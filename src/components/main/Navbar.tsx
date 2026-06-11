@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X, MessageSquare } from 'lucide-react';
 import { IContactInfo } from '@/types';
@@ -12,6 +13,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [contactInfo, setContactInfo] = useState<IContactInfo | null>(null);
   const [loadingContact, setLoadingContact] = useState(true);
+  const [logoError, setLogoError] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,9 +71,21 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <span className="text-2xl font-black tracking-tight text-[#cc0000] uppercase">
-              V.Raj <span className="text-[#222222]">Agro</span>
-            </span>
+            {!logoError ? (
+              <Image
+                src="/images/logo/logo.png"
+                alt="V.Raj Agro Logo"
+                width={150}
+                height={60}
+                onError={() => setLogoError(true)}
+                className="object-contain"
+                priority
+              />
+            ) : (
+              <span className="text-2xl font-black tracking-tight text-[#cc0000] uppercase">
+                V.Raj <span className="text-[#222222]">Agro</span>
+              </span>
+            )}
           </Link>
 
           {/* Desktop Nav Links */}
