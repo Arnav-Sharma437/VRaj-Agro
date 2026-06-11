@@ -3,14 +3,15 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { ArrowRight } from 'lucide-react';
 import { ICategory } from '@/types';
 
 // Fallback categories list to display if DB is empty
 const fallbackCategories = [
-  { name: 'Seeds', slug: 'seeds', image: 'https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&q=80&w=400' },
-  { name: 'Fertilizers', slug: 'fertilizers', image: 'https://images.unsplash.com/photo-1592417817098-8f3d6eb19675?auto=format&fit=crop&q=80&w=400' },
-  { name: 'Pesticides', slug: 'pesticides', image: 'https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?auto=format&fit=crop&q=80&w=400' },
-  { name: 'Equipments', slug: 'equipments', image: 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&q=80&w=400' }
+  { name: 'Concrete Mixers', slug: 'concrete-mixers', image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&q=80&w=400' },
+  { name: 'Tractor Trolleys', slug: 'tractor-trolleys', image: 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&q=80&w=400' },
+  { name: 'Agricultural Plows', slug: 'agricultural-plows', image: 'https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?auto=format&fit=crop&q=80&w=400' },
+  { name: 'Threshers & Harvesters', slug: 'threshers-harvesters', image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=400' }
 ];
 
 export default function CategorySection() {
@@ -36,16 +37,17 @@ export default function CategorySection() {
 
   if (loading) {
     return (
-      <section className="py-16 bg-[#f8fffe]">
+      <section className="py-16 bg-[#f5f5f5]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-xl mx-auto mb-12">
-            <div className="h-8 w-48 bg-gray-200 animate-pulse rounded mx-auto mb-3" />
-            <div className="h-4 w-64 bg-gray-250 animate-pulse rounded mx-auto" />
+            <div className="h-8 w-60 bg-gray-250 animate-pulse rounded mx-auto mb-3" />
+            <div className="h-1 bg-red-600 w-16 mx-auto mb-3" />
+            <div className="h-4 w-72 bg-gray-200 animate-pulse rounded mx-auto" />
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="bg-white rounded-2xl border border-gray-100 p-4 space-y-4 animate-pulse">
-                <div className="aspect-square bg-gray-200 rounded-xl w-full" />
+              <div key={i} className="bg-white rounded-lg border border-gray-100 p-4 space-y-4 animate-pulse">
+                <div className="aspect-square bg-gray-200 rounded w-full" />
                 <div className="h-5 bg-gray-200 rounded w-1/2 mx-auto" />
               </div>
             ))}
@@ -58,14 +60,16 @@ export default function CategorySection() {
   const list = categories.length > 0 ? categories : fallbackCategories;
 
   return (
-    <section className="py-16 bg-[#f8fffe]">
+    <section className="py-16 bg-[#f5f5f5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-12 space-y-2">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-[#2d6a4f] tracking-tight">
-            Shop by Category
+        {/* Header with Red Underline */}
+        <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
+          <h2 className="text-3xl md:text-4xl font-black text-[#222222] tracking-tight uppercase">
+            Our Product Categories
           </h2>
-          <p className="text-sm md:text-base text-gray-500 font-medium">
-            Explore our wide range of premium products tailored for your farm&apos;s needs.
+          <div className="w-20 h-1 bg-[#cc0000] mx-auto rounded" />
+          <p className="text-xs md:text-sm text-gray-500 font-bold uppercase tracking-wider">
+            Explore our robust machinery built for agriculture and construction.
           </p>
         </div>
 
@@ -74,20 +78,32 @@ export default function CategorySection() {
             <Link
               key={category.slug}
               href={`/shop?category=${category.slug}`}
-              className="group flex flex-col bg-white rounded-2xl border border-gray-100 p-4 hover:shadow-lg hover:border-green-100 hover:scale-105 transition-all duration-300"
+              className="group flex flex-col bg-white rounded-lg overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300"
             >
-              <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-100 mb-4">
+              {/* Image with Hover Overlays */}
+              <div className="relative aspect-square w-full overflow-hidden bg-gray-100">
                 <Image
-                  src={category.image || 'https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?auto=format&fit=crop&q=80&w=400'}
+                  src={category.image || fallbackCategories[0].image}
                   alt={category.name}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 768px) 50vw, 25vw"
                 />
+                
+                {/* Red Semi-Transparent Overlay on Hover */}
+                <div className="absolute inset-0 bg-[#cc0000]/70 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all duration-300">
+                  <div className="p-3 bg-white text-[#cc0000] rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-350 shadow-lg">
+                    <ArrowRight size={24} />
+                  </div>
+                </div>
               </div>
-              <h3 className="text-center font-bold text-gray-900 group-hover:text-[#2d6a4f] transition-colors duration-300 text-sm md:text-base">
-                {category.name}
-              </h3>
+
+              {/* Title below image */}
+              <div className="p-4 bg-white flex-1 flex items-center justify-center">
+                <h3 className="font-extrabold text-center text-gray-800 group-hover:text-[#cc0000] uppercase tracking-wide transition-colors duration-300 text-sm md:text-base leading-snug">
+                  {category.name}
+                </h3>
+              </div>
             </Link>
           ))}
         </div>

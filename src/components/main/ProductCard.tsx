@@ -22,7 +22,7 @@ export default function ProductCard({ product, whatsappNumber }: ProductCardProp
           const res = await fetch('/api/contact-info');
           if (res.ok) {
             const data = await res.json();
-            setLocalWhatsapp(data.whatsapp || '');
+            setLocalWhatsapp(data.whatsapp || '919300311126');
           }
         } catch (err) {
           console.error('Error fetching contact info inside ProductCard', err);
@@ -32,71 +32,72 @@ export default function ProductCard({ product, whatsappNumber }: ProductCardProp
     }
   }, [whatsappNumber]);
 
-  const targetWhatsapp = whatsappNumber || localWhatsapp;
+  const targetWhatsapp = whatsappNumber || localWhatsapp || '919300311126';
   const cleanNumber = targetWhatsapp.replace(/[^0-9]/g, '');
   const message = encodeURIComponent(`Hello, I am interested in ${product.name}. Please share more details.`);
-  const whatsappUrl = cleanNumber
-    ? `https://wa.me/${cleanNumber}?text=${message}`
-    : '#';
+  const whatsappUrl = `https://wa.me/${cleanNumber}?text=${message}`;
 
   const categoryName = typeof product.category === 'object' && product.category
     ? product.category.name
-    : 'Agriculture';
+    : 'Machine';
 
   return (
-    <div className="group flex flex-col bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-lg hover:border-green-100 transition-all duration-300 h-full">
-      {/* Product Image Link */}
+    <div className="group flex flex-col bg-white rounded border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 h-full relative">
+      {/* Yellow Featured Badge (Top-left) */}
+      {product.is_featured && (
+        <span className="absolute top-3 left-3 z-30 bg-[#f5a623] text-white text-[10px] font-black uppercase px-2.5 py-1 rounded tracking-wider shadow-sm">
+          Featured
+        </span>
+      )}
+
+      {/* Product Image (Top, full width) */}
       <Link href={`/product/${product.slug}`} className="relative aspect-[4/3] w-full overflow-hidden bg-gray-50 block">
         <Image
-          src={product.images && product.images.length > 0 ? product.images[0] : 'https://images.unsplash.com/photo-1592417817098-8f3d6eb19675?auto=format&fit=crop&q=80&w=400'}
+          src={product.images && product.images.length > 0 ? product.images[0] : 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&q=80&w=400'}
           alt={product.name}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="object-cover transition-transform duration-500 group-hover:scale-103"
           sizes="(max-width: 768px) 50vw, 25vw"
         />
       </Link>
 
       {/* Card Body */}
-      <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-        <div className="space-y-2.5">
-          {/* Category Badge */}
+      <div className="p-4 flex-1 flex flex-col justify-between space-y-4">
+        <div className="space-y-2">
+          {/* Red Category Badge */}
           <div>
-            <span className="inline-block bg-[#f0fff4] text-[#2d6a4f] text-[11px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider border border-[#d3f9d8]">
+            <span className="inline-block bg-[#fff5f5] text-[#cc0000] text-[10px] font-bold px-2 py-0.5 rounded border border-[#ffe3e3] uppercase tracking-wider">
               {categoryName}
             </span>
           </div>
 
           {/* Title */}
           <Link href={`/product/${product.slug}`} className="block">
-            <h3 className="font-extrabold text-gray-900 group-hover:text-[#2d6a4f] transition-colors duration-300 text-base md:text-lg leading-snug line-clamp-1">
+            <h3 className="font-extrabold text-gray-900 group-hover:text-[#cc0000] transition-colors duration-300 text-sm md:text-base leading-snug line-clamp-1">
               {product.name}
             </h3>
           </Link>
 
           {/* Description */}
-          <p className="text-gray-500 text-xs md:text-sm leading-relaxed line-clamp-2">
+          <p className="text-gray-500 text-xs leading-relaxed line-clamp-2">
             {product.short_description}
           </p>
         </div>
 
         {/* Buttons */}
         <div className="space-y-2 pt-2">
-          {cleanNumber ? (
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full bg-[#2d6a4f] hover:bg-[#1b4332] text-white py-2.5 rounded-xl text-xs md:text-sm font-bold shadow-sm transition-all duration-300"
-            >
-              <MessageCircle size={16} className="fill-current" />
-              <span>Enquire on WhatsApp</span>
-            </a>
-          ) : (
-            <div className="h-10 w-full bg-gray-55 animate-pulse rounded-xl" />
-          )}
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 w-full bg-[#cc0000] hover:bg-[#b30000] text-white py-2.5 rounded text-xs font-bold uppercase tracking-wider shadow-sm transition-all duration-300"
+          >
+            <MessageCircle size={14} className="fill-current" />
+            <span>Enquire on WhatsApp</span>
+          </a>
           <Link
             href={`/product/${product.slug}`}
-            className="block text-center border border-gray-200 hover:border-[#2d6a4f] hover:text-[#2d6a4f] text-gray-750 py-2.5 rounded-xl text-xs md:text-sm font-bold transition-all duration-300"
+            className="block text-center border border-gray-250 hover:border-[#cc0000] hover:text-[#cc0000] text-gray-700 py-2 rounded text-xs font-bold uppercase tracking-wider transition-all duration-300"
           >
             View Details
           </Link>

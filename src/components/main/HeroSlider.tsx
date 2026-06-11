@@ -47,7 +47,7 @@ export default function HeroSlider() {
 
   if (loading) {
     return (
-      <div className="w-full h-[350px] md:h-[550px] bg-gray-150 animate-pulse flex items-center justify-center">
+      <div className="w-full h-[300px] md:h-[550px] bg-gray-150 animate-pulse flex items-center justify-center">
         <div className="text-center space-y-4">
           <div className="h-8 w-64 bg-gray-300 rounded mx-auto" />
           <div className="h-4 w-96 bg-gray-300 rounded mx-auto" />
@@ -60,22 +60,22 @@ export default function HeroSlider() {
   // Fallback slide if no active banners found
   if (banners.length === 0) {
     return (
-      <div className="relative w-full h-[350px] md:h-[550px] bg-gradient-to-r from-[#1b4332] to-[#2d6a4f] flex items-center justify-center text-white px-4">
-        <div className="absolute inset-0 bg-black/10 z-0" />
+      <div className="relative w-full h-[300px] md:h-[550px] bg-gradient-to-r from-[#1a1a1a] via-[#2d2d2d] to-[#111111] flex items-center justify-center text-white px-4">
+        <div className="absolute inset-0 bg-black/40 z-0" />
         <div className="relative z-10 max-w-4xl text-center space-y-5 md:space-y-6">
-          <span className="inline-block bg-[#52b788]/20 text-[#52b788] px-4 py-1.5 rounded-full text-xs md:text-sm font-bold tracking-wide uppercase border border-[#52b788]/30">
-            Welcome to VRaj Agro
+          <span className="inline-block bg-[#cc0000]/20 text-[#cc0000] px-4 py-1.5 rounded text-xs md:text-sm font-bold tracking-widest uppercase border border-[#cc0000]/30">
+            Welcome to V.Raj Agro
           </span>
-          <h1 className="text-3xl md:text-6xl font-black tracking-tight leading-tight">
-            Premium Agriculture Products
+          <h1 className="text-2xl md:text-5xl font-black uppercase tracking-tight leading-tight max-w-3xl mx-auto">
+            Quality Agricultural & Construction Machinery
           </h1>
-          <p className="text-sm md:text-xl text-green-105/90 max-w-2xl mx-auto font-medium">
-            Quality seeds, fertilizers & more for better yield.
+          <p className="text-xs md:text-lg text-gray-300 max-w-2xl mx-auto font-medium">
+            Serving India since 1998 — Trusted by farmers & builders
           </p>
           <div className="pt-2">
             <Link
               href="/shop"
-              className="inline-block bg-[#52b788] hover:bg-[#95d5b2] text-[#1b4332] px-8 py-3 rounded-full text-sm md:text-base font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
+              className="inline-block bg-[#cc0000] hover:bg-[#b30000] text-white px-8 py-3 rounded text-sm md:text-base font-bold uppercase tracking-wider shadow-lg transition-all duration-300 hover:-translate-y-0.5"
             >
               Explore Products
             </Link>
@@ -86,7 +86,7 @@ export default function HeroSlider() {
   }
 
   return (
-    <div className="relative w-full h-[350px] md:h-[550px] overflow-hidden group">
+    <div className="relative w-full h-[300px] md:h-[550px] overflow-hidden group">
       {/* Slides */}
       {banners.map((banner, index) => (
         <div
@@ -120,21 +120,21 @@ export default function HeroSlider() {
           </div>
 
           {/* Dark Overlay with content */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/35 z-20 flex items-center px-6 md:px-16 lg:px-24">
+          <div className="absolute inset-0 bg-black/55 z-20 flex items-center px-6 md:px-16 lg:px-24">
             <div className="max-w-3xl space-y-4 md:space-y-6 text-white">
               {banner.subtitle && (
-                <span className="inline-block bg-[#52b788]/25 text-[#95d5b2] px-3 py-1 rounded-full text-xs md:text-sm font-bold tracking-wider uppercase border border-[#52b788]/30">
+                <span className="inline-block bg-[#f5a623]/25 text-[#f5a623] px-3 py-1 rounded text-xs md:text-sm font-bold tracking-wider uppercase border border-[#f5a623]/30">
                   {banner.subtitle}
                 </span>
               )}
-              <h2 className="text-3xl md:text-6xl font-black tracking-tight leading-tight">
+              <h2 className="text-2xl md:text-5xl font-black uppercase tracking-tight leading-tight">
                 {banner.title}
               </h2>
               {banner.cta_text && banner.cta_link && (
                 <div className="pt-2">
                   <Link
                     href={banner.cta_link}
-                    className="inline-block bg-[#2d6a4f] hover:bg-[#52b788] text-white px-7 py-3 rounded-full text-xs md:text-sm font-bold shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
+                    className="inline-block bg-[#cc0000] hover:bg-[#b30000] text-white px-7 py-3 rounded text-xs md:text-sm font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
                   >
                     {banner.cta_text}
                   </Link>
@@ -150,14 +150,14 @@ export default function HeroSlider() {
         <>
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-[#cc0000] hover:bg-[#b30000] text-white p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             aria-label="Previous slide"
           >
             <ChevronLeft size={24} />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-[#cc0000] hover:bg-[#b30000] text-white p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             aria-label="Next slide"
           >
             <ChevronRight size={24} />
@@ -172,8 +172,8 @@ export default function HeroSlider() {
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`h-2.5 rounded-full transition-all duration-300 ${
-                index === currentIndex ? 'w-8 bg-[#52b788]' : 'w-2.5 bg-white/50 hover:bg-white'
+              className={`h-2.5 rounded transition-all duration-300 ${
+                index === currentIndex ? 'w-8 bg-[#cc0000]' : 'w-2.5 bg-white/50 hover:bg-white'
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
