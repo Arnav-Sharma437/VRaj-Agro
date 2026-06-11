@@ -1,19 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { v2 as cloudinary } from 'cloudinary'
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-})
-
 export async function POST(request: NextRequest) {
   try {
-    console.log('Cloudinary config check:', {
-      cloud_name: process.env.CLOUDINARY_CLOUD_NAME ? 'SET' : 'NOT SET',
-      api_key: process.env.CLOUDINARY_API_KEY ? 'SET' : 'NOT SET',
-      api_secret: process.env.CLOUDINARY_API_SECRET ? 'SET' : 'NOT SET',
+    // Configure fresh on every request
+    cloudinary.config({
+      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY,
+      api_secret: process.env.CLOUDINARY_API_SECRET,
     })
+
+    const cloudName = process.env.CLOUDINARY_CLOUD_NAME
+    const apiKey = process.env.CLOUDINARY_API_KEY
+    const apiSecret = process.env.CLOUDINARY_API_SECRET
+
+    if (!cloudName || !apiKey || !apiSecret) {
+      return NextResponse.json({ 
+        error: 'Cloudinary not configured. Missing: ' + 
+        (!cloudName ? 'CLOUD_NAME ' : '') +
+        (!apiKey ? 'API_KEY ' : '') +
+        (!apiSecret ? 'API_SECRET' : '')
+      }, { status: 500 })
+    }
 
     const formData = await request.formData()
     const file = formData.get('file') as File
@@ -32,24 +40,17 @@ export async function POST(request: NextRequest) {
           resource_type: 'auto'
         },
         (error, result) => {
-          if (error) {
-            console.error('Cloudinary upload error:', error)
-            reject(error)
-          } else {
-            resolve(result)
-          }
+          if (error) reject(error)
+          else resolve(result)
         }
       ).end(buffer)
     }) as unknown as { secure_url: string }
 
     return NextResponse.json({ url: result.secure_url })
   } catch (error: unknown) {
-    console.error('Upload route error:', error)
-    const errMessage = error instanceof Error ? error.message : 'Upload failed'
-    const errDetails = error instanceof Error ? error.toString() : String(error)
+    const message = error instanceof Error ? error.message : 'Upload failed'
     return NextResponse.json({ 
-      error: errMessage,
-      details: errDetails
+      error: message
     }, { status: 500 })
   }
 }
