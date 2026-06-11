@@ -7,15 +7,15 @@ export interface IProductDocument extends Omit<IProduct, '_id' | 'category'>, Do
 
 const ProductSchema = new Schema<IProductDocument>(
   {
-    name: { type: String, required: true },
-    slug: { type: String, required: true, unique: true },
-    images: { type: [String], required: true, default: [] },
+    name: { type: String, default: '' },
+    slug: { type: String, unique: true, sparse: true },
+    images: { type: [String], default: [] },
     short_description: { type: String },
     full_description: { type: String },
     specifications: { type: Map, of: String, default: {} },
     features: { type: [String], default: [] },
     applications: { type: [String], default: [] },
-    category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
+    category: { type: Schema.Types.ObjectId, ref: 'Category' },
     is_featured: { type: Boolean, default: false },
     is_active: { type: Boolean, default: true },
   },

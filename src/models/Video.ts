@@ -6,7 +6,7 @@ export interface IVideoDocument extends Omit<IVideo, '_id'>, Document {}
 const VideoSchema = new Schema<IVideoDocument>(
   {
     title: { type: String },
-    video_url: { type: String, required: true },
+    video_url: { type: String, default: '' },
     thumbnail: { type: String },
     order: { type: Number, default: 0 },
     is_active: { type: Boolean, default: true },

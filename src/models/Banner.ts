@@ -5,12 +5,12 @@ export interface IBannerDocument extends Omit<IBanner, '_id'>, Document {}
 
 const BannerSchema = new Schema<IBannerDocument>(
   {
-    title: { type: String },
-    subtitle: { type: String },
-    image_desktop: { type: String, required: true },
-    image_mobile: { type: String, required: true },
-    cta_text: { type: String },
-    cta_link: { type: String },
+    title: { type: String, default: '' },
+    subtitle: { type: String, default: '' },
+    image_desktop: { type: String, default: '' },
+    image_mobile: { type: String, default: '' },
+    cta_text: { type: String, default: '' },
+    cta_link: { type: String, default: '' },
     order: { type: Number, default: 0 },
     is_active: { type: Boolean, default: true },
   },

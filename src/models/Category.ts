@@ -5,10 +5,10 @@ export interface ICategoryDocument extends Omit<ICategory, '_id'>, Document {}
 
 const CategorySchema = new Schema<ICategoryDocument>(
   {
-    name: { type: String, required: true },
-    slug: { type: String, required: true, unique: true },
-    image: { type: String },
-    description: { type: String },
+    name: { type: String, default: '' },
+    slug: { type: String, unique: true, sparse: true },
+    image: { type: String, default: '' },
+    description: { type: String, default: '' },
     is_active: { type: Boolean, default: true },
   },
   { timestamps: true }

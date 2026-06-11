@@ -5,7 +5,7 @@ export interface ITestimonialDocument extends Omit<ITestimonial, '_id'>, Documen
 
 const TestimonialSchema = new Schema<ITestimonialDocument>(
   {
-    customer_name: { type: String, required: true },
+    customer_name: { type: String, default: '' },
     location: { type: String },
     review: { type: String },
     image: { type: String },

@@ -5,11 +5,11 @@ export interface IContactInfoDocument extends Omit<IContactInfo, '_id'>, Documen
 
 const ContactInfoSchema = new Schema<IContactInfoDocument>(
   {
-    business_name: { type: String, required: true },
-    address: { type: String, required: true },
-    phone: { type: String, required: true },
-    whatsapp: { type: String, required: true },
-    email: { type: String, required: true },
+    business_name: { type: String, default: '' },
+    address: { type: String, default: '' },
+    phone: { type: String, default: '' },
+    whatsapp: { type: String, default: '' },
+    email: { type: String, default: '' },
     map_embed_url: { type: String },
   },
   { timestamps: true }
