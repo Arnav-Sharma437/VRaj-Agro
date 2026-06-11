@@ -5,6 +5,7 @@ import DataTable from '@/components/admin/DataTable';
 import CrudModal from '@/components/admin/CrudModal';
 import Toast from '@/components/ui/Toast';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
+import ImageUpload from '@/components/ui/ImageUpload';
 import { IBanner } from '@/types';
 import { Plus } from 'lucide-react';
 
@@ -192,7 +193,6 @@ export default function AdminBannersPage() {
               <label className="block text-sm font-semibold text-gray-700 mb-1">Title</label>
               <input
                 type="text"
-                required
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
@@ -210,28 +210,16 @@ export default function AdminBannersPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Desktop Image URL</label>
-              <input
-                type="text"
-                required
-                value={formData.image_desktop}
-                onChange={(e) => setFormData({ ...formData, image_desktop: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
-                placeholder="https://example.com/banner-desktop.jpg"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Mobile Image URL</label>
-              <input
-                type="text"
-                required
-                value={formData.image_mobile}
-                onChange={(e) => setFormData({ ...formData, image_mobile: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
-                placeholder="https://example.com/banner-mobile.jpg"
-              />
-            </div>
+            <ImageUpload
+              value={formData.image_desktop || ''}
+              onChange={(url) => setFormData({ ...formData, image_desktop: url })}
+              label="Desktop Image"
+            />
+            <ImageUpload
+              value={formData.image_mobile || ''}
+              onChange={(url) => setFormData({ ...formData, image_mobile: url })}
+              label="Mobile Image"
+            />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

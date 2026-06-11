@@ -42,7 +42,7 @@ export default function Footer() {
   const cleanPhone = primaryPhone.replace(/[^0-9+]/g, '');
 
   return (
-    <footer className="bg-[#1a1a1a] text-gray-400 pt-16">
+    <footer className="bg-[#1a1a1a] text-[#cccccc] pt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16">
           {/* Column 1: Brand & Tagline */}
@@ -118,14 +118,14 @@ export default function Footer() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-[#25d366] hover:bg-[#20ba5a] text-white px-4 py-2 rounded text-xs font-bold uppercase tracking-wider shadow-sm transition-all"
+                className="flex items-center gap-2 bg-[#cc0000] hover:bg-[#aa0000] text-white px-4 py-2 rounded text-xs font-bold uppercase tracking-wider shadow-sm transition-all"
               >
                 <MessageCircle size={16} className="fill-current" />
                 <span>WhatsApp</span>
               </a>
               <a
                 href={`tel:${cleanPhone}`}
-                className="flex items-center gap-2 bg-[#cc0000] hover:bg-[#b30000] text-white px-4 py-2 rounded text-xs font-bold uppercase tracking-wider shadow-sm transition-all"
+                className="flex items-center gap-2 bg-[#cc0000] hover:bg-[#aa0000] text-white px-4 py-2 rounded text-xs font-bold uppercase tracking-wider shadow-sm transition-all"
               >
                 <Phone size={14} />
                 <span>Call Us</span>

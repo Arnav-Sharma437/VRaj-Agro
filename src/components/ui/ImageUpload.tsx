@@ -1,34 +1,102 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
+import { Upload, X, Loader2 } from 'lucide-react';
 
 interface ImageUploadProps {
   value: string;
   onChange: (url: string) => void;
-  disabled?: boolean;
+  label: string;
 }
 
-export const ImageUpload: React.FC<ImageUploadProps> = ({ value, onChange, disabled }) => {
+export default function ImageUpload({ value, onChange, label }: ImageUploadProps) {
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    setError(null);
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.error || 'Failed to upload image');
+      }
+
+      const data = await res.json();
+      onChange(data.url);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'Upload failed';
+      setError(msg);
+      console.error(err);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleRemove = () => {
+    onChange('');
+  };
+
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="space-y-2">
+      <label className="block text-sm font-semibold text-gray-700">{label}</label>
       {value ? (
-        <div className="relative w-40 h-40 border rounded-md overflow-hidden">
+        <div className="relative w-40 h-40 border border-gray-250 rounded-lg overflow-hidden bg-gray-50 group">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={value} alt="Uploaded" className="object-cover w-full h-full" />
+          <img src={value} alt="Upload preview" className="w-full h-full object-cover" />
           <button
             type="button"
-            disabled={disabled}
-            onClick={() => onChange('')}
-            className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full text-xs"
+            onClick={handleRemove}
+            className="absolute top-2 right-2 bg-red-600 text-white p-1 rounded-full hover:bg-red-700 transition-colors shadow"
+            title="Remove image"
           >
-            ✕
+            <X size={14} />
           </button>
         </div>
       ) : (
-        <div className="w-40 h-40 border-2 border-dashed rounded-md flex flex-col items-center justify-center text-gray-400">
-          <span>Upload Image</span>
+        <div className="flex flex-col items-center justify-center w-full max-w-sm">
+          <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors">
+            <div className="flex flex-col items-center justify-center pt-5 pb-6">
+              {uploading ? (
+                <>
+                  <Loader2 size={24} className="animate-spin text-[#cc0000] mb-2" />
+                  <p className="text-xs text-gray-500 font-semibold">Uploading file...</p>
+                </>
+              ) : (
+                <>
+                  <Upload size={24} className="text-gray-400 mb-2" />
+                  <p className="text-sm text-gray-700 font-bold uppercase tracking-wide">
+                    Upload Image
+                  </p>
+                  <p className="text-[10px] text-gray-400 mt-1">
+                    PNG, JPG, JPEG, WEBP, SVG, GIF
+                  </p>
+                </>
+              )}
+            </div>
+            <input
+              type="file"
+              accept=".jpg,.jpeg,.png,.webp,.svg,.gif"
+              onChange={handleFileChange}
+              disabled={uploading}
+              className="hidden"
+            />
+          </label>
+          {error && <p className="text-xs text-red-650 font-semibold mt-1">{error}</p>}
         </div>
       )}
     </div>
   );
-};
-
-export default ImageUpload;
+}

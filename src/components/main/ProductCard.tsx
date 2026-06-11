@@ -45,7 +45,7 @@ export default function ProductCard({ product, whatsappNumber }: ProductCardProp
     <div className="group flex flex-col bg-white rounded border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 h-full relative">
       {/* Yellow Featured Badge (Top-left) */}
       {product.is_featured && (
-        <span className="absolute top-3 left-3 z-30 bg-[#f5a623] text-white text-[10px] font-black uppercase px-2.5 py-1 rounded tracking-wider shadow-sm">
+        <span className="absolute top-3 left-3 z-30 bg-[#f5a623] text-[#1a1a1a] text-[10px] font-black uppercase px-2.5 py-1 rounded tracking-wider shadow-sm">
           Featured
         </span>
       )}
@@ -66,20 +66,20 @@ export default function ProductCard({ product, whatsappNumber }: ProductCardProp
         <div className="space-y-2">
           {/* Red Category Badge */}
           <div>
-            <span className="inline-block bg-[#fff5f5] text-[#cc0000] text-[10px] font-bold px-2 py-0.5 rounded border border-[#ffe3e3] uppercase tracking-wider">
+            <span className="inline-block bg-[#cc0000] text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">
               {categoryName}
             </span>
           </div>
 
           {/* Title */}
           <Link href={`/product/${product.slug}`} className="block">
-            <h3 className="font-extrabold text-gray-900 group-hover:text-[#cc0000] transition-colors duration-300 text-sm md:text-base leading-snug line-clamp-1">
+            <h3 className="font-extrabold text-[#1a1a1a] group-hover:text-[#cc0000] transition-colors duration-300 text-sm md:text-base leading-snug line-clamp-1">
               {product.name}
             </h3>
           </Link>
 
           {/* Description */}
-          <p className="text-gray-500 text-xs leading-relaxed line-clamp-2">
+          <p className="text-[#444444] text-xs leading-relaxed line-clamp-2">
             {product.short_description}
           </p>
         </div>
@@ -90,7 +90,7 @@ export default function ProductCard({ product, whatsappNumber }: ProductCardProp
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full bg-[#cc0000] hover:bg-[#b30000] text-white py-2.5 rounded text-xs font-bold uppercase tracking-wider shadow-sm transition-all duration-300"
+            className="flex items-center justify-center gap-2 w-full bg-[#cc0000] hover:bg-[#aa0000] text-white py-2.5 rounded text-xs font-bold uppercase tracking-wider shadow-sm transition-all duration-300"
           >
             <MessageCircle size={14} className="fill-current" />
             <span>Enquire on WhatsApp</span>

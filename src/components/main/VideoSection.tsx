@@ -58,7 +58,7 @@ export default function VideoSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header with Red Underline */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
-          <h2 className="text-3xl md:text-4xl font-black text-[#222222] tracking-tight uppercase">
+          <h2 className="text-3xl md:text-4xl font-black text-[#1a1a1a] tracking-tight uppercase">
             Customer Success Stories
           </h2>
           <div className="w-20 h-1 bg-[#cc0000] mx-auto rounded" />
@@ -88,14 +88,14 @@ export default function VideoSection() {
                 
                 {/* Red Play Button Overlay */}
                 <div className="absolute inset-0 bg-black/30 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/45">
-                  <div className="w-14 h-14 bg-[#cc0000] hover:bg-[#b30000] text-white rounded-full flex items-center justify-center shadow-lg transform transition-transform duration-300 group-hover:scale-110">
+                  <div className="w-14 h-14 bg-[#cc0000] hover:bg-[#aa0000] text-white rounded-full flex items-center justify-center shadow-lg transform transition-transform duration-300 group-hover:scale-110">
                     <Play size={24} className="fill-current ml-1" />
                   </div>
                 </div>
               </div>
 
               {/* Title */}
-              <h3 className="font-extrabold text-gray-800 group-hover:text-[#cc0000] transition-colors duration-300 text-sm md:text-base leading-snug line-clamp-2 uppercase tracking-wide">
+              <h3 className="font-semibold text-[#1a1a1a] group-hover:text-[#cc0000] transition-colors duration-300 text-sm md:text-base leading-snug line-clamp-2 uppercase tracking-wide">
                 {video.title}
               </h3>
             </a>

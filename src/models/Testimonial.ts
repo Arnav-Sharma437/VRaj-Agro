@@ -7,7 +7,7 @@ const TestimonialSchema = new Schema<ITestimonialDocument>(
   {
     customer_name: { type: String, required: true },
     location: { type: String },
-    review: { type: String, required: true },
+    review: { type: String },
     image: { type: String },
     order: { type: Number, default: 0 },
     is_active: { type: Boolean, default: true },

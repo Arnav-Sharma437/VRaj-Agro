@@ -11,7 +11,6 @@ import {
   Package,
   Video,
   MessageSquare,
-  Phone,
   LogOut,
   Menu,
   X,
@@ -28,7 +27,6 @@ export const Sidebar: React.FC = () => {
     { label: 'Products', href: '/admin/products', icon: Package },
     { label: 'Videos', href: '/admin/videos', icon: Video },
     { label: 'Testimonials', href: '/admin/testimonials', icon: MessageSquare },
-    { label: 'Contact Info', href: '/admin/contact', icon: Phone },
   ];
 
   const toggleSidebar = () => setIsOpen(!isOpen);

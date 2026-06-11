@@ -71,7 +71,7 @@ export default function FeaturedProducts() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header with Red Underline */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
-          <h2 className="text-3xl md:text-4xl font-black text-[#222222] tracking-tight uppercase">
+          <h2 className="text-3xl md:text-4xl font-black text-[#1a1a1a] tracking-tight uppercase">
             Our Featured Products
           </h2>
           <div className="w-20 h-1 bg-[#cc0000] mx-auto rounded" />

@@ -117,7 +117,7 @@ export default function TestimonialsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header with Red Underline */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
-          <h2 className="text-3xl md:text-4xl font-black text-[#222222] tracking-tight uppercase">
+          <h2 className="text-3xl md:text-4xl font-black text-[#1a1a1a] tracking-tight uppercase">
             What Our Clients Say
           </h2>
           <div className="w-20 h-1 bg-[#cc0000] mx-auto rounded" />
@@ -143,7 +143,7 @@ export default function TestimonialsSection() {
                     ))}
                   </div>
                   {/* Review Text */}
-                  <blockquote className="text-gray-650 italic text-sm leading-relaxed">
+                  <blockquote className="text-[#444444] italic text-sm leading-relaxed">
                     &ldquo;{item.review}&rdquo;
                   </blockquote>
                 </div>
@@ -166,7 +166,7 @@ export default function TestimonialsSection() {
                     </div>
                   )}
                   <div>
-                    <h4 className="font-extrabold text-gray-900 text-sm tracking-wide uppercase">
+                    <h4 className="font-bold text-[#1a1a1a] text-sm tracking-wide uppercase">
                       {item.customer_name}
                     </h4>
                     {item.location && (
@@ -189,7 +189,7 @@ export default function TestimonialsSection() {
                     <Star key={star} size={16} className="fill-current" />
                   ))}
                 </div>
-                <blockquote className="text-gray-650 italic text-sm leading-relaxed">
+                <blockquote className="text-[#444444] italic text-sm leading-relaxed">
                   &ldquo;{list[currentIndex].review}&rdquo;
                 </blockquote>
               </div>
@@ -211,7 +211,7 @@ export default function TestimonialsSection() {
                   </div>
                 )}
                 <div>
-                  <h4 className="font-extrabold text-gray-900 text-sm tracking-wide uppercase">
+                  <h4 className="font-bold text-[#1a1a1a] text-sm tracking-wide uppercase">
                     {list[currentIndex].customer_name}
                   </h4>
                   {list[currentIndex].location && (

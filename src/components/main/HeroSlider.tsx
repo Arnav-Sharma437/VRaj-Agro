@@ -75,7 +75,7 @@ export default function HeroSlider() {
           <div className="pt-2">
             <Link
               href="/shop"
-              className="inline-block bg-[#cc0000] hover:bg-[#b30000] text-white px-8 py-3 rounded text-sm md:text-base font-bold uppercase tracking-wider shadow-lg transition-all duration-300 hover:-translate-y-0.5"
+              className="inline-block bg-[#cc0000] hover:bg-[#aa0000] text-white px-8 py-3 rounded text-sm md:text-base font-bold uppercase tracking-wider shadow-lg transition-all duration-300 hover:-translate-y-0.5"
             >
               Explore Products
             </Link>
@@ -134,7 +134,7 @@ export default function HeroSlider() {
                 <div className="pt-2">
                   <Link
                     href={banner.cta_link}
-                    className="inline-block bg-[#cc0000] hover:bg-[#b30000] text-white px-7 py-3 rounded text-xs md:text-sm font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
+                    className="inline-block bg-[#cc0000] hover:bg-[#aa0000] text-white px-7 py-3 rounded text-xs md:text-sm font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
                   >
                     {banner.cta_text}
                   </Link>
@@ -150,14 +150,14 @@ export default function HeroSlider() {
         <>
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-[#cc0000] hover:bg-[#b30000] text-white p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-[#cc0000] hover:bg-[#aa0000] text-white p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             aria-label="Previous slide"
           >
             <ChevronLeft size={24} />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-[#cc0000] hover:bg-[#b30000] text-white p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-[#cc0000] hover:bg-[#aa0000] text-white p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             aria-label="Next slide"
           >
             <ChevronRight size={24} />

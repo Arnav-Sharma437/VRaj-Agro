@@ -5,6 +5,7 @@ import DataTable from '@/components/admin/DataTable';
 import CrudModal from '@/components/admin/CrudModal';
 import Toast from '@/components/ui/Toast';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
+import ImageUpload from '@/components/ui/ImageUpload';
 import { IProduct, ICategory } from '@/types';
 import { Plus, Trash2, Package } from 'lucide-react';
 
@@ -385,7 +386,6 @@ export default function AdminProductsPage() {
               <label className="block text-sm font-semibold text-gray-700 mb-1">Short Description</label>
               <textarea
                 rows={2}
-                required
                 value={formData.short_description}
                 onChange={(e) => setFormData({ ...formData, short_description: e.target.value })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
@@ -414,21 +414,19 @@ export default function AdminProductsPage() {
                 <Plus size={14} /> Add Image
               </button>
             </div>
-            <div className="space-y-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {formData.images.map((imgUrl, idx) => (
-                <div key={idx} className="flex gap-2 items-center">
-                  <input
-                    type="text"
-                    required
+                <div key={idx} className="border border-gray-200 p-2.5 rounded bg-white relative">
+                  <ImageUpload
                     value={imgUrl}
-                    onChange={(e) => updateArrayField('images', idx, e.target.value)}
-                    className="flex-1 px-3 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-xs"
-                    placeholder="https://example.com/product-image.jpg"
+                    onChange={(url) => updateArrayField('images', idx, url)}
+                    label={`Image #${idx + 1}`}
                   />
                   <button
                     type="button"
                     onClick={() => removeArrayField('images', idx)}
-                    className="text-red-500 hover:text-red-700 focus:outline-none p-1"
+                    className="absolute top-2 right-2 text-red-500 hover:text-red-700 focus:outline-none p-1"
+                    title="Remove item"
                   >
                     <Trash2 size={16} />
                   </button>

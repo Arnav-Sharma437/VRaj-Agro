@@ -5,6 +5,7 @@ import DataTable from '@/components/admin/DataTable';
 import CrudModal from '@/components/admin/CrudModal';
 import Toast from '@/components/ui/Toast';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
+import ImageUpload from '@/components/ui/ImageUpload';
 import { IVideo } from '@/types';
 import { Plus, Video } from 'lucide-react';
 
@@ -190,36 +191,29 @@ export default function AdminVideosPage() {
             <label className="block text-sm font-semibold text-gray-700 mb-1">Title</label>
             <input
               type="text"
-              required
               value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Video URL (YouTube/Vimeo)</label>
-              <input
-                type="text"
-                required
-                value={formData.video_url}
-                onChange={(e) => setFormData({ ...formData, video_url: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
-                placeholder="https://www.youtube.com/embed/..."
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Thumbnail URL</label>
-              <input
-                type="text"
-                value={formData.thumbnail}
-                onChange={(e) => setFormData({ ...formData, thumbnail: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
-                placeholder="https://example.com/video-thumb.jpg"
-              />
-            </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Video URL (YouTube/Vimeo)</label>
+            <input
+              type="text"
+              required
+              value={formData.video_url}
+              onChange={(e) => setFormData({ ...formData, video_url: e.target.value })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
+              placeholder="https://www.youtube.com/embed/..."
+            />
           </div>
+
+          <ImageUpload
+            value={formData.thumbnail || ''}
+            onChange={(url) => setFormData({ ...formData, thumbnail: url })}
+            label="Video Thumbnail"
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>

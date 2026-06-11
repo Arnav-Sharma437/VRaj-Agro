@@ -5,7 +5,7 @@ export interface IBannerDocument extends Omit<IBanner, '_id'>, Document {}
 
 const BannerSchema = new Schema<IBannerDocument>(
   {
-    title: { type: String, required: true },
+    title: { type: String },
     subtitle: { type: String },
     image_desktop: { type: String, required: true },
     image_mobile: { type: String, required: true },

@@ -5,6 +5,7 @@ import DataTable from '@/components/admin/DataTable';
 import CrudModal from '@/components/admin/CrudModal';
 import Toast from '@/components/ui/Toast';
 import ConfirmDialog from '@/components/ui/ConfirmDialog';
+import ImageUpload from '@/components/ui/ImageUpload';
 import { ITestimonial } from '@/types';
 import { Plus, User } from 'lucide-react';
 
@@ -212,22 +213,16 @@ export default function AdminTestimonialsPage() {
             </div>
           </div>
 
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Customer Image URL</label>
-            <input
-              type="text"
-              value={formData.image}
-              onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
-              placeholder="https://example.com/customer-photo.jpg"
-            />
-          </div>
+          <ImageUpload
+            value={formData.image || ''}
+            onChange={(url) => setFormData({ ...formData, image: url })}
+            label="Customer Photo"
+          />
 
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1">Review</label>
             <textarea
               rows={4}
-              required
               value={formData.review}
               onChange={(e) => setFormData({ ...formData, review: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"

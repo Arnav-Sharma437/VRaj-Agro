@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X, MessageSquare } from 'lucide-react';
 import { IContactInfo } from '@/types';
@@ -13,7 +12,8 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [contactInfo, setContactInfo] = useState<IContactInfo | null>(null);
   const [loadingContact, setLoadingContact] = useState(true);
-  const [logoError, setLogoError] = useState(false);
+  const [logoIndex, setLogoIndex] = useState(0);
+  const logoExtensions = ['png', 'jpg', 'jpeg', 'webp', 'svg'];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,19 +71,19 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            {!logoError ? (
-              <Image
-                src="/images/logo/logo.png"
+            {logoIndex < logoExtensions.length ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={`/images/logo/logo.${logoExtensions[logoIndex]}`}
                 alt="V.Raj Agro Logo"
                 width={150}
                 height={60}
-                onError={() => setLogoError(true)}
-                className="object-contain"
-                priority
+                onError={() => setLogoIndex((prev) => prev + 1)}
+                className="object-contain h-12 w-auto"
               />
             ) : (
               <span className="text-2xl font-black tracking-tight text-[#cc0000] uppercase">
-                V.Raj <span className="text-[#222222]">Agro</span>
+                V.Raj <span className="text-[#1a1a1a]">Agro</span>
               </span>
             )}
           </Link>
@@ -117,7 +117,7 @@ export default function Navbar() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#cc0000] hover:bg-[#b30000] text-white px-5 py-2.5 rounded text-sm font-bold uppercase tracking-wider shadow-sm transition-all duration-305 hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 bg-[#cc0000] hover:bg-[#aa0000] text-white px-5 py-2.5 rounded text-sm font-bold uppercase tracking-wider shadow-sm transition-all duration-305 hover:-translate-y-0.5"
               >
                 <MessageSquare size={16} className="fill-current" />
                 <span>Request a Quote</span>
@@ -170,7 +170,7 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 w-full bg-[#cc0000] hover:bg-[#b30000] text-white py-3 rounded text-base font-bold uppercase tracking-wider shadow transition-all"
+                className="flex items-center justify-center gap-2 w-full bg-[#cc0000] hover:bg-[#aa0000] text-white py-3 rounded text-base font-bold uppercase tracking-wider shadow transition-all"
               >
                 <MessageSquare size={18} className="fill-current" />
                 <span>Request a Quote</span>

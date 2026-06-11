@@ -64,7 +64,7 @@ export default function CategorySection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header with Red Underline */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
-          <h2 className="text-3xl md:text-4xl font-black text-[#222222] tracking-tight uppercase">
+          <h2 className="text-3xl md:text-4xl font-black text-[#1a1a1a] tracking-tight uppercase">
             Our Product Categories
           </h2>
           <div className="w-20 h-1 bg-[#cc0000] mx-auto rounded" />
@@ -100,7 +100,7 @@ export default function CategorySection() {
 
               {/* Title below image */}
               <div className="p-4 bg-white flex-1 flex items-center justify-center">
-                <h3 className="font-extrabold text-center text-gray-800 group-hover:text-[#cc0000] uppercase tracking-wide transition-colors duration-300 text-sm md:text-base leading-snug">
+                <h3 className="font-semibold text-center text-[#1a1a1a] group-hover:text-[#cc0000] uppercase tracking-wide transition-colors duration-300 text-sm md:text-base leading-snug">
                   {category.name}
                 </h3>
               </div>
