@@ -57,9 +57,9 @@ export default async function AdminDashboardPage() {
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 bg-gray-50 -m-8 p-8 min-h-screen">
       <div>
-        <h1 className="text-3xl font-bold text-[#2d6a4f]">Welcome back, Admin</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Welcome back, Admin</h1>
         <p className="text-gray-500 mt-1">Here is what is happening with VRaj Agro today.</p>
       </div>
 
@@ -68,9 +68,9 @@ export default async function AdminDashboardPage() {
         {statCards.map((card) => {
           const Icon = card.icon;
           return (
-            <div key={card.label} className="bg-white p-6 rounded-2xl border shadow-sm flex items-center justify-between transition-all hover:-translate-y-1 hover:shadow-md">
+            <div key={card.label} className="bg-white p-6 rounded-xl shadow flex items-center justify-between transition-all hover:-translate-y-1 hover:shadow-md">
               <div className="space-y-2">
-                <span className="text-sm font-medium text-gray-500">{card.label}</span>
+                <span className="text-sm font-medium text-gray-600">{card.label}</span>
                 <h3 className="text-3xl font-bold text-gray-900">{card.value}</h3>
               </div>
               <div className={`p-4 rounded-xl ${card.bg} border`}>
@@ -100,7 +100,7 @@ export default async function AdminDashboardPage() {
               recentProducts.map((product) => {
                 const categoryObj = product.category as ICategory;
                 return (
-                  <div key={product._id} className="px-6 py-4 flex items-center justify-between hover:bg-gray-50/50 transition-colors">
+                  <div key={product._id} className="px-6 py-4 flex items-center justify-between hover:bg-gray-50/50 transition-colors text-gray-800">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 rounded-lg bg-gray-150 overflow-hidden flex items-center justify-center border border-gray-200">
                         {product.images && product.images.length > 0 ? (
@@ -111,7 +111,7 @@ export default async function AdminDashboardPage() {
                         )}
                       </div>
                       <div>
-                        <h4 className="font-bold text-gray-950 text-sm">{product.name}</h4>
+                        <h4 className="font-bold text-gray-800 text-sm">{product.name}</h4>
                         <p className="text-xs text-gray-500 mt-0.5">
                           Category: <span className="font-medium">{categoryObj?.name || 'Uncategorized'}</span>
                         </p>

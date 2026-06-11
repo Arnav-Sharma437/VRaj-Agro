@@ -163,7 +163,7 @@ export default function AdminTestimonialsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-[#2d6a4f]">Manage Testimonials</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Manage Testimonials</h1>
           <p className="text-sm text-gray-500 mt-1">Review, approve, and order customer feedback displayed on the public site.</p>
         </div>
         <button
@@ -192,22 +192,22 @@ export default function AdminTestimonialsPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Customer Name</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Customer Name</label>
               <input
                 type="text"
                 required
                 value={formData.customer_name}
                 onChange={(e) => setFormData({ ...formData, customer_name: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Location / Designation</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Location / Designation</label>
               <input
                 type="text"
                 value={formData.location}
                 onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 placeholder="e.g. Farmer, Gujarat"
               />
             </div>
@@ -220,24 +220,24 @@ export default function AdminTestimonialsPage() {
           />
 
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Review</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Review</label>
             <textarea
               rows={4}
               value={formData.review}
               onChange={(e) => setFormData({ ...formData, review: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               placeholder="Write customer feedback review here..."
             />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Display Order</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Display Order</label>
               <input
                 type="number"
                 value={formData.order}
                 onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               />
             </div>
             <div className="flex items-center mt-6">
@@ -248,7 +248,7 @@ export default function AdminTestimonialsPage() {
                 onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })}
                 className="h-4 w-4 rounded border-gray-300 text-[#2d6a4f] focus:ring-[#2d6a4f]"
               />
-              <label htmlFor="is_active" className="ml-2 block text-sm font-semibold text-gray-700">
+              <label htmlFor="is_active" className="ml-2 block text-sm font-medium text-gray-700">
                 Is Active (Show in testimonial carousels)
               </label>
             </div>

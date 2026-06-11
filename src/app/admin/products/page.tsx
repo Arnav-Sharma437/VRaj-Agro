@@ -311,7 +311,7 @@ export default function AdminProductsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-[#2d6a4f]">Manage Products</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Manage Products</h1>
           <p className="text-sm text-gray-500 mt-1">Create and maintain your Vraj Agro agricultural product inventory items.</p>
         </div>
         <button
@@ -341,35 +341,35 @@ export default function AdminProductsPage() {
           {/* Row 1: Name and Slug */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Name</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
               <input
                 type="text"
                 required
                 value={formData.name}
                 onChange={(e) => handleNameChange(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Slug (Auto-generated)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Slug (Auto-generated)</label>
               <input
                 type="text"
                 required
                 value={formData.slug}
                 onChange={(e) => setFormData({ ...formData, slug: slugify(e.target.value) })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-600 font-mono text-sm"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-gray-50 font-mono focus:outline-none"
               />
             </div>
           </div>
 
           {/* Row 2: Category */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Category</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
             <select
               required
               value={formData.category}
               onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
             >
               <option value="">Select Category</option>
               {categories.map((cat) => (
@@ -383,21 +383,21 @@ export default function AdminProductsPage() {
           {/* Row 3: Descriptions */}
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Short Description</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Short Description</label>
               <textarea
                 rows={2}
                 value={formData.short_description}
                 onChange={(e) => setFormData({ ...formData, short_description: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Full Description (Optional)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Full Description (Optional)</label>
               <textarea
                 rows={4}
                 value={formData.full_description}
                 onChange={(e) => setFormData({ ...formData, full_description: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               />
             </div>
           </div>
@@ -458,7 +458,7 @@ export default function AdminProductsPage() {
                       required
                       value={spec.key}
                       onChange={(e) => updateSpec(idx, 'key', e.target.value)}
-                      className="flex-1 px-3 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-xs"
+                      className="flex-1 border border-gray-300 rounded-lg px-3 py-1.5 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-xs"
                       placeholder="Property (e.g. Weight)"
                     />
                     <input
@@ -466,7 +466,7 @@ export default function AdminProductsPage() {
                       required
                       value={spec.value}
                       onChange={(e) => updateSpec(idx, 'value', e.target.value)}
-                      className="flex-1 px-3 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-xs"
+                      className="flex-1 border border-gray-300 rounded-lg px-3 py-1.5 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-xs"
                       placeholder="Value (e.g. 50 kg)"
                     />
                     <button
@@ -504,7 +504,7 @@ export default function AdminProductsPage() {
                       required
                       value={feat}
                       onChange={(e) => updateArrayField('features', idx, e.target.value)}
-                      className="flex-1 px-3 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-xs"
+                      className="flex-1 border border-gray-300 rounded-lg px-3 py-1.5 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-xs"
                       placeholder="Feature item"
                     />
                     <button
@@ -539,7 +539,7 @@ export default function AdminProductsPage() {
                       required
                       value={app}
                       onChange={(e) => updateArrayField('applications', idx, e.target.value)}
-                      className="flex-1 px-3 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-xs"
+                      className="flex-1 border border-gray-300 rounded-lg px-3 py-1.5 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-xs"
                       placeholder="Use-case application"
                     />
                     <button
@@ -565,7 +565,7 @@ export default function AdminProductsPage() {
                 onChange={(e) => setFormData({ ...formData, is_featured: e.target.checked })}
                 className="h-4 w-4 rounded border-gray-300 text-[#2d6a4f] focus:ring-[#2d6a4f]"
               />
-              <label htmlFor="is_featured" className="ml-2 block text-sm font-semibold text-gray-700">
+              <label htmlFor="is_featured" className="ml-2 block text-sm font-medium text-gray-700">
                 Is Featured (Show on homepage)
               </label>
             </div>
@@ -577,7 +577,7 @@ export default function AdminProductsPage() {
                 onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })}
                 className="h-4 w-4 rounded border-gray-300 text-[#2d6a4f] focus:ring-[#2d6a4f]"
               />
-              <label htmlFor="is_active" className="ml-2 block text-sm font-semibold text-gray-700">
+              <label htmlFor="is_active" className="ml-2 block text-sm font-medium text-gray-700">
                 Is Active (Visible to users)
               </label>
             </div>

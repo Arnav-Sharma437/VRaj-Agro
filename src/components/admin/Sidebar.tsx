@@ -41,7 +41,7 @@ export const Sidebar: React.FC = () => {
       <div className="p-6 border-b border-[#2d6a4f] flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="text-2xl">🌾</span>
-          <span className="text-xl font-bold tracking-wide">VRaj Agro</span>
+          <span className="text-xl text-white font-bold tracking-wide">VRaj Agro</span>
         </div>
         {/* Mobile close button */}
         <button onClick={toggleSidebar} className="md:hidden text-white/80 hover:text-white focus:outline-none">
@@ -61,11 +61,11 @@ export const Sidebar: React.FC = () => {
               onClick={() => setIsOpen(false)}
               className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
                 isActive
-                  ? 'bg-[#2d6a4f] text-[#f8fffe] shadow-md border-l-4 border-[#52b788]'
-                  : 'text-white/70 hover:text-white hover:bg-[#2d6a4f]/40'
+                  ? 'bg-green-800 text-white shadow-md'
+                  : 'text-gray-200 hover:text-white hover:bg-green-800/40'
               }`}
             >
-              <IconComponent size={18} className={isActive ? 'text-[#52b788]' : 'text-white/50'} />
+              <IconComponent size={18} className={isActive ? 'text-white' : 'text-gray-300'} />
               <span>{item.label}</span>
             </Link>
           );
@@ -76,9 +76,9 @@ export const Sidebar: React.FC = () => {
       <div className="p-4 border-t border-[#2d6a4f]">
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 w-full px-4 py-3 rounded-lg text-sm font-medium text-red-200 hover:text-white hover:bg-red-950/40 transition-colors focus:outline-none"
+          className="flex items-center gap-3 w-full px-4 py-3 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-green-800/40 transition-colors focus:outline-none"
         >
-          <LogOut size={18} className="text-red-300/60" />
+          <LogOut size={18} className="text-gray-300" />
           <span>Logout</span>
         </button>
       </div>

@@ -161,7 +161,7 @@ export default function AdminBannersPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-[#2d6a4f]">Manage Banners</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Manage Banners</h1>
           <p className="text-sm text-gray-500 mt-1">Add, edit, or remove promotional banners from the public home page slider.</p>
         </div>
         <button
@@ -190,21 +190,21 @@ export default function AdminBannersPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Title</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
               <input
                 type="text"
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Subtitle</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Subtitle</label>
               <input
                 type="text"
                 value={formData.subtitle}
                 onChange={(e) => setFormData({ ...formData, subtitle: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               />
             </div>
           </div>
@@ -224,22 +224,22 @@ export default function AdminBannersPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">CTA Button Text (Optional)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">CTA Button Text (Optional)</label>
               <input
                 type="text"
                 value={formData.cta_text}
                 onChange={(e) => setFormData({ ...formData, cta_text: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 placeholder="e.g. Shop Now"
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">CTA Button Link (Optional)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">CTA Button Link (Optional)</label>
               <input
                 type="text"
                 value={formData.cta_link}
                 onChange={(e) => setFormData({ ...formData, cta_link: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 placeholder="e.g. /shop"
               />
             </div>
@@ -247,12 +247,12 @@ export default function AdminBannersPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Display Order</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Display Order</label>
               <input
                 type="number"
                 value={formData.order}
                 onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] text-sm"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               />
             </div>
             <div className="flex items-center mt-6">
@@ -263,7 +263,7 @@ export default function AdminBannersPage() {
                 onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })}
                 className="h-4 w-4 rounded border-gray-300 text-[#2d6a4f] focus:ring-[#2d6a4f]"
               />
-              <label htmlFor="is_active" className="ml-2 block text-sm font-semibold text-gray-700">
+              <label htmlFor="is_active" className="ml-2 block text-sm font-medium text-gray-700">
                 Is Active (Visible to users)
               </label>
             </div>

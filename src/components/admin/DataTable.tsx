@@ -21,27 +21,27 @@ export function DataTable<T extends { _id?: string }>({
   loading = false,
 }: DataTableProps<T>) {
   return (
-    <div className="w-full overflow-x-auto bg-white rounded-2xl shadow border border-gray-150">
-      <table className="min-w-full divide-y divide-gray-155 text-left text-sm">
-        <thead className="bg-gray-50">
+    <div className="w-full overflow-x-auto bg-white rounded-lg shadow">
+      <table className="min-w-full divide-y divide-gray-100 text-left text-sm">
+        <thead className="bg-gray-100">
           <tr>
             {columns.map((col, idx) => (
-              <th key={idx} className="px-6 py-4 font-bold text-gray-700 uppercase tracking-wider text-[11px]">
+              <th key={idx} className="px-6 py-4 text-gray-700 font-semibold text-sm uppercase">
                 {col.header}
               </th>
             ))}
             {(onEdit || onDelete) && (
-              <th className="px-6 py-4 font-bold text-gray-700 uppercase tracking-wider text-[11px] text-right">
+              <th className="px-6 py-4 text-gray-700 font-semibold text-sm uppercase text-right">
                 Actions
               </th>
             )}
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-150">
+        <tbody className="divide-y divide-gray-100">
           {loading ? (
             // Skeleton loader
             Array.from({ length: 5 }).map((_, sIdx) => (
-              <tr key={sIdx} className="animate-pulse">
+              <tr key={sIdx} className="animate-pulse border-b border-gray-100">
                 {columns.map((_, cIdx) => (
                   <td key={cIdx} className="px-6 py-4">
                     <div className="h-4 bg-gray-200 rounded w-24"></div>
@@ -57,15 +57,15 @@ export function DataTable<T extends { _id?: string }>({
             ))
           ) : data.length === 0 ? (
             <tr>
-              <td colSpan={columns.length + (onEdit || onDelete ? 1 : 0)} className="px-6 py-10 text-center text-gray-500">
+              <td colSpan={columns.length + (onEdit || onDelete ? 1 : 0)} className="px-6 py-8 text-center text-gray-500">
                 No items found.
               </td>
             </tr>
           ) : (
             data.map((row, rowIdx) => (
-              <tr key={row._id || rowIdx} className="hover:bg-gray-50/50 transition-colors">
+              <tr key={row._id || rowIdx} className="hover:bg-gray-50/50 transition-colors border-b border-gray-100 text-gray-800">
                 {columns.map((col, colIdx) => (
-                  <td key={colIdx} className="px-6 py-4 text-gray-900 whitespace-nowrap align-middle">
+                  <td key={colIdx} className="px-6 py-4 whitespace-nowrap align-middle">
                     {typeof col.accessor === 'function'
                       ? col.accessor(row)
                       : (row[col.accessor] as React.ReactNode)}

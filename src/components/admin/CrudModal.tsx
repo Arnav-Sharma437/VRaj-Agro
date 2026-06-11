@@ -16,8 +16,8 @@ export const CrudModal: React.FC<CrudModalProps> = ({ isOpen, onClose, title, ch
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden border border-gray-150 animate-fade-in">
         {/* Header */}
         <div className="px-6 py-4 border-b border-gray-150 flex items-center justify-between bg-gray-50">
-          <h3 className="text-lg font-bold text-gray-900">{title}</h3>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 transition-colors focus:outline-none">
+          <h3 className="text-xl font-bold text-gray-900">{title}</h3>
+          <button onClick={onClose} className="text-gray-600 hover:text-gray-900 transition-colors focus:outline-none">
             <X size={20} />
           </button>
         </div>
