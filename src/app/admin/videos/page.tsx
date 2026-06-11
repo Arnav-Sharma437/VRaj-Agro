@@ -165,7 +165,7 @@ export default function AdminVideosPage() {
         </div>
         <button
           onClick={openAddModal}
-          className="flex items-center gap-2 bg-[#2d6a4f] hover:bg-[#1b4332] text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-sm"
+          className="flex items-center gap-2 bg-[#cc0000] hover:bg-[#aa0000] text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-sm"
         >
           <Plus size={18} />
           <span>Add New</span>
@@ -231,7 +231,7 @@ export default function AdminVideosPage() {
                 id="is_active"
                 checked={formData.is_active}
                 onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })}
-                className="h-4 w-4 rounded border-gray-300 text-[#2d6a4f] focus:ring-[#2d6a4f]"
+                className="h-4 w-4 rounded border-gray-300 text-[#cc0000] focus:ring-[#cc0000]"
               />
               <label htmlFor="is_active" className="ml-2 block text-sm font-medium text-gray-700">
                 Is Active (Show in guide galleries)
@@ -250,7 +250,7 @@ export default function AdminVideosPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="px-4 py-2 text-sm font-semibold text-white bg-[#2d6a4f] hover:bg-[#1b4332] rounded-lg transition-colors focus:outline-none disabled:opacity-70"
+              className="px-4 py-2 text-sm font-semibold text-white bg-[#cc0000] hover:bg-[#aa0000] rounded-lg transition-colors focus:outline-none disabled:opacity-70"
             >
               {submitting ? 'Saving...' : 'Save Video'}
             </button>

@@ -51,7 +51,7 @@ export default async function AdminDashboardPage() {
 
   const statCards = [
     { label: 'Total Products', value: stats.products, icon: Package, color: 'text-blue-600', bg: 'bg-blue-50 border-blue-100' },
-    { label: 'Total Categories', value: stats.categories, icon: Tag, color: 'text-[#2d6a4f]', bg: 'bg-green-50 border-green-100' },
+    { label: 'Total Categories', value: stats.categories, icon: Tag, color: 'text-[#f5a623]', bg: 'bg-amber-50 border-amber-100' },
     { label: 'Total Banners', value: stats.banners, icon: ImageIcon, color: 'text-amber-600', bg: 'bg-amber-50 border-amber-100' },
     { label: 'Total Testimonials', value: stats.testimonials, icon: MessageSquare, color: 'text-purple-600', bg: 'bg-purple-50 border-purple-100' },
   ];
@@ -87,7 +87,7 @@ export default async function AdminDashboardPage() {
         <div className="lg:col-span-2 bg-white rounded-2xl border border-gray-150 shadow-sm overflow-hidden">
           <div className="px-6 py-5 border-b border-gray-150 flex items-center justify-between">
             <h2 className="text-lg font-bold text-gray-900">Recent Products</h2>
-            <Link href="/admin/products" className="text-sm text-[#2d6a4f] hover:text-[#1b4332] font-semibold transition-colors">
+            <Link href="/admin/products" className="text-sm text-[#cc0000] hover:text-[#aa0000] font-semibold transition-colors">
               View All
             </Link>
           </div>
@@ -142,10 +142,10 @@ export default async function AdminDashboardPage() {
           <div className="space-y-3">
             <Link
               href="/admin/products"
-              className="flex items-center justify-between w-full p-4 rounded-xl border border-gray-200 hover:border-[#2d6a4f] hover:bg-green-50/20 group transition-all"
+              className="flex items-center justify-between w-full p-4 rounded-xl border border-gray-200 hover:border-[#cc0000] hover:bg-red-50/20 group transition-all"
             >
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-green-50 text-[#2d6a4f] group-hover:bg-[#2d6a4f] group-hover:text-white transition-colors">
+                <div className="p-2 rounded-lg bg-red-50 text-[#cc0000] group-hover:bg-[#cc0000] group-hover:text-white transition-colors">
                   <Plus size={18} />
                 </div>
                 <span className="text-sm font-semibold text-gray-700">Add New Product</span>
@@ -153,10 +153,10 @@ export default async function AdminDashboardPage() {
             </Link>
             <Link
               href="/admin/categories"
-              className="flex items-center justify-between w-full p-4 rounded-xl border border-gray-200 hover:border-[#2d6a4f] hover:bg-green-50/20 group transition-all"
+              className="flex items-center justify-between w-full p-4 rounded-xl border border-gray-200 hover:border-[#cc0000] hover:bg-red-50/20 group transition-all"
             >
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-green-50 text-[#2d6a4f] group-hover:bg-[#2d6a4f] group-hover:text-white transition-colors">
+                <div className="p-2 rounded-lg bg-red-50 text-[#cc0000] group-hover:bg-[#cc0000] group-hover:text-white transition-colors">
                   <Plus size={18} />
                 </div>
                 <span className="text-sm font-semibold text-gray-700">Add New Category</span>

@@ -37,14 +37,21 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f8fffe] px-4 py-12 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-2xl shadow-lg border border-[#95d5b2]/30">
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4 py-12 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
         <div className="text-center">
-          <div className="flex justify-center mb-3">
-            <span className="text-4xl">🌾</span>
+          <div className="flex justify-center mb-4">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/logo/logo.jpg"
+              alt="V.Raj Agro Logo"
+              width={160}
+              height={60}
+              className="object-contain h-12 w-auto"
+            />
           </div>
-          <h2 className="text-3xl font-extrabold text-[#2d6a4f] tracking-tight">
-            VRaj Agro
+          <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">
+            Admin Panel
           </h2>
           <p className="mt-2 text-sm text-gray-500">
             Sign in to access your Admin Control Center
@@ -72,7 +79,7 @@ export default function AdminLoginPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] focus:z-10 sm:text-sm transition-colors"
+                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-[#cc0000] focus:border-[#cc0000] focus:z-10 sm:text-sm transition-colors"
                 placeholder="admin@vrajagro.com"
               />
             </div>
@@ -88,7 +95,7 @@ export default function AdminLoginPage() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-[#2d6a4f] focus:border-[#2d6a4f] focus:z-10 sm:text-sm transition-colors"
+                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-[#cc0000] focus:border-[#cc0000] focus:z-10 sm:text-sm transition-colors"
                 placeholder="••••••••"
               />
             </div>
@@ -98,7 +105,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className={`group relative w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-semibold rounded-lg text-white bg-[#2d6a4f] hover:bg-[#1b4332] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2d6a4f] transition-all ${
+              className={`group relative w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-semibold rounded-lg text-white bg-[#cc0000] hover:bg-[#aa0000] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#cc0000] transition-all ${
                 loading ? 'opacity-75 cursor-not-allowed' : ''
               }`}
             >

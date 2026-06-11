@@ -25,9 +25,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   if (status === 'loading') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#f8fffe]">
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
         <div className="flex flex-col items-center gap-4">
-          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-[#2d6a4f]"></div>
+          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-[#cc0000]"></div>
           <span className="text-sm text-gray-500 font-medium">Verifying session...</span>
         </div>
       </div>
@@ -39,7 +39,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-[#f8fffe]">
+    <div className="flex flex-col md:flex-row min-h-screen bg-slate-50">
       <Sidebar />
       <main className="flex-1 p-8 overflow-y-auto">
         <div className="max-w-7xl mx-auto">

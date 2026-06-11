@@ -75,7 +75,7 @@ export function DataTable<T extends { _id?: string }>({
                   <td className="px-6 py-4 whitespace-nowrap text-right align-middle">
                     <div className="inline-flex justify-end gap-3 w-full">
                       {onEdit && (
-                        <button onClick={() => onEdit(row)} className="text-[#2d6a4f] hover:text-[#1b4332] font-semibold text-xs transition-colors">
+                        <button onClick={() => onEdit(row)} className="text-[#cc0000] hover:text-[#aa0000] font-semibold text-xs transition-colors">
                           Edit
                         </button>
                       )}
