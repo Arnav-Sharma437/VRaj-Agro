@@ -1,46 +1,102 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import { Play } from 'lucide-react';
 import { IVideo } from '@/types';
 
-interface VideoSectionProps {
-  videos: IVideo[];
-}
+export default function VideoSection() {
+  const [videos, setVideos] = useState<IVideo[]>([]);
+  const [loading, setLoading] = useState(true);
 
-export const VideoSection: React.FC<VideoSectionProps> = ({ videos }) => {
-  return (
-    <section className="py-12 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Videos & Guides</h2>
-        {videos.length === 0 ? (
-          <div className="text-center py-10 text-gray-500">
-            No videos available yet.
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        const res = await fetch('/api/videos');
+        if (res.ok) {
+          const data = await res.json();
+          setVideos(data);
+        }
+      } catch (err) {
+        console.error('Failed to fetch videos', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchVideos();
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="py-16 bg-[#f8fffe] border-t border-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-xl mx-auto mb-12">
+            <div className="h-8 w-60 bg-gray-250 animate-pulse rounded mx-auto mb-3" />
+            <div className="h-4 w-72 bg-gray-200 animate-pulse rounded mx-auto" />
           </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {videos.map((v) => (
-              <div key={v._id} className="border rounded-lg overflow-hidden bg-white shadow-sm">
-                <div className="aspect-video bg-gray-200 relative h-48 flex items-center justify-center">
-                  {v.thumbnail ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={v.thumbnail} alt={v.title} className="w-full h-full object-cover" />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-gray-400">
-                      Thumbnail Placeholder
-                    </div>
-                  )}
-                </div>
-                <div className="p-4">
-                  <h3 className="font-bold text-lg text-gray-900">{v.title}</h3>
-                  <a href={v.video_url} target="_blank" rel="noopener noreferrer" className="text-green-700 hover:text-green-900 font-medium text-sm mt-2 inline-block">
-                    Watch Video →
-                  </a>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="space-y-4 animate-pulse">
+                <div className="aspect-video bg-gray-200 rounded-2xl w-full" />
+                <div className="h-5 bg-gray-200 rounded w-2/3" />
               </div>
             ))}
           </div>
-        )}
+        </div>
+      </section>
+    );
+  }
+
+  // If no videos, hide section completely
+  if (videos.length === 0) {
+    return null;
+  }
+
+  return (
+    <section className="py-16 bg-[#f8fffe] border-t border-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-12 space-y-2">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-[#2d6a4f] tracking-tight">
+            Customer Success Stories
+          </h2>
+          <p className="text-sm md:text-base text-gray-500 font-medium">
+            Watch real outcomes and video testimonials from farming communities using our solutions.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {videos.map((video) => (
+            <a
+              key={video._id}
+              href={video.video_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block space-y-4"
+            >
+              {/* Thumbnail with overlay */}
+              <div className="relative aspect-video w-full rounded-2xl overflow-hidden shadow-sm group-hover:shadow-md transition-shadow bg-gray-100">
+                <Image
+                  src={video.thumbnail || 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&q=80&w=400'}
+                  alt={video.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+                {/* Play Button Overlay */}
+                <div className="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/35">
+                  <div className="w-14 h-14 bg-white text-[#2d6a4f] rounded-full flex items-center justify-center shadow-lg transform transition-transform duration-300 group-hover:scale-110">
+                    <Play size={24} className="fill-current ml-1" />
+                  </div>
+                </div>
+              </div>
+              {/* Title */}
+              <h3 className="font-bold text-gray-900 group-hover:text-[#2d6a4f] transition-colors duration-300 text-sm md:text-base leading-snug line-clamp-2">
+                {video.title}
+              </h3>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   );
-};
-
-export default VideoSection;
+}

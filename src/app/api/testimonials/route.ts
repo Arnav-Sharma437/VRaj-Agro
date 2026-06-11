@@ -1,11 +1,16 @@
 import { NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import dbConnect from '@/lib/mongodb';
 import Testimonial from '@/models/Testimonial';
 
 export async function GET() {
   try {
     await dbConnect();
-    const testimonials = await Testimonial.find({}).sort({ order: 1 });
+    const session = await getServerSession(authOptions);
+    const query = session ? {} : { is_active: true };
+
+    const testimonials = await Testimonial.find(query).sort({ order: 1 });
     return NextResponse.json(testimonials);
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';

@@ -1,11 +1,16 @@
 import { NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import dbConnect from '@/lib/mongodb';
 import Video from '@/models/Video';
 
 export async function GET() {
   try {
     await dbConnect();
-    const videos = await Video.find({}).sort({ order: 1 });
+    const session = await getServerSession(authOptions);
+    const query = session ? {} : { is_active: true };
+
+    const videos = await Video.find(query).sort({ order: 1 });
     return NextResponse.json(videos);
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
