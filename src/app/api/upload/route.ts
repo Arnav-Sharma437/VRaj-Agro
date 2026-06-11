@@ -1,33 +1,31 @@
-import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { NextRequest, NextResponse } from 'next/server'
+import cloudinary from '@/lib/cloudinary'
 
-export async function POST(req: Request) {
+export async function POST(request: NextRequest) {
   try {
-    const formData = await req.formData();
-    const file = formData.get('file') as File | null;
+    const formData = await request.formData()
+    const file = formData.get('file') as File
+    
     if (!file) {
-      return NextResponse.json({ error: 'No file provided' }, { status: 400 });
+      return NextResponse.json({ error: 'No file provided' }, { status: 400 })
     }
 
-    const arrayBuffer = await file.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
+    const bytes = await file.arrayBuffer()
+    const buffer = Buffer.from(bytes)
 
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads');
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, { recursive: true });
-    }
+    const result = await new Promise((resolve, reject) => {
+      cloudinary.uploader.upload_stream(
+        { folder: 'vraj-agro' },
+        (error, result) => {
+          if (error) reject(error)
+          else resolve(result)
+        }
+      ).end(buffer)
+    }) as unknown as { secure_url: string }
 
-    // Get extension
-    const ext = path.extname(file.name) || '.png';
-    const filename = `${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`;
-    const filePath = path.join(uploadDir, filename);
-
-    fs.writeFileSync(filePath, buffer);
-
-    return NextResponse.json({ url: `/uploads/${filename}` });
+    return NextResponse.json({ url: result.secure_url })
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unknown error';
-    return NextResponse.json({ error: message }, { status: 500 });
+    console.error('Upload failed:', error)
+    return NextResponse.json({ error: 'Upload failed' }, { status: 500 })
   }
 }
