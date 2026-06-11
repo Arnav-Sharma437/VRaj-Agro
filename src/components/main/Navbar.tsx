@@ -13,7 +13,7 @@ export default function Navbar() {
   const [contactInfo, setContactInfo] = useState<IContactInfo | null>(null);
   const [loadingContact, setLoadingContact] = useState(true);
   const [logoIndex, setLogoIndex] = useState(0);
-  const logoExtensions = ['png', 'jpg', 'jpeg', 'webp', 'svg'];
+  const logoExtensions = ['jpg', 'png', 'jpeg', 'webp', 'svg'];
 
   useEffect(() => {
     const handleScroll = () => {
