@@ -13,9 +13,9 @@ import {
   Check, 
   Quote, 
   ArrowRight,
-  Settings,
   ChevronRight
 } from 'lucide-react';
+import AboutImage from '@/components/main/AboutImage';
 
 export const metadata = {
   title: 'About Us | V.Raj Agro',
@@ -76,13 +76,7 @@ export default function AboutPage() {
           {/* Left Column: Image placeholder with machinery icon */}
           <div className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-[#cc0000] to-[#f5a623] rounded-2xl blur opacity-10 group-hover:opacity-25 transition duration-1000"></div>
-            <div className="relative bg-gray-100 border-2 border-dashed border-gray-300 rounded-2xl p-12 flex flex-col items-center justify-center text-center h-[350px] sm:h-[400px] transition-all duration-300 group-hover:border-[#cc0000]">
-              <div className="bg-white p-6 rounded-full shadow-md text-[#cc0000] mb-4 group-hover:scale-110 transition-transform duration-300">
-                <Settings size={64} className="animate-[spin_20s_linear_infinite]" />
-              </div>
-              <p className="text-gray-500 font-semibold text-lg">V.Raj Agro Machinery</p>
-              <p className="text-gray-400 text-sm mt-1 max-w-xs">Concrete Mixers, Chaff Cutters, Agricultural Threshers & Water Tankers</p>
-            </div>
+            <AboutImage />
           </div>
 
           {/* Right Column: Text and CTA */}

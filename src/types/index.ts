@@ -55,7 +55,8 @@ export interface ITestimonial {
 export interface IVideo {
   _id?: string;
   title: string;
-  video_url: string;
+  video_url?: string;
+  uploaded_video_url?: string;
   thumbnail?: string;
   order?: number;
   is_active?: boolean;

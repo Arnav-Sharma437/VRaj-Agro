@@ -12,6 +12,7 @@ import { Plus, Video } from 'lucide-react';
 const defaultForm: Partial<IVideo> = {
   title: '',
   video_url: '',
+  uploaded_video_url: '',
   thumbnail: '',
   order: 0,
   is_active: true,
@@ -62,7 +63,8 @@ export default function AdminVideosPage() {
     setEditingItem(item);
     setFormData({
       title: item.title,
-      video_url: item.video_url,
+      video_url: item.video_url || '',
+      uploaded_video_url: item.uploaded_video_url || '',
       thumbnail: item.thumbnail || '',
       order: item.order ?? 0,
       is_active: item.is_active ?? true,
@@ -136,11 +138,17 @@ export default function AdminVideosPage() {
     },
     { header: 'Title', accessor: (row: IVideo) => <span className="font-bold text-gray-900">{row.title}</span> },
     {
-      header: 'Video URL',
+      header: 'Video Source',
       accessor: (row: IVideo) => (
-        <a href={row.video_url} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline truncate max-w-xs block">
-          {row.video_url}
-        </a>
+        row.uploaded_video_url ? (
+          <a href={row.uploaded_video_url} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline truncate max-w-xs block font-semibold">
+            Direct File Upload (Cloudinary)
+          </a>
+        ) : (
+          <a href={row.video_url} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline truncate max-w-xs block">
+            {row.video_url}
+          </a>
+        )
       ),
     },
     { header: 'Order', accessor: (row: IVideo) => String(row.order ?? 0) },
@@ -197,22 +205,39 @@ export default function AdminVideosPage() {
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Video URL (YouTube/Vimeo)</label>
-            <input
-              type="text"
-              required
-              value={formData.video_url}
-              onChange={(e) => setFormData({ ...formData, video_url: e.target.value })}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-              placeholder="https://www.youtube.com/embed/..."
+          <div className="bg-gray-50 p-4 rounded-xl border border-gray-150 space-y-4">
+            <h3 className="text-xs font-extrabold text-[#1a1a1a] uppercase tracking-wider">Video Source Options</h3>
+            
+            <div>
+              <label className="block text-xs font-semibold text-gray-500 mb-1">Option A — Video URL (YouTube/Vimeo embed)</label>
+              <input
+                type="text"
+                value={formData.video_url}
+                onChange={(e) => setFormData({ ...formData, video_url: e.target.value })}
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm"
+                placeholder="https://www.youtube.com/embed/..."
+              />
+            </div>
+
+            <div className="relative flex py-2 items-center">
+              <div className="flex-grow border-t border-gray-200"></div>
+              <span className="flex-shrink mx-4 text-xs font-semibold text-gray-400 uppercase">Or</span>
+              <div className="flex-grow border-t border-gray-200"></div>
+            </div>
+
+            <ImageUpload
+              value={formData.uploaded_video_url || ''}
+              onChange={(url) => setFormData({ ...formData, uploaded_video_url: url })}
+              label="Option B — Upload Video File"
+              accept="video/*,.mp4,.webm,.mov,.avi"
             />
           </div>
 
           <ImageUpload
             value={formData.thumbnail || ''}
             onChange={(url) => setFormData({ ...formData, thumbnail: url })}
-            label="Video Thumbnail"
+            label="Video Thumbnail (Image only)"
+            accept="image/*"
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

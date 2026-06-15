@@ -71,7 +71,7 @@ export default function VideoSection() {
           {videos.map((video) => (
             <a
               key={video._id}
-              href={video.video_url}
+              href={video.uploaded_video_url || video.video_url}
               target="_blank"
               rel="noopener noreferrer"
               className="group block space-y-4"

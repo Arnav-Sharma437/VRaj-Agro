@@ -7,36 +7,12 @@ import {
   Phone, 
   Mail, 
   MessageSquare,
-  ChevronRight,
-  Send,
-  Loader2
+  ChevronRight
 } from 'lucide-react';
-import Toast from '@/components/ui/Toast';
 import { IContactInfo } from '@/types';
 
 export default function ContactPageClient() {
   const [contactInfo, setContactInfo] = useState<IContactInfo | null>(null);
-
-  // Form states
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-  const [submitting, setSubmitting] = useState(false);
-
-  // Toast states
-  const [toast, setToast] = useState<{
-    show: boolean;
-    message: string;
-    type: 'success' | 'error';
-  }>({
-    show: false,
-    message: '',
-    type: 'success'
-  });
 
   // Fetch contact info on load
   useEffect(() => {
@@ -54,57 +30,6 @@ export default function ContactPageClient() {
     fetchContact();
   }, []);
 
-  // Form input handler
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  // Form submit handler
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitting(true);
-
-    try {
-      const res = await fetch('/api/contact-form', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
-
-      if (res.ok) {
-        setToast({
-          show: true,
-          message: 'Message sent successfully!',
-          type: 'success'
-        });
-        // Reset form
-        setFormData({
-          name: '',
-          phone: '',
-          email: '',
-          subject: '',
-          message: ''
-        });
-      } else {
-        throw new Error('Failed to send message');
-      }
-    } catch {
-      setToast({
-        show: true,
-        message: 'Failed to send. Please try again.',
-        type: 'error'
-      });
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
   // Parse details with fallbacks
   const address = contactInfo?.address || 'V. Raj Agro Beside New Petrol Pump, Seepat Road Mopka, Bilaspur Chhattisgarh 495001';
   const emailVal = contactInfo?.email || 'mustafajabrot.vraj@gmail.com';
@@ -120,15 +45,6 @@ export default function ContactPageClient() {
 
   return (
     <div className="bg-white min-h-screen relative">
-      {/* Toast Notification */}
-      {toast.show && (
-        <Toast 
-          message={toast.message} 
-          type={toast.type} 
-          onClose={() => setToast((prev) => ({ ...prev, show: false }))} 
-        />
-      )}
-
       {/* Section 1: Page Banner */}
       <section className="bg-[#cc0000] text-white h-[200px] flex flex-col justify-center px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto w-full">
@@ -191,132 +107,20 @@ export default function ContactPageClient() {
         </div>
       </section>
 
-      {/* Section 3: Contact Form + Map */}
+      {/* Section 3: Google Map (Full Width) */}
       <section className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Left: Contact Form */}
-          <div className="bg-white border border-gray-100 rounded-2xl p-6 sm:p-10 shadow-sm">
-            <h2 className="text-2xl font-bold text-[#1a1a1a] mb-2">Send Us a Message</h2>
-            <div className="w-12 h-1 bg-[#cc0000] rounded-full mb-8"></div>
-
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div>
-                <label htmlFor="name" className="block text-sm font-semibold text-[#1a1a1a] mb-1.5">
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="John Doe"
-                  className="w-full border border-gray-300 text-gray-900 bg-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent transition-all"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-semibold text-[#1a1a1a] mb-1.5">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    required
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="+91 9300311126"
-                    className="w-full border border-gray-300 text-gray-900 bg-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent transition-all"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-[#1a1a1a] mb-1.5">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="john@example.com"
-                    className="w-full border border-gray-300 text-gray-900 bg-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent transition-all"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="subject" className="block text-sm font-semibold text-[#1a1a1a] mb-1.5">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  required
-                  value={formData.subject}
-                  onChange={handleChange}
-                  placeholder="Inquiry about Concrete Mixer Machine"
-                  className="w-full border border-gray-300 text-gray-900 bg-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent transition-all"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-semibold text-[#1a1a1a] mb-1.5">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  rows={5}
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Write your message here..."
-                  className="w-full border border-gray-300 text-gray-900 bg-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent transition-all resize-none"
-                ></textarea>
-              </div>
-
-              <div>
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="w-full bg-[#cc0000] hover:bg-[#aa0000] text-white font-bold uppercase tracking-wider py-3.5 px-6 rounded-lg transition-all duration-300 shadow-md flex items-center justify-center gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
-                >
-                  {submitting ? (
-                    <>
-                      <Loader2 className="animate-spin" size={18} />
-                      <span>Sending...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send size={18} />
-                      <span>Send Message</span>
-                    </>
-                  )}
-                </button>
-              </div>
-            </form>
-          </div>
-
-          {/* Right: Google Map */}
-          <div className="w-full h-full min-h-[400px] rounded-2xl overflow-hidden shadow-sm border border-gray-150 relative">
-            <iframe
-              src={mapEmbedUrl}
-              width="100%"
-              height="100%"
-              style={{ border: 0, minHeight: '400px' }}
-              allowFullScreen={true}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="V.Raj Agro Location Map"
-              className="absolute inset-0 w-full h-full"
-            ></iframe>
-          </div>
+        <div className="w-full h-[450px] rounded-2xl overflow-hidden shadow-sm border border-gray-150 relative">
+          <iframe
+            src={mapEmbedUrl}
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen={true}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="V.Raj Agro Location Map"
+            className="absolute inset-0 w-full h-full"
+          ></iframe>
         </div>
       </section>
 
