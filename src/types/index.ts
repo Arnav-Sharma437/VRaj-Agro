@@ -75,3 +75,15 @@ export interface IContactInfo {
   updatedAt?: Date | string;
 }
 
+export interface IContactMessage {
+  _id?: string;
+  name: string;
+  phone: string;
+  email: string;
+  subject: string;
+  message: string;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+}
+
+
