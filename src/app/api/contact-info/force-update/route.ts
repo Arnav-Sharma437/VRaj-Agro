@@ -12,9 +12,12 @@ export async function GET() {
     const updated = await ContactInfo.findOneAndUpdate(
       {},
       {
-        whatsapp: '918871822944',
-        phone: '+91-8871822944',
-        email: 'vrajagrobilaspurcg@gmail.com',
+        $set: {
+          address: 'V. Raj Agro Beside New Petrol Pump, Seepat Road Mopka, Bilaspur Chhattisgarh 495001',
+          phone: '+91-8871822944',
+          whatsapp: '918871822944',
+          email: 'vrajagrobilaspurcg@gmail.com',
+        }
       },
       { new: true, upsert: true }
     );
