@@ -36,6 +36,9 @@ export interface IProduct {
   category: string | ICategory; // Category ID (string) or Populated Category Document
   is_featured?: boolean;
   is_active?: boolean;
+  price?: number;
+  discount_percent?: number;
+  show_price?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string;
 }

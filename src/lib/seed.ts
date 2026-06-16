@@ -42,9 +42,9 @@ async function seed() {
       {
         business_name: "V.Raj Agro",
         address: "V. Raj Agro Beside New Petrol Pump, Seepat Road Mopka, Bilaspur Chhattisgarh 495001",
-        phone: "+91-9300311126, +91-8871822944",
-        whatsapp: "919300311126",
-        email: "mustafajabrot.vraj@gmail.com",
+        phone: "+91-8871822944",
+        whatsapp: "918871822944",
+        email: "vrajagrobilaspurcg@gmail.com",
         map_embed_url: "",
       },
       { upsert: true, new: true, setDefaultsOnInsert: true }

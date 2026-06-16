@@ -64,8 +64,9 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const contactLean = await ContactInfo.findOne({}).lean();
   const contact = contactLean ? JSON.parse(JSON.stringify(contactLean)) : null;
 
-  const phone = contact?.phone || '+91 93003 11126';
-  const rawWhatsapp = contact?.whatsapp || '919300311126';
+  const phone = contact?.phone || '+91-8871822944';
+  const cleanPhone = phone.split(',')[0].trim().replace(/[^0-9+]/g, '');
+  const rawWhatsapp = contact?.whatsapp || '918871822944';
   const cleanWhatsapp = rawWhatsapp.replace(/[^0-9]/g, '');
 
   const whatsappMessage = encodeURIComponent(`Hello, I am interested in ${product.name}. Please share more details.`);
@@ -112,12 +113,31 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           {/* Right Column: Product Info & Actions */}
           <div className="lg:col-span-6 space-y-6 bg-white p-6 md:p-8 rounded-2xl border border-gray-200 shadow-sm">
             <div>
-              <span className="inline-block bg-[#cc0000] text-white text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider mb-3 shadow-sm">
-                {categoryName}
-              </span>
+              <div className="flex flex-wrap items-center gap-2 mb-3">
+                <span className="inline-block bg-[#cc0000] text-white text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                  {categoryName}
+                </span>
+                {product.show_price && product.price !== undefined && product.price > 0 && product.discount_percent !== undefined && product.discount_percent > 0 && (
+                  <span className="inline-block bg-[#22c55e] text-white text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                    {product.discount_percent}% OFF
+                  </span>
+                )}
+              </div>
               <h1 className="text-2xl md:text-3xl font-extrabold text-[#1a1a1a] leading-tight">
                 {product.name}
               </h1>
+              {product.show_price && product.price !== undefined && product.price > 0 && (
+                <div className="flex items-baseline gap-3 mt-3 mb-2">
+                  <span className="text-3xl font-extrabold text-gray-900">
+                    ₹{Math.round(product.price - (product.price * (product.discount_percent || 0) / 100)).toLocaleString('en-IN')}
+                  </span>
+                  {product.discount_percent !== undefined && product.discount_percent > 0 && (
+                    <span className="text-lg text-gray-500 line-through">
+                      ₹{product.price.toLocaleString('en-IN')}
+                    </span>
+                  )}
+                </div>
+              )}
             </div>
 
             <hr className="border-gray-200" />
@@ -152,7 +172,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
               {/* Call Us Now Button */}
               <a
-                href={`tel:${phone}`}
+                href={`tel:${cleanPhone}`}
                 className="inline-flex items-center justify-center gap-2 border-2 border-[#cc0000] hover:bg-red-50 text-[#cc0000] px-6 py-3.5 rounded-xl text-sm font-bold uppercase tracking-wider transition-all duration-300"
               >
                 <Phone size={16} />

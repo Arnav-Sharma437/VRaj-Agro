@@ -23,7 +23,7 @@ export default function ProductCard({ product, whatsappNumber }: ProductCardProp
           const res = await fetch('/api/contact-info');
           if (res.ok) {
             const data = await res.json();
-            setLocalWhatsapp(data.whatsapp || '919300311126');
+            setLocalWhatsapp(data.whatsapp || '918871822944');
           }
         } catch (err) {
           console.error('Error fetching contact info inside ProductCard', err);
@@ -33,7 +33,7 @@ export default function ProductCard({ product, whatsappNumber }: ProductCardProp
     }
   }, [whatsappNumber]);
 
-  const targetWhatsapp = whatsappNumber || localWhatsapp || '919300311126';
+  const targetWhatsapp = whatsappNumber || localWhatsapp || '918871822944';
   const cleanNumber = targetWhatsapp.replace(/[^0-9]/g, '');
   const message = encodeURIComponent(`Hello, I am interested in ${product.name}. Please share more details.`);
   const whatsappUrl = `https://wa.me/${cleanNumber}?text=${message}`;
@@ -51,12 +51,19 @@ export default function ProductCard({ product, whatsappNumber }: ProductCardProp
       onClick={handleCardClick}
       className="group flex flex-col bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 hover:scale-[1.01] transition-all duration-300 h-full relative cursor-pointer"
     >
-      {/* Yellow Featured Badge (Top-left) */}
-      {product.is_featured && (
-        <span className="absolute top-3 left-3 z-30 bg-[#f5a623] text-[#1a1a1a] text-[10px] font-black uppercase px-2.5 py-1 rounded tracking-wider shadow-sm">
-          Featured
-        </span>
-      )}
+      {/* Badges Container (Top-left) */}
+      <div className="absolute top-3 left-3 z-30 flex flex-col gap-1.5 items-start">
+        {product.is_featured && (
+          <span className="bg-[#f5a623] text-[#1a1a1a] text-[10px] font-black uppercase px-2.5 py-1 rounded tracking-wider shadow-sm">
+            Featured
+          </span>
+        )}
+        {product.show_price && product.price !== undefined && product.price > 0 && product.discount_percent !== undefined && product.discount_percent > 0 && (
+          <span className="bg-[#22c55e] text-white text-[10px] font-black uppercase px-2.5 py-1 rounded tracking-wider shadow-sm">
+            {product.discount_percent}% OFF
+          </span>
+        )}
+      </div>
 
       {/* Product Image (Top, full width) */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-50 block">
@@ -91,6 +98,20 @@ export default function ProductCard({ product, whatsappNumber }: ProductCardProp
              {product.short_description}
           </p>
         </div>
+
+        {/* Price Row */}
+        {product.show_price && product.price !== undefined && product.price > 0 && (
+          <div className="flex items-baseline gap-2 pt-1">
+            <span className="text-base font-extrabold text-gray-900">
+              ₹{Math.round(product.price - (product.price * (product.discount_percent || 0) / 100)).toLocaleString('en-IN')}
+            </span>
+            {product.discount_percent !== undefined && product.discount_percent > 0 && (
+              <span className="text-xs text-gray-500 line-through">
+                ₹{product.price.toLocaleString('en-IN')}
+              </span>
+            )}
+          </div>
+        )}
 
         {/* Buttons */}
         <div className="space-y-2 pt-2">

@@ -32,12 +32,12 @@ export default function ContactPageClient() {
 
   // Parse details with fallbacks
   const address = contactInfo?.address || 'V. Raj Agro Beside New Petrol Pump, Seepat Road Mopka, Bilaspur Chhattisgarh 495001';
-  const emailVal = contactInfo?.email || 'mustafajabrot.vraj@gmail.com';
-  const rawPhones = contactInfo?.phone || '+91-9300311126, +91-8871822944';
+  const emailVal = contactInfo?.email || 'vrajagrobilaspurcg@gmail.com';
+  const rawPhones = contactInfo?.phone || '+91-8871822944';
   const phonesList = rawPhones.split(',').map((p) => p.trim());
   const mainPhoneClean = phonesList[0].replace(/[^0-9+]/g, '');
 
-  const rawWhatsapp = contactInfo?.whatsapp || '919300311126';
+  const rawWhatsapp = contactInfo?.whatsapp || '918871822944';
   const whatsappClean = rawWhatsapp.replace(/[^0-9]/g, '');
   const whatsappUrl = `https://wa.me/${whatsappClean}`;
 

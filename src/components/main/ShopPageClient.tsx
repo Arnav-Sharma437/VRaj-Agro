@@ -22,7 +22,7 @@ export default function ShopPageClient({ initialCategories, initialProducts }: S
         const res = await fetch('/api/contact-info');
         if (res.ok) {
           const data = await res.json();
-          setWhatsappNumber(data.whatsapp || '919300311126');
+          setWhatsappNumber(data.whatsapp || '918871822944');
         }
       } catch (err) {
         console.error('Failed to fetch contact number inside ShopPage', err);

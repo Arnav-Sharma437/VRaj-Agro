@@ -8,9 +8,9 @@ import { IContactInfo } from '@/types';
 const defaultContact = {
   business_name: "V.Raj Agro",
   address: "V. Raj Agro Beside New Petrol Pump, Seepat Road Mopka, Bilaspur Chhattisgarh 495001",
-  phone: "+91-9300311126, +91-8871822944",
-  whatsapp: "919300311126",
-  email: "mustafajabrot.vraj@gmail.com",
+  phone: "+91-8871822944",
+  whatsapp: "918871822944",
+  email: "vrajagrobilaspurcg@gmail.com",
 };
 
 export default function Footer() {
@@ -34,7 +34,7 @@ export default function Footer() {
     fetchContact();
   }, []);
 
-  const whatsappNumber = contactInfo.whatsapp || '919300311126';
+  const whatsappNumber = contactInfo.whatsapp || '918871822944';
   const cleanWhatsapp = whatsappNumber.replace(/[^0-9]/g, '');
   const whatsappUrl = `https://wa.me/${cleanWhatsapp}`;
 

@@ -11,9 +11,9 @@ export async function GET() {
       contactInfo = await ContactInfo.create({
         business_name: 'VRaj Agro',
         address: '123 Agri Business Park, Gujarat, India',
-        phone: '+91 99999 88888',
-        whatsapp: '+91 99999 88888',
-        email: 'contact@vrajagro.com',
+        phone: '+91-8871822944',
+        whatsapp: '918871822944',
+        email: 'vrajagrobilaspurcg@gmail.com',
         map_embed_url: 'https://www.google.com/maps/embed?pb=placeholder',
       });
     }

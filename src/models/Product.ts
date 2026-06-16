@@ -18,6 +18,9 @@ const ProductSchema = new Schema<IProductDocument>(
     category: { type: Schema.Types.ObjectId, ref: 'Category' },
     is_featured: { type: Boolean, default: false },
     is_active: { type: Boolean, default: true },
+    price: { type: Number, default: 0 },
+    discount_percent: { type: Number, default: 0 },
+    show_price: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

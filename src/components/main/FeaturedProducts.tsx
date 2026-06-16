@@ -24,7 +24,7 @@ export default function FeaturedProducts() {
         }
         if (contactRes.ok) {
           const contactData = await contactRes.json();
-          setWhatsappNumber(contactData.whatsapp || '919300311126');
+          setWhatsappNumber(contactData.whatsapp || '918871822944');
         }
       } catch (err) {
         console.error('Failed to fetch initial data for FeaturedProducts', err);

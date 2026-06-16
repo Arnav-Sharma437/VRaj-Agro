@@ -38,7 +38,7 @@ export default function TopInfoBar() {
             <>
               {contactInfo?.phone && (
                 <a
-                  href={`tel:${contactInfo.phone.split(',')[0].trim()}`}
+                  href={`tel:${contactInfo.phone.split(',')[0].trim().replace(/[^0-9+]/g, '')}`}
                   className="flex items-center gap-1.5 hover:text-red-200 transition-colors"
                 >
                   <Phone size={13} />

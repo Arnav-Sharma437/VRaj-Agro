@@ -40,7 +40,7 @@ export default function Navbar() {
     fetchContact();
   }, []);
 
-  const whatsappNumber = contactInfo?.whatsapp || '919300311126';
+  const whatsappNumber = contactInfo?.whatsapp || '918871822944';
   const cleanNumber = whatsappNumber.replace(/[^0-9]/g, '');
   const message = encodeURIComponent("Hello V.Raj Agro, I would like to request a quote.");
   const whatsappUrl = `https://wa.me/${cleanNumber}?text=${message}`;

@@ -25,6 +25,9 @@ interface ProductFormState {
   applications: string[];
   is_featured: boolean;
   is_active: boolean;
+  price: number;
+  discount_percent: number;
+  show_price: boolean;
 }
 
 const defaultForm: ProductFormState = {
@@ -38,6 +41,9 @@ const defaultForm: ProductFormState = {
   applications: [''],
   is_featured: false,
   is_active: true,
+  price: 0,
+  discount_percent: 0,
+  show_price: false,
 };
 
 const slugify = (text: string) => {
@@ -118,6 +124,9 @@ export default function AdminProductsPage() {
       applications: item.applications && item.applications.length > 0 ? [...item.applications] : [''],
       is_featured: item.is_featured ?? false,
       is_active: item.is_active ?? true,
+      price: item.price ?? 0,
+      discount_percent: item.discount_percent ?? 0,
+      show_price: item.show_price ?? false,
     });
 
     // Parse specifications map to SpecPair array
@@ -553,6 +562,54 @@ export default function AdminProductsPage() {
                 ))}
               </div>
             </div>
+          </div>
+
+          {/* Pricing (Optional) */}
+          <div className="border border-gray-150 p-4 rounded-xl space-y-4 bg-gray-50/50">
+            <h4 className="text-sm font-bold text-gray-800">Pricing (Optional)</h4>
+            
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="show_price"
+                checked={formData.show_price}
+                onChange={(e) => setFormData({ ...formData, show_price: e.target.checked })}
+                className="h-4 w-4 rounded border-gray-300 text-[#cc0000] focus:ring-[#cc0000]"
+              />
+              <label htmlFor="show_price" className="ml-2 block text-sm font-medium text-gray-700">
+                Show Price on Website
+              </label>
+            </div>
+
+            {formData.show_price && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Price (₹)</label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={formData.price}
+                    onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Discount %</label>
+                  <input
+                    type="number"
+                    min="0"
+                    max="100"
+                    value={formData.discount_percent}
+                    onChange={(e) => setFormData({ ...formData, discount_percent: Number(e.target.value) })}
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+            )}
+            
+            <p className="text-xs text-gray-500">
+              Leave price as 0 to hide pricing and show only WhatsApp enquiry.
+            </p>
           </div>
 
           {/* Row 7: Toggles */}
