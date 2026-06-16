@@ -23,7 +23,7 @@ export default function Footer() {
         if (res.ok) {
           const data = await res.json();
           // Check if data is not empty or a default template
-          if (data && data.business_name && data.address !== '123 Agri Business Park, Gujarat, India') {
+          if (data && data.business_name && data.address !== 'V. Raj Agro Beside New Petrol Pump, Seepat Road Mopka, Bilaspur Chhattisgarh 495001') {
             setContactInfo(data);
           }
         }

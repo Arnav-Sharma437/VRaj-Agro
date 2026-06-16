@@ -13,7 +13,7 @@ export async function GET() {
       // Create a default placeholder document if none exists yet
       contactInfo = await ContactInfo.create({
         business_name: 'VRaj Agro',
-        address: '123 Agri Business Park, Gujarat, India',
+        address: 'V. Raj Agro Beside New Petrol Pump, Seepat Road Mopka, Bilaspur Chhattisgarh 495001',
         phone: '+91-8871822944',
         whatsapp: '918871822944',
         email: 'vrajagrobilaspurcg@gmail.com',
