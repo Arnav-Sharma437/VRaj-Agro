@@ -13,6 +13,7 @@ import { IContactInfo } from '@/types';
 
 export default function ContactPageClient() {
   const [contactInfo, setContactInfo] = useState<IContactInfo | null>(null);
+  const [loading, setLoading] = useState(true);
 
   // Fetch contact info on load
   useEffect(() => {
@@ -22,13 +23,28 @@ export default function ContactPageClient() {
         if (res.ok) {
           const data = await res.json();
           setContactInfo(data);
+        } else {
+          console.error(`Failed to fetch contact info. Status code: ${res.status}`);
         }
       } catch (err) {
-        console.error('Failed to fetch contact info', err);
+        console.error('Failed to fetch contact info:', err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchContact();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="flex flex-col items-center gap-4">
+          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-[#cc0000]"></div>
+          <span className="text-sm text-gray-500 font-medium">Loading contact details...</span>
+        </div>
+      </div>
+    );
+  }
 
   // Parse details with fallbacks
   const address = contactInfo?.address || 'V. Raj Agro Beside New Petrol Pump, Seepat Road Mopka, Bilaspur Chhattisgarh 495001';
