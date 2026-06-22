@@ -26,7 +26,7 @@ export default function TopInfoBar() {
   }, []);
 
   return (
-    <div className="hidden md:block bg-[#cc0000] text-white py-2 border-b border-red-700 text-xs">
+    <div className="hidden md:block bg-[#cc0000] text-white py-2 border-b border-red-700 text-xs font-medium">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         <div>
           <span className="font-semibold">Welcome to V.Raj Agro</span>
