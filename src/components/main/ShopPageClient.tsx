@@ -84,78 +84,76 @@ export default function ShopPageClient({ initialCategories, initialProducts }: S
       </div>
 
       {/* 2. Main Content Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 flex flex-col lg:flex-row gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 flex flex-col md:flex-row gap-6 md:gap-8">
         
         {/* Left column: Sticky Sidebar (hidden on mobile) */}
-        <aside className="hidden lg:block w-64 shrink-0">
-          <div className="sticky top-[90px] space-y-6">
-            <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
-              <h2 className="text-base font-bold text-gray-900 mb-4 border-b border-gray-100 pb-2 uppercase tracking-wider">
-                Categories
-              </h2>
-              <div className="space-y-1.5">
-                {/* All Products button */}
-                <button
-                  onClick={() => setSelectedCategory('all')}
-                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
-                    selectedCategory === 'all'
-                      ? 'bg-[#cc0000] text-white shadow-md shadow-red-100'
-                      : 'text-gray-700 hover:bg-red-50 hover:text-[#cc0000]'
-                  }`}
-                >
-                  <div className="flex items-center gap-2.5">
-                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 text-sm">
-                      📦
-                    </span>
-                    <span>All Products</span>
-                  </div>
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${selectedCategory === 'all' ? 'bg-white/25 text-white' : 'bg-gray-100 text-gray-500'}`}>
-                    {categoryCounts['all'] || 0}
-                  </span>
-                </button>
+        <aside className="hidden md:block w-56 shrink-0">
+          <div className="sticky top-[90px]">
+            <h2 className="text-xs font-bold text-gray-500 mb-3 uppercase tracking-wider">
+              FILTER BY CATEGORY
+            </h2>
+            <div className="space-y-1">
+              {/* All Products button */}
+              <button
+                onClick={() => setSelectedCategory('all')}
+                className={`w-full flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-all duration-205 ${
+                  selectedCategory === 'all'
+                    ? 'bg-[#cc0000] text-white shadow-sm'
+                    : 'bg-white hover:bg-gray-50 text-[#1a1a1a]'
+                }`}
+              >
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gray-100 text-lg">
+                  📦
+                </span>
+                <span className={`text-sm font-semibold text-left transition-colors ${selectedCategory === 'all' ? 'text-white' : 'text-[#1a1a1a]'}`}>
+                  All Products
+                </span>
+                <span className={`text-xs ml-auto transition-colors ${selectedCategory === 'all' ? 'text-white' : 'text-gray-400'}`}>
+                  {categoryCounts['all'] || 0}
+                </span>
+              </button>
 
-                {/* Individual Category buttons */}
-                {initialCategories.map((cat) => {
-                  const isActive = selectedCategory === cat.slug;
-                  return (
-                    <button
-                      key={cat._id}
-                      onClick={() => setSelectedCategory(cat.slug || '')}
-                      className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
-                        isActive
-                          ? 'bg-[#cc0000] text-white shadow-md shadow-red-100'
-                          : 'text-gray-700 hover:bg-red-50 hover:text-[#cc0000]'
-                      }`}
-                    >
-                      <div className="flex items-center gap-2.5">
-                        {cat.image ? (
-                          <img
-                            src={cat.image}
-                            alt={cat.name}
-                            className="h-7 w-7 rounded-full object-cover border border-gray-200"
-                          />
-                        ) : (
-                          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 text-sm">
-                            🚜
-                          </span>
-                        )}
-                        <span className="truncate max-w-[130px]">{cat.name}</span>
-                      </div>
-                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${isActive ? 'bg-white/25 text-white' : 'bg-gray-100 text-gray-500'}`}>
-                        {categoryCounts[cat.slug || ''] || 0}
+              {/* Individual Category buttons */}
+              {initialCategories.map((cat) => {
+                const isActive = selectedCategory === cat.slug;
+                return (
+                  <button
+                    key={cat._id}
+                    onClick={() => setSelectedCategory(cat.slug || '')}
+                    className={`w-full flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-all duration-205 ${
+                      isActive
+                        ? 'bg-[#cc0000] text-white shadow-sm'
+                        : 'bg-white hover:bg-gray-50 text-[#1a1a1a]'
+                    }`}
+                  >
+                    {cat.image ? (
+                      <img
+                        src={cat.image}
+                        alt={cat.name}
+                        className="w-10 h-10 rounded-lg object-cover shrink-0"
+                      />
+                    ) : (
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gray-100 text-lg">
+                        🚜
                       </span>
-                    </button>
-                  );
-                })}
-              </div>
+                    )}
+                    <span className={`text-sm font-semibold truncate text-left transition-colors ${isActive ? 'text-white' : 'text-[#1a1a1a]'}`}>
+                      {cat.name}
+                    </span>
+                    <span className={`text-xs ml-auto transition-colors ${isActive ? 'text-white' : 'text-gray-400'}`}>
+                      {categoryCounts[cat.slug || ''] || 0}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </aside>
 
         {/* Right column: Search, Mobile Filters, and Products Grid */}
         <div className="flex-1 space-y-6">
-          {/* Search bar & Mobile Filters container */}
-          <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 shadow-sm space-y-4">
+          {/* Search bar container */}
+          <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 shadow-sm">
             <div className="relative w-full">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
               <input
@@ -166,44 +164,37 @@ export default function ShopPageClient({ initialCategories, initialProducts }: S
                 className="w-full bg-gray-50 border border-gray-300 rounded-xl pl-11 pr-4 py-3 text-sm text-gray-900 focus:outline-none focus:bg-white focus:border-[#cc0000] focus:ring-1 focus:ring-[#cc0000] transition-all"
               />
             </div>
+          </div>
 
-            {/* Mobile Category Filters (Visible only on mobile/tablet) */}
-            <div className="lg:hidden border-t border-gray-100 pt-3">
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Filter by Category</p>
-              <div className="flex items-center gap-2 overflow-x-auto scrollbar-none py-1 -mx-4 px-4 sm:mx-0 sm:px-0">
-                <button
-                  onClick={() => setSelectedCategory('all')}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all duration-205 flex items-center gap-1.5 ${
-                    selectedCategory === 'all'
-                      ? 'bg-[#cc0000] text-white shadow-sm'
-                      : 'bg-gray-100 text-gray-700 border border-gray-200 hover:border-[#cc0000] hover:text-[#cc0000]'
-                  }`}
-                >
-                  <span>All Products</span>
-                  <span className={`text-[10px] font-bold px-1.5 py-0.2 rounded-full ${selectedCategory === 'all' ? 'bg-white/20 text-white' : 'bg-gray-200 text-gray-500'}`}>
-                    {categoryCounts['all'] || 0}
-                  </span>
-                </button>
-                {initialCategories.map((cat) => {
-                  const isActive = selectedCategory === cat.slug;
-                  return (
-                    <button
-                      key={cat._id}
-                      onClick={() => setSelectedCategory(cat.slug || '')}
-                      className={`px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all duration-205 flex items-center gap-1.5 ${
-                        isActive
-                          ? 'bg-[#cc0000] text-white shadow-sm'
-                          : 'bg-gray-100 text-gray-700 border border-gray-200 hover:border-[#cc0000] hover:text-[#cc0000]'
-                      }`}
-                    >
-                      <span>{cat.name}</span>
-                      <span className={`text-[10px] font-bold px-1.5 py-0.2 rounded-full ${isActive ? 'bg-white/20 text-white' : 'bg-gray-200 text-gray-500'}`}>
-                        {categoryCounts[cat.slug || ''] || 0}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
+          {/* Mobile Category Filters (Visible only on mobile/tablet) */}
+          <div className="md:hidden">
+            <div className="flex overflow-x-auto gap-2 pb-3 px-0 scrollbar-hide">
+              <button
+                onClick={() => setSelectedCategory('all')}
+                className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold border transition-all ${
+                  selectedCategory === 'all'
+                    ? 'bg-[#cc0000] text-white border-[#cc0000]'
+                    : 'bg-white text-[#1a1a1a] border-gray-200'
+                }`}
+              >
+                All Products ({categoryCounts['all'] || 0})
+              </button>
+              {initialCategories.map((cat) => {
+                const isActive = selectedCategory === cat.slug;
+                return (
+                  <button
+                    key={cat._id}
+                    onClick={() => setSelectedCategory(cat.slug || '')}
+                    className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold border transition-all ${
+                      isActive
+                        ? 'bg-[#cc0000] text-white border-[#cc0000]'
+                        : 'bg-white text-[#1a1a1a] border-gray-200'
+                    }`}
+                  >
+                    {cat.name} ({categoryCounts[cat.slug || ''] || 0})
+                  </button>
+                );
+              })}
             </div>
           </div>
 
@@ -231,7 +222,7 @@ export default function ShopPageClient({ initialCategories, initialProducts }: S
               </div>
             ) : (
               /* Grid Layout: 2 columns on mobile, 3 columns on desktop */
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5">
                 {filteredProducts.map((product) => (
                   <div key={product._id} className="h-full">
                     <ProductCard product={product} whatsappNumber={whatsappNumber} />
