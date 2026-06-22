@@ -21,8 +21,6 @@ export default function FeaturedProducts() {
 
   if (products.length === 0) return null;
 
-  const doubled = [...products, ...products, ...products];
-
   return (
     <section style={{ background: '#f5f5f5', padding: '60px 0', overflow: 'hidden' }}>
       {/* Heading */}
@@ -37,14 +35,20 @@ export default function FeaturedProducts() {
       </div>
 
       {/* Slider */}
-      <div style={{ overflow: 'hidden', width: '100%' }}>
+      {/* Row 1 - scrolls left */}
+      <div style={{ overflow: 'hidden', width: '100%', marginBottom: '20px' }}>
         <div className="marquee-track" style={{ gap: '20px', padding: '10px 0' }}>
-          {doubled.map((product, index) => (
-            <ProductCard 
-              key={`${product._id}-${index}`}
-              product={product}
-              whatsapp={whatsapp}
-            />
+          {[...products, ...products, ...products].map((product, index) => (
+            <ProductCard key={`row1-${product._id}-${index}`} product={product} whatsapp={whatsapp} />
+          ))}
+        </div>
+      </div>
+
+      {/* Row 2 - scrolls right (reversed products) */}
+      <div style={{ overflow: 'hidden', width: '100%' }}>
+        <div className="marquee-track-reverse" style={{ gap: '20px', padding: '10px 0' }}>
+          {[...products, ...products, ...products].reverse().map((product, index) => (
+            <ProductCard key={`row2-${product._id}-${index}`} product={product} whatsapp={whatsapp} />
           ))}
         </div>
       </div>
