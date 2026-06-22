@@ -5,59 +5,13 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Search, PackageOpen, ArrowRight, ChevronRight } from 'lucide-react';
 import ProductCard from '@/components/main/ProductCard';
 import { ICategory, IProduct } from '@/types';
-import {
-  MAIN_CATEGORIES_INFO,
-  SUB_CATEGORIES,
-  getSubCategoriesOf,
-  getCategoryInfo,
-  getSubCategoryInfo
-} from '@/lib/categories-data';
 
 interface ShopPageClientProps {
   initialCategories: ICategory[];
   initialProducts: IProduct[];
 }
 
-// Fallback logic to resolve subcategories for products if unpopulated in DB
-export function getProductSubCategory(product: IProduct): string {
-  if (product.sub_category) {
-    return product.sub_category;
-  }
-
-  const name = product.name.toLowerCase();
-  const catSlug = typeof product.category === 'object' && product.category ? product.category.slug : '';
-
-  if (catSlug === 'concrete-mixers') {
-    if (name.includes('diesel')) return 'diesel-concrete-mixers';
-    if (name.includes('electric') || name.includes('electrical')) return 'electric-concrete-mixers';
-    if (name.includes('hydraulic')) return 'hydraulic-concrete-mixers';
-    if (name.includes('lift')) return 'lift-type-concrete-mixers';
-    return 'hand-operated-concrete-mixers';
-  }
-
-  if (catSlug === 'tractor-trolleys') {
-    if (name.includes('hydraulic') || name.includes('tipping')) return 'hydraulic-tipping-trolleys';
-    if (name.includes('non-tipping') || name.includes('non tipping')) return 'non-tipping-trolleys';
-    if (name.includes('double axle') || name.includes('double-axle')) return 'double-axle-trolleys';
-    return 'single-axle-trolleys';
-  }
-
-  if (catSlug === 'agricultural-plows') {
-    if (name.includes('disc')) return 'disc-plows';
-    if (name.includes('mouldboard') || name.includes('mb')) return 'mouldboard-plows';
-    if (name.includes('chisel')) return 'chisel-plows';
-    return 'rotavators-cultivators';
-  }
-
-  if (catSlug === 'threshers-harvesters') {
-    if (name.includes('crop') || name.includes('multi')) return 'multi-crop-threshers';
-    if (name.includes('paddy')) return 'paddy-threshers';
-    if (name.includes('maize') || name.includes('sheller')) return 'maize-shellers';
-    return 'straw-reapers-harvesters';
-  }
-
-  return '';
-}
+const fallbackCategoryImage = 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&q=80&w=400';
 
 export default function ShopPageClient({ initialCategories, initialProducts }: ShopPageClientProps) {
   const router = useRouter();
@@ -65,7 +19,6 @@ export default function ShopPageClient({ initialCategories, initialProducts }: S
 
   // Read URL search params
   const categoryQuery = searchParams.get('category') || '';
-  const subCategoryQuery = searchParams.get('sub') || '';
 
   // Local state for search bar input
   const [searchQuery, setSearchQuery] = useState('');
@@ -86,21 +39,28 @@ export default function ShopPageClient({ initialCategories, initialProducts }: S
     fetchContact();
   }, []);
 
-  // Determine current UI View State (H)
+  // Determine current UI View State
   const viewState = searchQuery.trim() !== ''
     ? 'search'
     : categoryQuery
-      ? (subCategoryQuery ? 'products' : 'subcategories')
+      ? 'products'
       : 'main';
 
   // Navigation helper updates the URL search params to support browser history
-  const handleNavigate = (cat?: string, sub?: string) => {
+  const handleNavigate = (cat?: string) => {
     const params = new URLSearchParams();
     if (cat) params.set('category', cat);
-    if (sub) params.set('sub', sub);
     
     const queryStr = params.toString();
     router.push(queryStr ? `/shop?${queryStr}` : '/shop', { scroll: false });
+  };
+
+  // Safe category slug resolver
+  const getProductCategorySlug = (product: IProduct): string => {
+    if (typeof product.category === 'object' && product.category) {
+      return product.category.slug || '';
+    }
+    return '';
   };
 
   // Filter products based on URL params and search query
@@ -118,51 +78,29 @@ export default function ShopPageClient({ initialCategories, initialProducts }: S
         return matchesSearch;
       }
 
-      const prodCatSlug = typeof product.category === 'object' && product.category
-        ? product.category.slug
-        : '';
+      const prodCatSlug = getProductCategorySlug(product);
       const matchesCategory = categoryQuery === '' || prodCatSlug === categoryQuery;
 
-      const resolvedSubCat = getProductSubCategory(product);
-      const matchesSubCategory = subCategoryQuery === '' || resolvedSubCat === subCategoryQuery;
-
-      return matchesCategory && matchesSubCategory && matchesSearch;
+      return matchesCategory && matchesSearch;
     });
-  }, [initialProducts, categoryQuery, subCategoryQuery, searchQuery]);
+  }, [initialProducts, categoryQuery, searchQuery]);
 
-  // Compute product counts for main categories
+  // Compute product counts for main categories dynamically from DB data
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = { all: initialProducts.length };
-    MAIN_CATEGORIES_INFO.forEach((cat) => {
-      counts[cat.slug] = initialProducts.filter((p) => {
-        const prodCatSlug = typeof p.category === 'object' && p.category ? p.category.slug : '';
-        return prodCatSlug === cat.slug;
-      }).length;
+    initialCategories.forEach((cat) => {
+      const slug = cat.slug || '';
+      if (slug) {
+        counts[slug] = initialProducts.filter((p) => getProductCategorySlug(p) === slug).length;
+      }
     });
     return counts;
-  }, [initialProducts]);
+  }, [initialProducts, initialCategories]);
 
-  // Compute product counts for subcategories
-  const subCategoryCounts = useMemo(() => {
-    const counts: Record<string, number> = {};
-    SUB_CATEGORIES.forEach((sub) => {
-      counts[sub.slug] = initialProducts.filter((p) => {
-        const prodCatSlug = typeof p.category === 'object' && p.category ? p.category.slug : '';
-        const resolvedSub = getProductSubCategory(p);
-        return prodCatSlug === sub.categorySlug && resolvedSub === sub.slug;
-      }).length;
-    });
-    return counts;
-  }, [initialProducts]);
-
-  // Resolve active category and subcategory info objects
+  // Resolve active category info dynamically from DB data
   const activeCategoryInfo = useMemo(() => {
-    return categoryQuery ? getCategoryInfo(categoryQuery) : undefined;
-  }, [categoryQuery]);
-
-  const activeSubCategoryInfo = useMemo(() => {
-    return (categoryQuery && subCategoryQuery) ? getSubCategoryInfo(categoryQuery, subCategoryQuery) : undefined;
-  }, [categoryQuery, subCategoryQuery]);
+    return initialCategories.find(c => c.slug === categoryQuery);
+  }, [categoryQuery, initialCategories]);
 
   return (
     <div className="bg-gray-50 min-h-screen pb-20">
@@ -189,19 +127,8 @@ export default function ShopPageClient({ initialCategories, initialProducts }: S
           {categoryQuery && (
             <>
               <ChevronRight size={14} className="text-gray-400" />
-              <button 
-                onClick={() => { setSearchQuery(''); handleNavigate(categoryQuery); }} 
-                className={`hover:text-[#cc0000] transition-colors uppercase ${!subCategoryQuery ? 'text-gray-900 font-extrabold' : ''}`}
-              >
-                {activeCategoryInfo?.name || categoryQuery.replace(/-/g, ' ')}
-              </button>
-            </>
-          )}
-          {subCategoryQuery && (
-            <>
-              <ChevronRight size={14} className="text-gray-400" />
               <span className="text-gray-900 font-extrabold uppercase truncate">
-                {activeSubCategoryInfo?.name || subCategoryQuery.replace(/-/g, ' ')}
+                {activeCategoryInfo?.name || categoryQuery.replace(/-/g, ' ')}
               </span>
             </>
           )}
@@ -232,13 +159,11 @@ export default function ShopPageClient({ initialCategories, initialProducts }: S
         {viewState === 'main' && (
           <div className="space-y-6">
             <p className="text-sm text-gray-500 font-bold uppercase tracking-wider mb-4">
-              Select a main category to browse the catalogue
+              Select a category to browse products
             </p>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {MAIN_CATEGORIES_INFO.map((cat) => {
-                // Find matching category object to get count
-                const matchedCategory = initialCategories.find(c => c.slug === cat.slug);
-                const count = categoryCounts[cat.slug] || 0;
+              {initialCategories.map((cat) => {
+                const count = categoryCounts[cat.slug || ''] || 0;
                 
                 return (
                   <button
@@ -249,7 +174,7 @@ export default function ShopPageClient({ initialCategories, initialProducts }: S
                     <div className="relative aspect-[16/10] overflow-hidden bg-slate-100 w-full shrink-0">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={matchedCategory?.image || cat.imageFile}
+                        src={cat.image || fallbackCategoryImage}
                         alt={cat.name}
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
@@ -259,11 +184,11 @@ export default function ShopPageClient({ initialCategories, initialProducts }: S
                         {cat.name}
                       </h2>
                       <p className="mb-4 flex-1 text-sm text-gray-500 leading-relaxed line-clamp-3">
-                        {cat.description}
+                        {cat.description || `High-quality ${cat.name} machinery manufactured by V.Raj Agro.`}
                       </p>
                       <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
                         <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#cc0000]">
-                          BROWSE CATALOGUE <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                          VIEW PRODUCTS <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                         </span>
                         <span className="text-[11px] font-bold text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
                           {count} Products
@@ -277,44 +202,7 @@ export default function ShopPageClient({ initialCategories, initialProducts }: S
           </div>
         )}
 
-        {/* VIEW 2: Subcategory/Inner Cards List */}
-        {viewState === 'subcategories' && activeCategoryInfo && (
-          <div className="space-y-6">
-            <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-gray-200 pb-3">
-              <h2 className="text-xl font-bold text-gray-900 uppercase">
-                {activeCategoryInfo.name} Sub-Categories
-              </h2>
-              <p className="text-sm text-gray-500 font-medium mt-1 md:mt-0">
-                Select a sub-category under <strong className="text-gray-900">{activeCategoryInfo.name}</strong>
-              </p>
-            </div>
-            
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {getSubCategoriesOf(categoryQuery).map((sub) => {
-                const count = subCategoryCounts[sub.slug] || 0;
-                return (
-                  <button
-                    key={sub.slug}
-                    onClick={() => handleNavigate(categoryQuery, sub.slug)}
-                    className="group flex items-center justify-between rounded-2xl border border-gray-200 bg-white p-5 text-left shadow-sm hover:border-[#cc0000] hover:shadow-md transition-all duration-200 cursor-pointer"
-                  >
-                    <div>
-                      <span className="block font-display text-base font-bold text-gray-900 group-hover:text-[#cc0000] transition-colors leading-tight">
-                        {sub.name}
-                      </span>
-                      <span className="block text-[11px] font-semibold text-gray-400 mt-1">
-                        {count} Products Available
-                      </span>
-                    </div>
-                    <ArrowRight className="h-5 w-5 shrink-0 text-[#cc0000] opacity-70 transition-all group-hover:translate-x-1 group-hover:opacity-100" />
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
-        {/* VIEW 3: Products Grid & Search Results */}
+        {/* VIEW 2: Products Grid & Search Results */}
         {(viewState === 'products' || viewState === 'search') && (
           <div>
             {filteredProducts.length === 0 ? (

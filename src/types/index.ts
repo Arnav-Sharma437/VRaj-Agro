@@ -34,7 +34,6 @@ export interface IProduct {
   features?: string[];
   applications?: string[];
   category: string | ICategory; // Category ID (string) or Populated Category Document
-  sub_category?: string; // Subcategory slug string
   is_featured?: boolean;
   is_active?: boolean;
   price?: number;
