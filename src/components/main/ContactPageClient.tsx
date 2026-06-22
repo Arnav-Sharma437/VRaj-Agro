@@ -56,7 +56,16 @@ export default function ContactPageClient() {
   const whatsappClean = rawWhatsapp.replace(/[^0-9]/g, '');
   const whatsappUrl = `https://wa.me/${whatsappClean}`;
 
-  const mapEmbedUrl = contactInfo?.map_embed_url || 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.326795400262!2d82.17726597597116!3d22.091723550290074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a280b1e4f4fb35b%3A0x67396602058ee9e5!2sSeepat%20Rd%2C%20Mopka%2C%20Chhattisgarh%20495006!5e0!3m2!1sen!2sin!4v1719053000000!5m2!1sen!2sin';
+  // Use a query-based Google Maps embed url if map_embed_url is missing, empty, or not a valid embed URL.
+  // This resolves the exact business address dynamically on the map and prevents world map rendering fallbacks.
+  const isValidEmbedUrl = (url: string | undefined): boolean => {
+    if (!url) return false;
+    return url.includes('embed') || url.includes('output=embed');
+  };
+
+  const mapEmbedUrl = isValidEmbedUrl(contactInfo?.map_embed_url)
+    ? contactInfo!.map_embed_url
+    : `https://maps.google.com/maps?q=${encodeURIComponent(address)}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
 
   return (
     <div className="bg-white min-h-screen relative">
