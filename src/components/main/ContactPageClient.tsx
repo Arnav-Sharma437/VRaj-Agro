@@ -65,7 +65,7 @@ export default function ContactPageClient() {
 
   const mapEmbedUrl = isValidEmbedUrl(contactInfo?.map_embed_url)
     ? contactInfo!.map_embed_url
-    : `https://maps.google.com/maps?q=${encodeURIComponent(address)}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
+    : 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3937.279981927464!2d82.21025044745511!3d22.09078131102962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a280aed59ed23cb%3A0x643e19da1de00f90!2sV%20Raj%20Agro!5e1!3m2!1sen!2sin!4v1782127162354!5m2!1sen!2sin';
 
   return (
     <div className="bg-white min-h-screen relative">
