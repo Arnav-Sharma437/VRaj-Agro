@@ -94,10 +94,10 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative py-1 text-sm font-bold uppercase tracking-wider transition-colors duration-300 ${
+                className={`relative py-1 text-sm uppercase tracking-wider transition-colors duration-300 ${
                   isActive(link.href)
-                    ? 'text-[#cc0000]'
-                    : 'text-gray-700 hover:text-[#cc0000]'
+                    ? 'text-[#cc0000] font-bold'
+                    : 'text-[#1a1a1a] hover:text-[#cc0000] font-semibold'
                 }`}
               >
                 {link.name}
@@ -146,16 +146,16 @@ export default function Navbar() {
             : 'max-h-0 opacity-0 pointer-events-none'
         }`}
       >
-        <div className="px-4 pt-2 pb-6 space-y-3 shadow-inner">
+        <div className="px-4 pt-2 pb-6 space-y-1 shadow-inner bg-white">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className={`block px-3 py-2 rounded text-base font-bold uppercase tracking-wider transition-colors ${
+              className={`block px-3 py-3 text-base uppercase tracking-wider transition-colors border-b border-gray-100 ${
                 isActive(link.href)
-                  ? 'bg-red-50 text-[#cc0000]'
-                  : 'text-gray-750 hover:bg-gray-50 hover:text-[#cc0000]'
+                  ? 'bg-red-50 text-[#cc0000] font-bold'
+                  : 'text-[#1a1a1a] hover:bg-gray-50 hover:text-[#cc0000] font-semibold'
               }`}
             >
               {link.name}

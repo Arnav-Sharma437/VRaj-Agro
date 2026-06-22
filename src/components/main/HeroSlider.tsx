@@ -47,7 +47,7 @@ export default function HeroSlider() {
 
   if (loading) {
     return (
-      <div className="w-full h-[300px] md:h-[550px] bg-gray-150 animate-pulse flex items-center justify-center">
+      <div className="w-full h-[280px] md:h-[550px] bg-gray-150 animate-pulse flex items-center justify-center">
         <div className="text-center space-y-4">
           <div className="h-8 w-64 bg-gray-300 rounded mx-auto" />
           <div className="h-4 w-96 bg-gray-300 rounded mx-auto" />
@@ -60,7 +60,7 @@ export default function HeroSlider() {
   // Fallback slide if no active banners found
   if (banners.length === 0) {
     return (
-      <div className="relative w-full h-[300px] md:h-[550px] bg-gradient-to-r from-[#1a1a1a] via-[#2d2d2d] to-[#111111] flex items-center justify-center text-white px-4">
+      <div className="relative w-full h-[280px] md:h-[550px] bg-gradient-to-r from-[#1a1a1a] via-[#2d2d2d] to-[#111111] flex items-center justify-center text-white px-4">
         <div className="absolute inset-0 bg-black/40 z-0" />
         <div className="relative z-10 max-w-4xl text-center space-y-5 md:space-y-6">
           <span className="inline-block bg-[#cc0000]/20 text-[#cc0000] px-4 py-1.5 rounded text-xs md:text-sm font-bold tracking-widest uppercase border border-[#cc0000]/30">
@@ -86,7 +86,7 @@ export default function HeroSlider() {
   }
 
   return (
-    <div className="relative w-full h-[300px] md:h-[550px] overflow-hidden group">
+    <div className="relative w-full h-[280px] md:h-[550px] overflow-hidden group">
       {/* Slides */}
       {banners.map((banner, index) => (
         <div
@@ -120,10 +120,10 @@ export default function HeroSlider() {
           </div>
 
           {/* Dark Overlay with content */}
-          <div className="absolute inset-0 bg-black/55 z-20 flex items-center px-6 md:px-16 lg:px-24">
-            <div className="max-w-3xl space-y-4 md:space-y-6 text-white">
+          <div className="absolute inset-0 bg-black/55 z-20 flex items-center px-6 md:px-16 lg:px-24 py-4">
+            <div className="max-w-3xl space-y-2 md:space-y-6 text-white">
               {banner.subtitle && (
-                <span className="inline-block bg-[#f5a623]/25 text-[#f5a623] px-3 py-1 rounded text-xs md:text-sm font-bold tracking-wider uppercase border border-[#f5a623]/30">
+                <span className="inline-block bg-[#f5a623]/25 text-[#f5a623] px-3 py-1 rounded text-sm md:text-xl font-bold tracking-wider uppercase border border-[#f5a623]/30 animate-fadeIn">
                   {banner.subtitle}
                 </span>
               )}

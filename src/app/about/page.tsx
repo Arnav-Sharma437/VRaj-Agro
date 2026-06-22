@@ -59,7 +59,7 @@ export default function AboutPage() {
   return (
     <div className="bg-white min-h-screen">
       {/* Section 1: Page Banner */}
-      <section className="bg-[#cc0000] text-white h-[200px] flex flex-col justify-center px-4 sm:px-6 lg:px-8">
+      <section className="bg-[#cc0000] text-white h-[140px] md:h-[180px] flex flex-col justify-center px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto w-full">
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">About Us</h1>
           <nav className="mt-2 flex items-center text-sm font-medium opacity-90">
