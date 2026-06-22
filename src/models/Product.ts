@@ -16,6 +16,7 @@ const ProductSchema = new Schema<IProductDocument>(
     features: { type: [String], default: [] },
     applications: { type: [String], default: [] },
     category: { type: Schema.Types.ObjectId, ref: 'Category' },
+    sub_category: { type: String, default: '' },
     is_featured: { type: Boolean, default: false },
     is_active: { type: Boolean, default: true },
     price: { type: Number, default: 0 },

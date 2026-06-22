@@ -10,6 +10,8 @@ import ProductGallery from '@/components/main/ProductGallery';
 import ProductTabs from '@/components/main/ProductTabs';
 import ProductCard from '@/components/main/ProductCard';
 import { IProduct, ICategory } from '@/types';
+import { SUB_CATEGORIES } from '@/lib/categories-data';
+import { getProductSubCategory } from '@/components/main/ShopPageClient';
 
 if (Category) {
   // no-op
@@ -60,6 +62,12 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const categoryObj = product.category as ICategory;
   const categoryName = categoryObj?.name || 'Machine';
 
+  const resolvedSubSlug = getProductSubCategory(product);
+  const subCategoryObj = resolvedSubSlug
+    ? SUB_CATEGORIES.find(s => s.categorySlug === categoryObj?.slug && s.slug === resolvedSubSlug)
+    : null;
+  const subCategoryName = subCategoryObj?.name || '';
+
   // Fetch contact details for WhatsApp and calling buttons
   const contactLean = await ContactInfo.findOne({}).lean();
   const contact = contactLean ? JSON.parse(JSON.stringify(contactLean)) : null;
@@ -90,7 +98,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         {/* Breadcrumb Navigation */}
-        <nav className="flex items-center gap-2 text-xs text-gray-500 font-medium mb-8">
+        <nav className="flex items-center gap-2 text-xs text-gray-500 font-medium mb-8 uppercase">
           <Link href="/" className="hover:text-[#cc0000] transition-colors">
             Home
           </Link>
@@ -98,8 +106,24 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           <Link href="/shop" className="hover:text-[#cc0000] transition-colors">
             Products
           </Link>
+          {categoryObj && (
+            <>
+              <span>&gt;</span>
+              <Link href={`/shop?category=${categoryObj.slug}`} className="hover:text-[#cc0000] transition-colors">
+                {categoryObj.name}
+              </Link>
+            </>
+          )}
+          {subCategoryObj && (
+            <>
+              <span>&gt;</span>
+              <Link href={`/shop?category=${categoryObj.slug}&sub=${subCategoryObj.slug}`} className="hover:text-[#cc0000] transition-colors">
+                {subCategoryObj.name}
+              </Link>
+            </>
+          )}
           <span>&gt;</span>
-          <span className="text-gray-900 font-semibold truncate">{product.name}</span>
+          <span className="text-gray-900 font-extrabold truncate normal-case">{product.name}</span>
         </nav>
 
         {/* Two-Column Main Section */}
@@ -117,6 +141,11 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 <span className="inline-block bg-[#cc0000] text-white text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
                   {categoryName}
                 </span>
+                {subCategoryName && (
+                  <span className="inline-block bg-gray-100 text-gray-800 text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm border border-gray-200">
+                    {subCategoryName}
+                  </span>
+                )}
                 {product.show_price && product.price !== undefined && product.price > 0 && product.discount_percent !== undefined && product.discount_percent > 0 && (
                   <span className="inline-block bg-[#22c55e] text-white text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
                     {product.discount_percent}% OFF

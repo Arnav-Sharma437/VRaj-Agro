@@ -8,6 +8,7 @@ import ConfirmDialog from '@/components/ui/ConfirmDialog';
 import ImageUpload from '@/components/ui/ImageUpload';
 import { IProduct, ICategory } from '@/types';
 import { Plus, Trash2, Package } from 'lucide-react';
+import { getSubCategoriesOf } from '@/lib/categories-data';
 
 interface SpecPair {
   key: string;
@@ -20,6 +21,7 @@ interface ProductFormState {
   short_description: string;
   full_description: string;
   category: string;
+  sub_category: string;
   images: string[];
   features: string[];
   applications: string[];
@@ -36,6 +38,7 @@ const defaultForm: ProductFormState = {
   short_description: '',
   full_description: '',
   category: '',
+  sub_category: '',
   images: [''],
   features: [''],
   applications: [''],
@@ -119,6 +122,7 @@ export default function AdminProductsPage() {
       short_description: item.short_description,
       full_description: item.full_description || '',
       category: catId,
+      sub_category: item.sub_category || '',
       images: item.images && item.images.length > 0 ? [...item.images] : [''],
       features: item.features && item.features.length > 0 ? [...item.features] : [''],
       applications: item.applications && item.applications.length > 0 ? [...item.applications] : [''],
@@ -371,22 +375,42 @@ export default function AdminProductsPage() {
             </div>
           </div>
 
-          {/* Row 2: Category */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
-            <select
-              required
-              value={formData.category}
-              onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-            >
-              <option value="">Select Category</option>
-              {categories.map((cat) => (
-                <option key={cat._id} value={cat._id}>
-                  {cat.name}
-                </option>
-              ))}
-            </select>
+          {/* Row 2: Category & Subcategory */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+              <select
+                required
+                value={formData.category}
+                onChange={(e) => {
+                  const catId = e.target.value;
+                  setFormData({ ...formData, category: catId, sub_category: '' });
+                }}
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              >
+                <option value="">Select Category</option>
+                {categories.map((cat) => (
+                  <option key={cat._id} value={cat._id}>
+                    {cat.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Subcategory</label>
+              <select
+                value={formData.sub_category}
+                onChange={(e) => setFormData({ ...formData, sub_category: e.target.value })}
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              >
+                <option value="">Select Subcategory</option>
+                {getSubCategoriesOf(categories.find(cat => cat._id === formData.category)?.slug || '').map((sub) => (
+                  <option key={sub.slug} value={sub.slug}>
+                    {sub.name}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
           {/* Row 3: Descriptions */}
