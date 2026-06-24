@@ -64,7 +64,8 @@ export default function FloatingSocial() {
       position: 'fixed',
       left: 0,
       top: '50%',
-      transform: 'translateY(-50%)',
+      transform: `translateY(-50%) translateX(${isOpen ? '0px' : '-38px'})`,
+      transition: 'transform 0.35s ease-in-out',
       zIndex: 999,
       display: 'flex',
       flexDirection: 'row',
@@ -75,9 +76,6 @@ export default function FloatingSocial() {
         display: 'flex',
         flexDirection: 'column',
         gap: '2px',
-        transform: isOpen ? 'translateX(0)' : 'translateX(-100%)',
-        transition: 'transform 0.35s ease',
-        pointerEvents: isOpen ? 'auto' : 'none',
       }}>
         {socials.map((s, i) => (
           <a
@@ -94,7 +92,10 @@ export default function FloatingSocial() {
               justifyContent: 'center',
               textDecoration: 'none',
               borderRadius: '0 4px 4px 0',
+              transition: 'opacity 0.2s ease',
             }}
+            onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
+            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
           >
             {s.icon}
           </a>
@@ -116,6 +117,8 @@ export default function FloatingSocial() {
           borderRadius: '0 6px 6px 0',
           flexShrink: 0,
           padding: 0,
+          boxShadow: '2px 0 8px rgba(0,0,0,0.15)',
+          outline: 'none',
         }}
       >
         <ChevronRight
