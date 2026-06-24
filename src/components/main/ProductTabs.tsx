@@ -31,17 +31,17 @@ export default function ProductTabs({
   if (visibleTabs.length === 0) return null;
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+    <div className="w-full">
       {/* Tabs list */}
-      <div className="flex border-b border-gray-200 bg-gray-50/50">
+      <div className="flex border-b border-gray-250 mb-6">
         {visibleTabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-6 py-4 text-sm font-bold uppercase tracking-wider border-b-2 transition-all focus:outline-none ${
+            className={`px-5 py-3 text-sm font-bold uppercase tracking-wider border-b-2 transition-all focus:outline-none -mb-[2px] ${
               activeTab === tab.id
-                ? 'border-[#cc0000] text-[#cc0000] bg-white'
-                : 'border-transparent text-gray-500 hover:text-[#cc0000] hover:bg-gray-55/20'
+                ? 'border-[#cc0000] text-[#cc0000]'
+                : 'border-transparent text-gray-500 hover:text-[#cc0000]'
             }`}
           >
             {tab.label}
@@ -50,15 +50,15 @@ export default function ProductTabs({
       </div>
 
       {/* Tab panel contents */}
-      <div className="p-6 md:p-8">
+      <div className="py-2">
         {activeTab === 'description' && description && (
-          <div className="prose max-w-none text-[#444444] text-sm leading-relaxed whitespace-pre-wrap">
+          <div className="prose max-w-none text-[#555] text-sm leading-relaxed whitespace-pre-wrap">
             {description}
           </div>
         )}
 
         {activeTab === 'specifications' && hasSpecs && (
-          <div className="overflow-hidden border border-gray-200 rounded-xl">
+          <div className="overflow-hidden border border-gray-200 rounded-xl max-w-2xl bg-white">
             <table className="min-w-full divide-y divide-gray-200 text-left text-sm">
               <tbody className="divide-y divide-gray-200">
                 {specPairs.map(([key, val], idx) => (
@@ -69,7 +69,7 @@ export default function ProductTabs({
                     <td className="px-6 py-4 font-bold text-[#1a1a1a] w-1/3 bg-gray-50/30">
                       {key}
                     </td>
-                    <td className="px-6 py-4 text-[#444444]">
+                    <td className="px-6 py-4 text-[#555]">
                       {val}
                     </td>
                   </tr>
@@ -80,9 +80,9 @@ export default function ProductTabs({
         )}
 
         {activeTab === 'applications' && hasApps && (
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
             {applications.map((app, idx) => (
-              <li key={idx} className="flex items-start gap-3 text-sm text-[#444444] leading-relaxed">
+              <li key={idx} className="flex items-start gap-3 text-sm text-[#555] leading-relaxed">
                 <span className="p-1 rounded bg-red-50 text-[#cc0000] shrink-0 mt-0.5">
                   <Check size={14} className="stroke-[3]" />
                 </span>

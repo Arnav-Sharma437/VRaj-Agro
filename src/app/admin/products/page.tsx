@@ -204,10 +204,6 @@ export default function AdminProductsPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.category) {
-      showToast('Please select a category', 'error');
-      return;
-    }
 
     setSubmitting(true);
 
@@ -363,7 +359,6 @@ export default function AdminProductsPage() {
               <label className="block text-sm font-medium text-gray-700 mb-1">Slug (Auto-generated)</label>
               <input
                 type="text"
-                required
                 value={formData.slug}
                 onChange={(e) => setFormData({ ...formData, slug: slugify(e.target.value) })}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-gray-50 font-mono focus:outline-none"
@@ -375,7 +370,6 @@ export default function AdminProductsPage() {
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
             <select
-              required
               value={formData.category}
               onChange={(e) => setFormData({ ...formData, category: e.target.value })}
               className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
@@ -464,7 +458,6 @@ export default function AdminProductsPage() {
                   <div key={idx} className="flex gap-2 items-center">
                     <input
                       type="text"
-                      required
                       value={spec.key}
                       onChange={(e) => updateSpec(idx, 'key', e.target.value)}
                       className="flex-1 border border-gray-300 rounded-lg px-3 py-1.5 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-xs"
@@ -472,7 +465,6 @@ export default function AdminProductsPage() {
                     />
                     <input
                       type="text"
-                      required
                       value={spec.value}
                       onChange={(e) => updateSpec(idx, 'value', e.target.value)}
                       className="flex-1 border border-gray-300 rounded-lg px-3 py-1.5 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-xs"
@@ -510,7 +502,6 @@ export default function AdminProductsPage() {
                   <div key={idx} className="flex gap-2 items-center">
                     <input
                       type="text"
-                      required
                       value={feat}
                       onChange={(e) => updateArrayField('features', idx, e.target.value)}
                       className="flex-1 border border-gray-300 rounded-lg px-3 py-1.5 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-xs"
@@ -545,7 +536,6 @@ export default function AdminProductsPage() {
                   <div key={idx} className="flex gap-2 items-center">
                     <input
                       type="text"
-                      required
                       value={app}
                       onChange={(e) => updateArrayField('applications', idx, e.target.value)}
                       className="flex-1 border border-gray-300 rounded-lg px-3 py-1.5 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-xs"

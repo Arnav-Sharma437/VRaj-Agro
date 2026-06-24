@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Phone, Star } from 'lucide-react';
+import { Phone } from 'lucide-react';
 import dbConnect from '@/lib/mongodb';
 import Product from '@/models/Product';
 import Category from '@/models/Category';
@@ -119,69 +119,40 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           </div>
 
           {/* Right Column: Product Info & Actions */}
-          <div className="lg:col-span-6 space-y-6 bg-white p-6 md:p-8 rounded-2xl border border-gray-200 shadow-sm">
-            <div>
-              <div className="flex flex-wrap items-center gap-2 mb-3">
-                <span className="inline-block bg-[#cc0000] text-white text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
-                  {categoryName}
-                </span>
-                {product.show_price && product.price !== undefined && product.price > 0 && product.discount_percent !== undefined && product.discount_percent > 0 && (
-                  <span className="inline-block bg-[#22c55e] text-white text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
-                    {product.discount_percent}% OFF
-                  </span>
-                )}
-              </div>
-              <h1 className="text-2xl md:text-3xl font-extrabold text-[#1a1a1a] leading-tight">
-                {product.name}
-              </h1>
-              {product.show_price && product.price !== undefined && product.price > 0 && (
-                <div className="flex items-baseline gap-3 mt-3 mb-2">
-                  <span className="text-3xl font-extrabold text-gray-900">
-                    ₹{Math.round(product.price - (product.price * (product.discount_percent || 0) / 100)).toLocaleString('en-IN')}
-                  </span>
-                  {product.discount_percent !== undefined && product.discount_percent > 0 && (
-                    <span className="text-lg text-gray-500 line-through">
-                      ₹{product.price.toLocaleString('en-IN')}
-                    </span>
-                  )}
-                </div>
-              )}
-            </div>
-
-            <hr className="border-gray-200" />
-
-            <div className="space-y-4">
-              <h3 className="text-xs font-black uppercase text-gray-400 tracking-wider">Overview</h3>
-              <p className="text-[#444444] text-sm md:text-base leading-relaxed whitespace-pre-wrap">
-                {product.short_description}
-              </p>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t border-gray-150">
-              
-              {/* WhatsApp Enquiry Button */}
+          <div className="lg:col-span-6 space-y-4">
+            {/* Category badge */}
+            {categoryObj && (
+              <span className="inline-block bg-[#cc0000] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                {categoryName}
+              </span>
+            )}
+            
+            <h1 className="text-2xl font-bold text-[#1a1a1a] leading-tight">
+              {product.name}
+            </h1>
+            
+            <div className="border-t border-gray-100 my-3"></div>
+            
+            <p className="text-[#555] text-sm leading-relaxed whitespace-pre-wrap">
+              {product.short_description}
+            </p>
+            
+            {/* Two buttons */}
+            <div className="mt-4 space-y-2 max-w-md">
               <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 inline-flex items-center justify-center gap-3 bg-[#cc0000] hover:bg-[#aa0000] text-white px-6 py-3.5 rounded-xl text-sm font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
+                className="w-full flex items-center justify-center gap-2 bg-[#25d366] text-white rounded-xl py-3 text-sm font-bold uppercase tracking-wider hover:opacity-90 transition-opacity"
               >
-                {/* Custom WhatsApp Green-filled Icon */}
-                <svg
-                  className="w-5 h-5 fill-current text-[#25d366]"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M17.472 14.382c-.022-.08-.5-.204-.627-.25-.13-.047-.215-.07-.31-.018-.095.053-.37.283-.453.336-.083.053-.167.08-.31.018-.143-.062-.605-.223-1.152-.712-.425-.379-.713-.847-.796-.983-.084-.136-.01-.21.058-.277.062-.06.136-.16.204-.24.07-.08.092-.136.138-.227.045-.09.022-.167-.01-.23-.03-.063-.302-.728-.415-.992-.11-.264-.22-.228-.3-.23-.078-.002-.167-.002-.257-.002-.09 0-.236.034-.36.168-.124.134-.475.465-.475 1.135 0 .67.487 1.317.555 1.41.07.09.96 1.465 2.327 2.054.325.14.58.223.778.286.327.104.624.09.86.055.263-.04 1.258-.515 1.434-1.012.176-.5.176-.928.123-1.018zM12.016 2.006c-5.5 0-9.98 4.47-9.98 9.98 0 1.76.46 3.48 1.33 5L2.006 22l5.16-1.35c1.47.8 3.12 1.22 4.84 1.22 5.5 0 9.98-4.47 9.98-9.98 0-5.5-4.48-9.98-9.98-9.98zm0 18.294c-1.55 0-3.08-.42-4.41-1.2l-.32-.19-3.27.86.87-3.19-.21-.34c-.85-1.36-1.3-2.94-1.3-4.57 0-4.62 3.76-8.38 8.38-8.38 4.62 0 8.38 3.76 8.38 8.38 0 4.62-3.76 8.38-8.38 8.38z" />
+                <svg viewBox="0 0 24 24" fill="white" width="16" height="16">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                 </svg>
                 <span>Enquire on WhatsApp</span>
               </a>
-
-              {/* Call Us Now Button */}
               <a
                 href={`tel:${cleanPhone}`}
-                className="inline-flex items-center justify-center gap-2 border-2 border-[#cc0000] hover:bg-red-50 text-[#cc0000] px-6 py-3.5 rounded-xl text-sm font-bold uppercase tracking-wider transition-all duration-300"
+                className="w-full flex items-center justify-center gap-2 border-2 border-[#cc0000] text-[#cc0000] rounded-xl py-3 text-sm font-bold uppercase tracking-wider hover:bg-red-50 transition-colors"
               >
                 <Phone size={16} />
                 <span>Call Us Now</span>
@@ -191,7 +162,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         </div>
 
         {/* Product Details Tabs Section */}
-        <div className="mt-12">
+        <div className="mt-12 bg-white p-6 md:p-8 rounded-2xl border border-gray-200 shadow-sm">
           <ProductTabs
             description={product.full_description || product.short_description}
             specifications={product.specifications}
@@ -199,31 +170,14 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           />
         </div>
 
-        {/* Features Section */}
-        {product.features && product.features.length > 0 && (
-          <div className="mt-12 bg-white p-6 md:p-8 rounded-2xl border border-gray-200 shadow-sm space-y-6">
-            <h2 className="text-xl font-extrabold text-[#1a1a1a] tracking-wide flex items-center gap-2">
-              <span className="text-[#f5a623]">★</span> Key Features
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {product.features.map((feat, idx) => (
-                <div key={idx} className="flex gap-3 items-start p-4 rounded-xl bg-gray-50/50 border border-gray-100">
-                  <Star className="text-[#f5a623] fill-[#f5a623] shrink-0 mt-0.5" size={16} />
-                  <span className="text-sm text-[#1a1a1a] font-semibold leading-snug">{feat}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
         {/* Related Products Section */}
         {relatedProducts.length > 0 && (
           <div className="mt-16 space-y-6">
             <h2 className="text-2xl font-extrabold text-[#1a1a1a]">Related Products</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {relatedProducts.map((relProduct) => (
                 <div key={relProduct._id} className="h-full">
-                  <ProductCard product={relProduct} whatsappNumber={rawWhatsapp} />
+                  <ProductCard product={relProduct} whatsapp={rawWhatsapp} />
                 </div>
               ))}
             </div>

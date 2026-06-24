@@ -1,59 +1,50 @@
-'use client';
+'use client'
 
-import React, { useState } from 'react';
-import Image from 'next/image';
+import React, { useState } from 'react'
 
 interface ProductGalleryProps {
-  images: string[];
-  name: string;
+  images: string[]
+  name: string
 }
 
 export default function ProductGallery({ images, name }: ProductGalleryProps) {
-  const [activeIdx, setActiveIdx] = useState(0);
+  const [activeIdx, setActiveIdx] = useState(0)
 
-  // Fallback image if none exist
   const galleryImages = images && images.length > 0
     ? images
-    : ['https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&q=80&w=600'];
+    : ['https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&q=80&w=600']
 
   return (
-    <div className="space-y-4">
-      {/* Main Large Image */}
-      <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-gray-50 border border-gray-200 shadow-sm group">
-        <Image
+    <div className="sticky top-4">
+      {/* Main Image */}
+      <div className="w-full overflow-hidden rounded-2xl bg-gray-50 border border-gray-200">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={galleryImages[activeIdx]}
-          alt={`${name} Image Preview`}
-          fill
-          className="object-cover transition-all duration-500 group-hover:scale-[1.02]"
-          sizes="(max-width: 1024px) 100vw, 50vw"
-          priority
+          alt={name}
+          className="w-full rounded-2xl object-cover max-h-[420px]"
         />
       </div>
 
-      {/* Thumbnail Rows */}
+      {/* Thumbnail row */}
       {galleryImages.length > 1 && (
-        <div className="flex gap-3 overflow-x-auto scrollbar-none py-1">
+        <div className="flex gap-2 mt-3 overflow-x-auto scrollbar-none py-1">
           {galleryImages.map((imgUrl, idx) => (
-            <button
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
               key={idx}
+              src={imgUrl}
+              alt={`${name} Thumbnail ${idx + 1}`}
               onClick={() => setActiveIdx(idx)}
-              className={`relative h-20 w-24 shrink-0 rounded-xl overflow-hidden border-2 bg-gray-50 focus:outline-none transition-all duration-300 ${
+              className={`w-16 h-16 rounded-lg object-cover cursor-pointer border-2 transition-all ${
                 activeIdx === idx
-                  ? 'border-[#cc0000] scale-[0.98] shadow-sm'
-                  : 'border-gray-200 hover:border-[#cc0000]/60'
+                  ? 'border-[#cc0000]'
+                  : 'border-transparent'
               }`}
-            >
-              <Image
-                src={imgUrl}
-                alt={`${name} Thumbnail ${idx + 1}`}
-                fill
-                className="object-cover"
-                sizes="80px"
-              />
-            </button>
+            />
           ))}
         </div>
       )}
     </div>
-  );
+  )
 }

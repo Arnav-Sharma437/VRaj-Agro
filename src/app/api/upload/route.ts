@@ -34,8 +34,8 @@ export async function POST(request: NextRequest) {
     const buffer = Buffer.from(bytes)
 
     const result = await new Promise((resolve, reject) => {
-      // 5 minutes timeout for large file uploads
-      const timeoutSec = 300;
+      // 120 seconds timeout for large file uploads
+      const timeoutSec = 120;
       const uploadTimeout = setTimeout(() => {
         reject(new Error(`Upload request timed out after ${timeoutSec} seconds`));
       }, timeoutSec * 1000);
@@ -45,6 +45,7 @@ export async function POST(request: NextRequest) {
           folder: 'vraj-agro',
           resource_type: 'auto',
           chunk_size: 6000000,
+          timeout: 120000,
         },
         (error, result) => {
           clearTimeout(uploadTimeout);
@@ -64,4 +65,14 @@ export async function POST(request: NextRequest) {
     }, { status: 500 })
   }
 }
+
+// NOTE: Exporting config is deprecated in Next.js App Router API Route Handlers.
+// Next.js App Router parses request bodies as streams dynamically by default,
+// making bodyParser: false the default behavior.
+// If you uncomment this, Next.js will throw a fatal build error.
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+// }
 
