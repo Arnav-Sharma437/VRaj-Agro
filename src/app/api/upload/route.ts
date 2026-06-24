@@ -34,16 +34,26 @@ export async function POST(request: NextRequest) {
     const buffer = Buffer.from(bytes)
 
     const result = await new Promise((resolve, reject) => {
-      cloudinary.uploader.upload_stream(
+      // 5 minutes timeout for large file uploads
+      const timeoutSec = 300;
+      const uploadTimeout = setTimeout(() => {
+        reject(new Error(`Upload request timed out after ${timeoutSec} seconds`));
+      }, timeoutSec * 1000);
+
+      const stream = cloudinary.uploader.upload_stream(
         { 
           folder: 'vraj-agro',
-          resource_type: 'auto'
+          resource_type: 'auto',
+          chunk_size: 6000000,
         },
         (error, result) => {
-          if (error) reject(error)
-          else resolve(result)
+          clearTimeout(uploadTimeout);
+          if (error) reject(error);
+          else resolve(result);
         }
-      ).end(buffer)
+      );
+      
+      stream.end(buffer);
     }) as unknown as { secure_url: string }
 
     return NextResponse.json({ url: result.secure_url })
