@@ -8,6 +8,9 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata = {
   title: 'VRaj Agro',
   description: 'VRaj Agro - Premium Agricultural Products',
+  icons: {
+    icon: '/images/logo/logo.jpg',
+  },
 };
 
 export default function RootLayout({
