@@ -56,16 +56,8 @@ export default function ContactPageClient() {
   const whatsappClean = rawWhatsapp.replace(/[^0-9]/g, '');
   const whatsappUrl = `https://wa.me/${whatsappClean}`;
 
-  // Use a query-based Google Maps embed url if map_embed_url is missing, empty, or not a valid embed URL.
-  // This resolves the exact business address dynamically on the map and prevents world map rendering fallbacks.
-  const isValidEmbedUrl = (url: string | undefined): boolean => {
-    if (!url) return false;
-    return url.includes('embed') || url.includes('output=embed');
-  };
-
-  const mapEmbedUrl = isValidEmbedUrl(contactInfo?.map_embed_url)
-    ? contactInfo!.map_embed_url
-    : 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3937.279981927464!2d82.21025044745511!3d22.09078131102962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a280aed59ed23cb%3A0x643e19da1de00f90!2sV%20Raj%20Agro!5e1!3m2!1sen!2sin!4v1782127162354!5m2!1sen!2sin';
+  // Lock the location map to V. Raj Agro Beside New Petrol Pump, Seepat Road Mopka, Bilaspur Chhattisgarh 495001
+  const mapEmbedUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3697.07008892404!2d82.2076755760237!3d22.089886250550346!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a280aed59ed23cb%3A0x643e19da1de00f90!2sV%20Raj%20Agro!5e0!3m2!1sen!2sin!4v1714392437648!5m2!1sen!2sin';
 
   return (
     <div className="bg-white min-h-screen relative">
@@ -103,8 +95,23 @@ export default function ContactPageClient() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Card 1: Location */}
           <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col items-center text-center group">
-            <div className="bg-red-50 p-4 rounded-full text-[#cc0000] mb-5 group-hover:bg-[#cc0000] group-hover:text-white transition-colors duration-300">
-              <MapPin size={32} />
+            {/* Render small map on mobile, hide MapPin. Render MapPin on desktop, hide map */}
+            <div className="mb-5 w-full flex justify-center">
+              <div className="block md:hidden w-full h-[150px] rounded-xl overflow-hidden shadow-inner border border-gray-200">
+                <iframe
+                  src={mapEmbedUrl}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen={true}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="V.Raj Agro Mobile Location Map"
+                ></iframe>
+              </div>
+              <div className="hidden md:block bg-red-50 p-4 rounded-full text-[#cc0000] group-hover:bg-[#cc0000] group-hover:text-white transition-colors duration-300">
+                <MapPin size={32} />
+              </div>
             </div>
             <h3 className="text-lg font-bold text-[#1a1a1a] mb-3">Our Location</h3>
             <p className="text-[#444444] text-sm leading-relaxed max-w-xs">{address}</p>

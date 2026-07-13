@@ -11,7 +11,20 @@ interface ShopPageClientProps {
   initialProducts: IProduct[];
 }
 
-const fallbackCategoryImage = 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&q=80&w=400';
+function getCategoryImage(name: string, existingImage: string) {
+  if (existingImage) return existingImage
+  const n = name.toLowerCase()
+  if (n.includes('concrete') || n.includes('mixer')) return 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop'
+  if (n.includes('water') || n.includes('tanker')) return 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop'
+  if (n.includes('chaff') || n.includes('cutter')) return 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop'
+  if (n.includes('thresh')) return 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400&h=300&fit=crop'
+  if (n.includes('hand') || n.includes('trolley')) return 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop'
+  if (n.includes('tractor') || n.includes('trolley')) return 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&h=300&fit=crop'
+  if (n.includes('equipment') || n.includes('machinery') || n.includes('plow')) return 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=400&h=300&fit=crop'
+  return 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=300&fit=crop'
+}
+
+
 
 export default function ShopPageClient({ initialCategories, initialProducts }: ShopPageClientProps) {
   const router = useRouter();
@@ -174,7 +187,7 @@ export default function ShopPageClient({ initialCategories, initialProducts }: S
                     <div className="relative aspect-[16/10] overflow-hidden bg-slate-100 w-full shrink-0">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={cat.image || fallbackCategoryImage}
+                        src={getCategoryImage(cat.name, cat.image || '')}
                         alt={cat.name}
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
