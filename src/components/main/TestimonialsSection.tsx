@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { Star } from 'lucide-react';
 import { ITestimonial } from '@/types';
+import AnimateOnScroll from '@/components/ui/AnimateOnScroll';
 
 // Fallback testimonials if DB is empty
 const fallbackTestimonials: ITestimonial[] = [
@@ -115,8 +116,9 @@ export default function TestimonialsSection() {
   return (
     <section className="py-16 bg-[#f5f5f5] border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header with Red Underline */}
-        <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
+        <AnimateOnScroll direction="up">
+          {/* Header with Red Underline */}
+          <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
           <h2 className="text-3xl md:text-4xl font-black text-[#1a1a1a] tracking-tight uppercase">
             What Our Clients Say
           </h2>
@@ -240,6 +242,7 @@ export default function TestimonialsSection() {
             </div>
           )}
         </div>
+        </AnimateOnScroll>
       </div>
     </section>
   );

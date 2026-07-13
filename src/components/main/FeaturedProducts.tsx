@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { IProduct, ICategory } from '@/types';
+import AnimateOnScroll from '@/components/ui/AnimateOnScroll';
 
 export default function FeaturedProducts() {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -24,15 +25,17 @@ export default function FeaturedProducts() {
   return (
     <section style={{ background: '#f5f5f5', padding: '60px 0', overflow: 'hidden' }}>
       {/* Heading */}
-      <div style={{ textAlign: 'center', marginBottom: '40px', padding: '0 16px' }}>
-        <h2 style={{ fontSize: 'clamp(22px, 4vw, 36px)', fontWeight: 900, color: '#1a1a1a', textTransform: 'uppercase', margin: 0 }}>
-          Our Featured Products
-        </h2>
-        <div style={{ width: '60px', height: '3px', background: '#cc0000', margin: '12px auto' }}></div>
-        <p style={{ color: '#666', fontSize: '14px', marginTop: '8px' }}>
-          Premium machinery engineered for durability, performance & efficiency
-        </p>
-      </div>
+      <AnimateOnScroll direction="up">
+        <div style={{ textAlign: 'center', marginBottom: '40px', padding: '0 16px' }}>
+          <h2 style={{ fontSize: 'clamp(22px, 4vw, 36px)', fontWeight: 900, color: '#1a1a1a', textTransform: 'uppercase', margin: 0 }}>
+            Our Featured Products
+          </h2>
+          <div style={{ width: '60px', height: '3px', background: '#cc0000', margin: '12px auto' }}></div>
+          <p style={{ color: '#666', fontSize: '14px', marginTop: '8px' }}>
+            Premium machinery engineered for durability, performance & efficiency
+          </p>
+        </div>
+      </AnimateOnScroll>
 
       {/* Slider */}
       {/* Row 1 - scrolls left */}

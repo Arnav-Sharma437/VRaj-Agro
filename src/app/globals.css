@@ -36,14 +36,14 @@ body {
   100% { transform: translateX(0); }
 }
 
-.marquee-track {
-  animation: marquee 40s linear infinite;
+.marquee-track, .animate-marquee {
+  animation: marquee 50s linear infinite;
   display: flex;
   width: fit-content;
 }
 
-.marquee-track-reverse {
-  animation: marquee-reverse 40s linear infinite;
+.marquee-track-reverse, .animate-marquee-reverse {
+  animation: marquee-reverse 50s linear infinite;
   display: flex;
   width: fit-content;
 }

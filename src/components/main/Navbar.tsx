@@ -129,10 +129,10 @@ export default function Navbar() {
           <div className="flex md:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-gray-750 hover:text-[#cc0000] focus:outline-none transition-colors"
+              className="text-[#cc0000] focus:outline-none transition-colors"
               aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileMenuOpen ? <X size={24} color="#cc0000" /> : <Menu size={24} color="#cc0000" />}
             </button>
           </div>
         </div>
