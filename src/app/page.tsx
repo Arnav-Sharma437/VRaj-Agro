@@ -29,13 +29,13 @@ function AboutSection() {
     <section className="py-20 bg-white px-4 md:px-8 border-t border-gray-100">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left Column: Founder Image */}
+          {/* Left Column: Industrial Fabrication Image */}
           <div className="lg:col-span-5">
             <AnimateOnScroll direction="left">
-              <div className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden shadow-lg bg-gray-100 border border-gray-100">
+              <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden shadow-lg bg-gray-100 border border-gray-100">
                 <Image
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&h=625&fit=crop"
-                  alt="V.Raj Agro Founder"
+                  src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=800"
+                  alt="V.Raj Agro Machinery Manufacturing"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 40vw"
@@ -140,53 +140,7 @@ function FactorySection() {
   );
 }
 
-// New Founder's Message Callout Block
-function FounderMessage() {
-  return (
-    <section className="bg-[#1a1a1a] text-white py-20 px-4 md:px-8">
-      <div className="max-w-7xl mx-auto">
-        <AnimateOnScroll direction="up">
-          <div className="overflow-hidden rounded-3xl border border-white/10 bg-[#0e0e0e] shadow-2xl">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 p-8 md:p-12 lg:p-16 items-center">
-              {/* Founder Image */}
-              <div className="lg:col-span-5 flex justify-center lg:justify-start">
-                <div className="relative aspect-[4/5] w-full max-w-sm rounded-2xl overflow-hidden shadow-2xl border border-white/5 bg-gray-900">
-                  <Image
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&h=625&fit=crop"
-                    alt="V.Raj Agro Founder"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 30vw"
-                  />
-                </div>
-              </div>
 
-              {/* Message Content */}
-              <div className="lg:col-span-7 space-y-6">
-                <span className="text-xs font-bold text-[#f5a623] uppercase tracking-widest block">
-                  FOUNDER&apos;S MESSAGE
-                </span>
-                <h2 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight">
-                  Decades of Dedication
-                </h2>
-                <div className="w-16 h-1 bg-[#cc0000]" />
-                <p className="text-white/80 text-sm md:text-base leading-relaxed italic font-medium">
-                  &ldquo;When we laid the foundation of V.Raj Agro in 1998, it was with a deep-seated commitment to deliver premium-grade construction and agricultural machinery. Over the last 25 years, our goal has remained unchanged: providing unparalleled quality, long-term machinery value, and immediate support. We are proud partners in building India&apos;s agricultural and structural future.&rdquo;
-                </p>
-                <div>
-                  <h4 className="font-extrabold text-white text-base">V. Raj</h4>
-                  <p className="text-[10px] text-white/50 uppercase tracking-widest font-semibold mt-0.5">
-                    Founder & Principal Director, V.Raj Agro
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </AnimateOnScroll>
-      </div>
-    </section>
-  );
-}
 
 export default function HomePage() {
   return (
@@ -198,7 +152,6 @@ export default function HomePage() {
       <FactorySection />
       <FeaturedProducts />
       <VideoSection />
-      <FounderMessage />
       <TestimonialsSection />
     </div>
   );
