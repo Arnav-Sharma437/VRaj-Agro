@@ -135,7 +135,7 @@ export default function TestimonialsSection() {
             {visibleTestimonials.map((item, idx) => (
               <div
                 key={item._id || idx}
-                className="bg-white p-6 rounded border border-gray-200 shadow-sm flex flex-col justify-between space-y-6 transform hover:-translate-y-1 transition-all duration-300"
+                className="bg-white p-8 rounded-2xl border border-gray-150/60 shadow-sm flex flex-col justify-between space-y-6 transform hover:-translate-y-1 hover:shadow-md transition-all duration-300"
               >
                 <div className="space-y-4">
                   {/* Rating Stars */}
@@ -184,7 +184,7 @@ export default function TestimonialsSection() {
 
           {/* Mobile Layout (displays 1 card) */}
           <div className="block md:hidden">
-            <div className="bg-white p-6 rounded border border-gray-200 shadow-sm flex flex-col justify-between space-y-6">
+            <div className="bg-white p-8 rounded-2xl border border-gray-150/60 shadow-sm flex flex-col justify-between space-y-6">
               <div className="space-y-4">
                 <div className="flex gap-1 text-[#f5a623]">
                   {[1, 2, 3, 4, 5].map((star) => (
