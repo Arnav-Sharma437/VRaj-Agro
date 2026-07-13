@@ -73,8 +73,8 @@ export default function ContactPageClient() {
         </div>
       </section>
 
-      {/* Section 3: Google Map (Full Width) */}
-      <section className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      {/* Section 3: Google Map (Full Width, hidden on mobile) */}
+      <section className="hidden md:block py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="w-full h-[450px] rounded-2xl overflow-hidden shadow-sm border border-gray-150 relative">
           <iframe
             src={mapEmbedUrl}
