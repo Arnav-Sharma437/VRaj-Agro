@@ -11,6 +11,25 @@ import ProductTabs from '@/components/main/ProductTabs';
 import ProductCard from '@/components/main/ProductCard';
 import { IProduct, ICategory } from '@/types';
 
+function getProductPlaceholder(productName: string, categoryName: string): string {
+  const name = (productName + ' ' + categoryName).toLowerCase()
+  if (name.includes('concrete') || name.includes('mixer')) 
+    return 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=500&fit=crop'
+  if (name.includes('water') || name.includes('tanker')) 
+    return 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=500&fit=crop'
+  if (name.includes('chaff') || name.includes('cutter')) 
+    return 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&h=500&fit=crop'
+  if (name.includes('thresh')) 
+    return 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600&h=500&fit=crop'
+  if (name.includes('tractor')) 
+    return 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600&h=500&fit=crop'
+  if (name.includes('hand') || name.includes('trolley')) 
+    return 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=500&fit=crop'
+  if (name.includes('pump') || name.includes('water')) 
+    return 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=500&fit=crop'
+  return 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=500&fit=crop'
+}
+
 if (Category) {
   // no-op
 }
@@ -115,7 +134,11 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           
           {/* Left Column: Image Gallery */}
           <div className="lg:col-span-6 w-full">
-            <ProductGallery images={product.images || []} name={product.name} />
+            <ProductGallery
+              images={product.images || []}
+              name={product.name}
+              placeholderImage={getProductPlaceholder(product.name, categoryName)}
+            />
           </div>
 
           {/* Right Column: Product Info & Actions */}

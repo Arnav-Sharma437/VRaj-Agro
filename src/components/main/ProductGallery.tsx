@@ -5,14 +5,16 @@ import React, { useState } from 'react'
 interface ProductGalleryProps {
   images: string[]
   name: string
+  placeholderImage?: string
 }
 
-export default function ProductGallery({ images, name }: ProductGalleryProps) {
+export default function ProductGallery({ images, name, placeholderImage }: ProductGalleryProps) {
   const [activeIdx, setActiveIdx] = useState(0)
 
+  const fallback = placeholderImage || 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&q=80&w=600'
   const galleryImages = images && images.length > 0
     ? images
-    : ['https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&q=80&w=600']
+    : [fallback]
 
   return (
     <div className="sticky top-4">

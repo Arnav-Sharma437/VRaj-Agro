@@ -14,7 +14,7 @@ export const metadata = {
   description: 'V.Raj Agro is a premier manufacturer of high-quality Concrete Mixer Machines and agricultural equipment since 1998. Trusted by builders and farmers across India.',
 };
 
-// Redesigned AEC-Style AboutSection (Why Choose Us)
+// Redesigned AEC-Style AboutSection (Why Choose Us & Who Are We)
 function AboutSection() {
   const features = [
     { title: 'High-Quality Machinery', desc: 'Premium materials and heavy-duty steel for long-lasting structural performance.' },
@@ -27,43 +27,63 @@ function AboutSection() {
 
   return (
     <section className="py-20 bg-white px-4 md:px-8 border-t border-gray-100">
-      <div className="max-w-7xl mx-auto space-y-16">
-        {/* Header Block */}
-        <AnimateOnScroll direction="up">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <h2 className="text-3xl md:text-4xl font-black text-[#1a1a1a] tracking-tight uppercase">
-              Why Choose V.Raj Agro?
-            </h2>
-            <div className="w-16 h-1 bg-[#cc0000] mx-auto rounded" />
-            <p className="text-xs md:text-sm text-gray-500 font-bold uppercase tracking-wider">
-              Decades of experience delivering quality construction & agricultural solutions.
-            </p>
-          </div>
-        </AnimateOnScroll>
-
-        {/* 3-Column Grid of AEC-Style Numbered Feature Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feat, index) => (
-            <AnimateOnScroll key={index} delay={index * 0.08} direction="up">
-              <div className="flex flex-col items-center text-center p-8 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full">
-                {/* Number Badge with check icon */}
-                <div className="relative mb-6 flex h-[5.5rem] w-[5.5rem] items-center justify-center rounded-full border-[3px] border-[#f5a623] bg-white shadow-sm shrink-0">
-                  <Check size={28} className="text-[#f5a623] stroke-[3]" />
-                  <span className="absolute -bottom-1.5 flex h-7 w-7 items-center justify-center rounded-full border-2 border-[#cc0000] bg-[#cc0000] font-black text-xs text-white">
-                    {index + 1}
-                  </span>
-                </div>
-
-                {/* Content */}
-                <h3 className="mb-3 font-bold text-sm md:text-base text-[#1a1a1a] uppercase tracking-wide">
-                  {feat.title}
-                </h3>
-                <p className="text-xs md:text-sm text-gray-500 leading-relaxed flex-1">
-                  {feat.desc}
-                </p>
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Left Column: Founder Image */}
+          <div className="lg:col-span-5">
+            <AnimateOnScroll direction="left">
+              <div className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden shadow-lg bg-gray-100 border border-gray-100">
+                <Image
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&h=625&fit=crop"
+                  alt="V.Raj Agro Founder"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                />
               </div>
             </AnimateOnScroll>
-          ))}
+          </div>
+
+          {/* Right Column: Text Content & 2x3 Grid */}
+          <div className="lg:col-span-7 space-y-6">
+            <AnimateOnScroll direction="right" delay={0.2}>
+              <div className="space-y-3">
+                <h2 className="text-3xl md:text-4xl font-black text-[#1a1a1a] uppercase tracking-tight">
+                  Who Are We?
+                </h2>
+                <div className="w-16 h-1 bg-[#cc0000] rounded" />
+              </div>
+
+              <p className="text-gray-600 text-sm md:text-base leading-relaxed mt-4">
+                Founded in 1998, V.Raj Agro has built a strong reputation as a manufacturer of high-quality Concrete Mixer Machines and a wide range of agricultural machinery. With decades of experience and an unwavering commitment to excellence, we continuously meet the evolving needs of construction and agriculture sectors.
+              </p>
+
+              {/* 2x3 Grid of AEC-Style Numbered Feature Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-6">
+                {features.map((feat, index) => (
+                  <div key={index} className="flex gap-4 p-4 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-300">
+                    {/* Number Badge with check icon */}
+                    <div className="relative flex h-14 w-14 items-center justify-center rounded-full border-2 border-[#f5a623] bg-white shadow-sm shrink-0">
+                      <Check size={18} className="text-[#f5a623] stroke-[3]" />
+                      <span className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full border border-[#cc0000] bg-[#cc0000] font-black text-[9px] text-white">
+                        {index + 1}
+                      </span>
+                    </div>
+
+                    {/* Content */}
+                    <div className="space-y-1">
+                      <h4 className="font-bold text-xs md:text-sm text-[#1a1a1a] uppercase tracking-wide">
+                        {feat.title}
+                      </h4>
+                      <p className="text-[11px] md:text-xs text-gray-500 leading-normal">
+                        {feat.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </AnimateOnScroll>
+          </div>
         </div>
       </div>
     </section>

@@ -2,6 +2,25 @@
 import { useRouter } from 'next/navigation'
 import { IProduct, ICategory } from '@/types'
 
+function getProductPlaceholder(productName: string, categoryName: string): string {
+  const name = (productName + ' ' + categoryName).toLowerCase()
+  if (name.includes('concrete') || name.includes('mixer')) 
+    return 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=500&fit=crop'
+  if (name.includes('water') || name.includes('tanker')) 
+    return 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=500&fit=crop'
+  if (name.includes('chaff') || name.includes('cutter')) 
+    return 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&h=500&fit=crop'
+  if (name.includes('thresh')) 
+    return 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600&h=500&fit=crop'
+  if (name.includes('tractor')) 
+    return 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600&h=500&fit=crop'
+  if (name.includes('hand') || name.includes('trolley')) 
+    return 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=500&fit=crop'
+  if (name.includes('pump') || name.includes('water')) 
+    return 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=500&fit=crop'
+  return 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=500&fit=crop'
+}
+
 interface ProductCardProps {
   product: IProduct
   whatsapp?: string
@@ -41,26 +60,12 @@ export default function ProductCard({ product }: ProductCardProps) {
     >
       {/* IMAGE */}
       <div style={{ height: '180px', background: '#f5f5f5', overflow: 'hidden', position: 'relative' }}>
-        {product.images?.[0] ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={product.images[0]}
-            alt={product.name}
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          />
-        ) : (
-          <div style={{
-            width: '100%', height: '100%',
-            display: 'flex', alignItems: 'center',
-            justifyContent: 'center', color: '#ccc',
-          }}>
-            <svg width="36" height="36" fill="none" stroke="#ccc" strokeWidth="1.5" viewBox="0 0 24 24">
-              <rect x="3" y="3" width="18" height="18" rx="2"/>
-              <circle cx="8.5" cy="8.5" r="1.5"/>
-              <path d="M21 15l-5-5L5 21"/>
-            </svg>
-          </div>
-        )}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={product.images?.[0] || getProductPlaceholder(product.name, categoryName)}
+          alt={product.name}
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        />
       </div>
 
       {/* BODY */}
