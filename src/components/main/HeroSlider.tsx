@@ -261,7 +261,7 @@ export default function HeroSlider() {
       </div>
 
       {/* 7. Scroll Down Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1">
+      <div className="hidden md:flex flex-col absolute bottom-8 left-1/2 -translate-x-1/2 z-10 items-center gap-1">
         <span className="text-[10px] font-bold tracking-widest uppercase text-white/40">Scroll Down</span>
         <ArrowDown size={20} className="text-white/40 animate-bounce" />
       </div>
