@@ -1,9 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { 
-  Eye, 
-  Target, 
-  ShieldCheck, 
   Award, 
   Cpu, 
   Headphones, 
@@ -59,26 +56,13 @@ export default function AboutPage() {
   return (
     <div className="bg-white min-h-screen">
       {/* Section 1: Page Banner */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#1a1a1a] via-[#4d0000] to-[#cc0000] py-16 sm:py-20 text-white px-4 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]"></div>
-        <div className="absolute -left-16 -top-16 w-64 h-64 bg-[#cc0000]/10 rounded-full blur-3xl"></div>
-        <div className="absolute -right-16 -bottom-16 w-64 h-64 bg-[#f5a623]/10 rounded-full blur-3xl"></div>
-        
-        <div className="max-w-7xl mx-auto w-full relative z-10 text-center md:text-left">
-          <span className="text-[10px] font-bold tracking-widest uppercase text-white/50 bg-white/5 border border-white/10 px-3 py-1 rounded-full">
-            WHO WE ARE
-          </span>
-          <h1 className="text-3xl sm:text-5xl font-black tracking-tight uppercase mt-4 text-white">
-            About V.Raj Agro
-          </h1>
-          <p className="mt-2 text-xs sm:text-sm text-white/70 max-w-xl font-medium leading-relaxed">
-            Delivering unmatched construction concrete mixers and high-performance agricultural machinery since 1998.
-          </p>
-          
-          <nav className="mt-6 flex items-center justify-center md:justify-start text-xs font-bold uppercase tracking-wider text-white/60">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <ChevronRight size={14} className="mx-2 text-[#cc0000]" />
-            <span className="text-[#f5a623]">About Us</span>
+      <section className="bg-[#cc0000] text-white h-[140px] md:h-[180px] flex flex-col justify-center px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto w-full">
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">About Us</h1>
+          <nav className="mt-2 flex items-center text-sm font-medium opacity-90">
+            <Link href="/" className="hover:underline">Home</Link>
+            <ChevronRight size={14} className="mx-2" />
+            <span className="text-white/80">About Us</span>
           </nav>
         </div>
       </section>
@@ -125,68 +109,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Section 3: Vision, Mission, Values */}
-      <section className="bg-[#f9f9f9] py-20 px-4 sm:px-6 lg:px-8 border-t border-b border-gray-100">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10">
-            
-            {/* Card 1 — Our Vision */}
-            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl hover:border-transparent transition-all duration-300 flex flex-col h-full border border-gray-200 relative group overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-[4px] bg-[#f5a623]" />
-              <div className="absolute top-4 right-4 text-3xl font-black text-gray-100 select-none transition-colors group-hover:text-[#f5a623]/10">01</div>
-              
-              <div className="bg-amber-50 p-4 rounded-2xl text-[#f5a623] w-fit mb-6 transition-all duration-300 group-hover:bg-[#f5a623] group-hover:text-white shadow-sm">
-                <Eye size={28} />
-              </div>
-              
-              <h3 className="text-lg font-bold text-[#1a1a1a] uppercase tracking-wide mb-3 group-hover:text-[#f5a623] transition-colors">
-                Our Vision
-              </h3>
-              <p className="text-gray-600 text-xs md:text-sm leading-relaxed mt-2">
-                To become a leading global manufacturer, offering sustainable solutions 
-                that shape the future of farming and construction excellence.
-              </p>
-            </div>
 
-            {/* Card 2 — Our Mission */}
-            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl hover:border-transparent transition-all duration-300 flex flex-col h-full border border-gray-200 relative group overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-[4px] bg-[#cc0000]" />
-              <div className="absolute top-4 right-4 text-3xl font-black text-gray-100 select-none transition-colors group-hover:text-[#cc0000]/10">02</div>
-              
-              <div className="bg-red-50 p-4 rounded-2xl text-[#cc0000] w-fit mb-6 transition-all duration-300 group-hover:bg-[#cc0000] group-hover:text-white shadow-sm">
-                <Target size={28} />
-              </div>
-              
-              <h3 className="text-lg font-bold text-[#1a1a1a] uppercase tracking-wide mb-3 group-hover:text-[#cc0000] transition-colors">
-                Our Mission
-              </h3>
-              <p className="text-gray-600 text-xs md:text-sm leading-relaxed mt-2">
-                To deliver innovative, efficient, and reliable machines that empower 
-                construction and agriculture industries for maximum productivity and growth.
-              </p>
-            </div>
-
-            {/* Card 3 — Why Choose Us */}
-            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl hover:border-transparent transition-all duration-300 flex flex-col h-full border border-gray-200 relative group overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-[4px] bg-[#1a1a1a]" />
-              <div className="absolute top-4 right-4 text-3xl font-black text-gray-100 select-none transition-colors group-hover:text-black/10">03</div>
-              
-              <div className="bg-slate-100 p-4 rounded-2xl text-[#1a1a1a] w-fit mb-6 transition-all duration-300 group-hover:bg-[#1a1a1a] group-hover:text-white shadow-sm">
-                <ShieldCheck size={28} />
-              </div>
-              
-              <h3 className="text-lg font-bold text-[#1a1a1a] uppercase tracking-wide mb-3 group-hover:text-[#cc0000] transition-colors">
-                Why Choose Us
-              </h3>
-              <p className="text-gray-600 text-xs md:text-sm leading-relaxed mt-2">
-                We ensure quality, durability, and customer satisfaction through advanced 
-                machinery, timely delivery, and trusted after-sales support.
-              </p>
-            </div>
-
-          </div>
-        </div>
-      </section>
 
       {/* Section 4: Why Choose Us (detailed) */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
