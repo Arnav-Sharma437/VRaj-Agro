@@ -21,8 +21,6 @@ function AboutSection() {
     { title: 'Advanced Technology', desc: 'Modern automated fabrication processes ensuring maximum field efficiency.' },
     { title: 'Expert Support', desc: 'Prompt and reliable after-sales field support and spare parts supply.' },
     { title: 'On-Time Delivery', desc: 'Well-connected logistics network delivering machinery across India without delays.' },
-    { title: 'Wide Range', desc: 'Diverse selection from industrial concrete mixers to agricultural threshers.' },
-    { title: 'Cost-Effective', desc: 'Factory-direct competitive pricing without compromising build standard.' },
   ];
 
   return (

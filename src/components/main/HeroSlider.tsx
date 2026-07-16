@@ -61,8 +61,8 @@ export default function HeroSlider() {
 
       {/* Content Container (2-Column Grid) */}
       <div className="relative z-10 w-full max-w-7xl flex flex-col md:flex-row items-center justify-between gap-12">
-        {/* Left Column (60%): Text Content */}
-        <div className="w-full md:w-[55%] lg:w-[60%] text-left text-white space-y-6">
+        {/* Left Column (60%): Text Content Wrapped in Glassmorphism Card */}
+        <div className="w-full md:w-[60%] lg:w-[65%] text-left text-white bg-black/40 backdrop-blur-md border border-white/10 p-6 sm:p-10 md:p-12 rounded-3xl shadow-2xl space-y-6">
           {/* 1. Red Pill Badge */}
           <motion.div
             initial={{ opacity: 0, x: -10 }}
@@ -125,31 +125,6 @@ export default function HeroSlider() {
               <MessageSquare size={16} className="fill-current" />
               <span>WhatsApp Us</span>
             </a>
-          </motion.div>
-
-          {/* 6. Stats Row */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.3 }}
-            className="flex gap-4 md:gap-8 pt-8 border-t border-white/10 mt-12 max-w-2xl"
-          >
-            <div className="pr-4 md:pr-8 border-r border-white/10">
-              <span className="text-xl md:text-2xl font-black text-[#f5a623] block">25+</span>
-              <span className="text-[10px] text-white/50 uppercase font-bold tracking-widest mt-1 block">Years</span>
-            </div>
-            <div className="pr-4 md:pr-8 border-r border-white/10">
-              <span className="text-xl md:text-2xl font-black text-[#f5a623] block">500+</span>
-              <span className="text-[10px] text-white/50 uppercase font-bold tracking-widest mt-1 block">Clients</span>
-            </div>
-            <div className="pr-4 md:pr-8 border-r border-white/10">
-              <span className="text-xl md:text-2xl font-black text-[#f5a623] block">50+</span>
-              <span className="text-[10px] text-white/50 uppercase font-bold tracking-widest mt-1 block">Products</span>
-            </div>
-            <div>
-              <span className="text-xl md:text-2xl font-black text-[#f5a623] block">10+</span>
-              <span className="text-[10px] text-white/50 uppercase font-bold tracking-widest mt-1 block">States</span>
-            </div>
           </motion.div>
         </div>
 
