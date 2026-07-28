@@ -11,8 +11,11 @@ export default function AdminLoginPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  const isRateLimited = error.includes('Too many attempts');
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isRateLimited) return;
     setError('');
     setLoading(true);
 
@@ -26,7 +29,7 @@ export default function AdminLoginPage() {
       if (res?.error) {
         setError(res.error || 'Invalid email or password');
       } else {
-        router.push('/admin');
+        router.push('/bdis87oanxje1');
         router.refresh();
       }
     } catch {
@@ -59,8 +62,8 @@ export default function AdminLoginPage() {
         </div>
 
         {error && (
-          <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-md text-sm" role="alert">
-            <p className="font-semibold">Authentication failed</p>
+          <div className={`bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-md text-sm ${isRateLimited ? 'font-bold border-red-650' : ''}`} role="alert">
+            <p className="font-semibold">{isRateLimited ? 'Access Blocked' : 'Authentication failed'}</p>
             <p className="mt-1">{error}</p>
           </div>
         )}
@@ -77,9 +80,10 @@ export default function AdminLoginPage() {
                 type="email"
                 autoComplete="email"
                 required
+                disabled={isRateLimited}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-[#cc0000] focus:border-[#cc0000] focus:z-10 sm:text-sm transition-colors"
+                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-[#cc0000] focus:border-[#cc0000] focus:z-10 sm:text-sm transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed"
                 placeholder="admin@vrajagro.com"
               />
             </div>
@@ -93,9 +97,10 @@ export default function AdminLoginPage() {
                 type="password"
                 autoComplete="current-password"
                 required
+                disabled={isRateLimited}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-[#cc0000] focus:border-[#cc0000] focus:z-10 sm:text-sm transition-colors"
+                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-lg focus:outline-none focus:ring-[#cc0000] focus:border-[#cc0000] focus:z-10 sm:text-sm transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed"
                 placeholder="••••••••"
               />
             </div>
@@ -104,12 +109,12 @@ export default function AdminLoginPage() {
           <div>
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || isRateLimited}
               className={`group relative w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-semibold rounded-lg text-white bg-[#cc0000] hover:bg-[#aa0000] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#cc0000] transition-all ${
-                loading ? 'opacity-75 cursor-not-allowed' : ''
+                (loading || isRateLimited) ? 'opacity-50 cursor-not-allowed' : ''
               }`}
             >
-              {loading ? 'Logging in...' : 'Login to Admin Panel'}
+              {loading ? 'Logging in...' : isRateLimited ? 'Access Blocked' : 'Login to Admin Panel'}
             </button>
           </div>
         </form>

@@ -87,7 +87,7 @@ export default async function AdminDashboardPage() {
         <div className="lg:col-span-2 bg-white rounded-2xl border border-gray-150 shadow-sm overflow-hidden">
           <div className="px-6 py-5 border-b border-gray-150 flex items-center justify-between">
             <h2 className="text-lg font-bold text-gray-900">Recent Products</h2>
-            <Link href="/admin/products" className="text-sm text-[#cc0000] hover:text-[#aa0000] font-semibold transition-colors">
+            <Link href="/bdis87oanxje1/products" className="text-sm text-[#cc0000] hover:text-[#aa0000] font-semibold transition-colors">
               View All
             </Link>
           </div>
@@ -141,7 +141,7 @@ export default async function AdminDashboardPage() {
           <h2 className="text-lg font-bold text-gray-900">Quick Actions</h2>
           <div className="space-y-3">
             <Link
-              href="/admin/products"
+              href="/bdis87oanxje1/products"
               className="flex items-center justify-between w-full p-4 rounded-xl border border-gray-200 hover:border-[#cc0000] hover:bg-red-50/20 group transition-all"
             >
               <div className="flex items-center gap-3">
@@ -152,7 +152,7 @@ export default async function AdminDashboardPage() {
               </div>
             </Link>
             <Link
-              href="/admin/categories"
+              href="/bdis87oanxje1/categories"
               className="flex items-center justify-between w-full p-4 rounded-xl border border-gray-200 hover:border-[#cc0000] hover:bg-red-50/20 group transition-all"
             >
               <div className="flex items-center gap-3">

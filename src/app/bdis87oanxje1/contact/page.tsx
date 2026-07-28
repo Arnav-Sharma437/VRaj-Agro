@@ -7,7 +7,7 @@ export default function AdminContactPage() {
   const router = useRouter();
 
   useEffect(() => {
-    router.replace('/admin');
+    router.replace('/bdis87oanxje1');
   }, [router]);
 
   return null;

@@ -10,11 +10,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
   const router = useRouter();
 
-  const isLoginPage = pathname === '/admin/login';
+  const isLoginPage = pathname === '/bdis87oanxje1/login';
 
   useEffect(() => {
     if (status === 'unauthenticated' && !isLoginPage) {
-      router.replace('/admin/login');
+      router.replace('/bdis87oanxje1/login');
     }
   }, [status, isLoginPage, router]);
 

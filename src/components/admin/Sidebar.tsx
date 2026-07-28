@@ -21,18 +21,18 @@ export const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { label: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-    { label: 'Banners', href: '/admin/banners', icon: Image },
-    { label: 'Categories', href: '/admin/categories', icon: Tag },
-    { label: 'Products', href: '/admin/products', icon: Package },
-    { label: 'Videos', href: '/admin/videos', icon: Video },
-    { label: 'Testimonials', href: '/admin/testimonials', icon: MessageSquare },
+    { label: 'Dashboard', href: '/bdis87oanxje1', icon: LayoutDashboard },
+    { label: 'Banners', href: '/bdis87oanxje1/banners', icon: Image },
+    { label: 'Categories', href: '/bdis87oanxje1/categories', icon: Tag },
+    { label: 'Products', href: '/bdis87oanxje1/products', icon: Package },
+    { label: 'Videos', href: '/bdis87oanxje1/videos', icon: Video },
+    { label: 'Testimonials', href: '/bdis87oanxje1/testimonials', icon: MessageSquare },
   ];
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
   const handleLogout = async () => {
-    await signOut({ callbackUrl: '/admin/login' });
+    await signOut({ callbackUrl: '/bdis87oanxje1/login' });
   };
 
   const SidebarContent = () => (
