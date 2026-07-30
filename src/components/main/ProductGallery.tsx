@@ -17,7 +17,7 @@ export default function ProductGallery({ images, name, placeholderImage }: Produ
     : [fallback]
 
   return (
-    <div className="sticky top-4">
+    <div className="relative">
       {/* Main Image */}
       <div className="w-full overflow-hidden rounded-2xl bg-gray-50 border border-gray-200">
         {/* eslint-disable-next-line @next/next/no-img-element */}
