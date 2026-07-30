@@ -11,6 +11,9 @@ export const metadata = {
   icons: {
     icon: '/images/logo/logo.jpg',
   },
+  verification: {
+    google: 'YHLtFKEE9bZTXTlivj6m_BddoJ5nAJy_6XuZ1PQfriU',
+  },
 };
 
 export default function RootLayout({
