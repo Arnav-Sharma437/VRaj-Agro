@@ -46,7 +46,7 @@ export default function ContactPageClient() {
   }
 
   // Parse details with fallbacks
-  const address = contactInfo?.address || 'V. Raj Agro Beside New Petrol Pump, Seepat Road Mopka, Bilaspur Chhattisgarh 495001';
+  const address = contactInfo?.address || 'V. Raj Agro Beside New Petrol Pump, Seepat Road Mopka, Bilaspur Chhattisgarh 495006';
   const emailVal = contactInfo?.email || 'vrajagrobilaspurcg@gmail.com';
   const rawPhones = contactInfo?.phone || '+91-8871822944';
   const phonesList = rawPhones.split(',').map((p) => p.trim());
@@ -56,7 +56,7 @@ export default function ContactPageClient() {
   const whatsappClean = rawWhatsapp.replace(/[^0-9]/g, '');
   const whatsappUrl = `https://wa.me/${whatsappClean}`;
 
-  // Lock the location map to V. Raj Agro Beside New Petrol Pump, Seepat Road Mopka, Bilaspur Chhattisgarh 495001
+  // Lock the location map to V. Raj Agro Beside New Petrol Pump, Seepat Road Mopka, Bilaspur Chhattisgarh 495006
   const mapEmbedUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3697.07008892404!2d82.2076755760237!3d22.089886250550346!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a280aed59ed23cb%3A0x643e19da1de00f90!2sV%20Raj%20Agro!5e0!3m2!1sen!2sin!4v1714392437648!5m2!1sen!2sin';
 
   return (
