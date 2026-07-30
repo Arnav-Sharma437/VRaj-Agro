@@ -53,6 +53,37 @@ export default function RootLayout({
             gtag('config', 'G-62PJMHBFG2');
           `}
         </Script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "V Raj Agro",
+              "image": "https://www.vrajagro.in/images/logo/logo.jpg",
+              "@id": "https://www.vrajagro.in/",
+              "url": "https://www.vrajagro.in/",
+              "telephone": "+91-8871822944",
+              "email": "vrajagrobilaspurcg@gmail.com",
+              "priceRange": "₹₹",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Seepat Rd, beside Indian Oil Petrol Pump, Mopka",
+                "addressLocality": "Bilaspur",
+                "addressRegion": "Chhattisgarh",
+                "postalCode": "495006",
+                "addressCountry": "IN"
+              },
+              "sameAs": [
+                "https://wa.me/918871822944",
+                "https://www.youtube.com/@VRajAgro",
+                "https://www.instagram.com/themachinejunction",
+                "https://www.facebook.com/share/18B8RM6Udc/"
+              ],
+              "description": "V Raj Agro is a manufacturer of Concrete Mixer Machines and agricultural equipment based in Bilaspur, Chhattisgarh, trusted since 1998."
+            })
+          }}
+        />
       </head>
       <body className={inter.className}>
         <SessionProvider>
