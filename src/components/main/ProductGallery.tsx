@@ -18,8 +18,8 @@ export default function ProductGallery({ images, videos = [], name, placeholderI
   const fallback = placeholderImage || 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&q=80&w=600'
 
   const allMedia: MediaItem[] = [
-    ...(images || []).map((url) => ({ type: 'image' as const, url })),
     ...(videos || []).map((url) => ({ type: 'video' as const, url })),
+    ...(images || []).map((url) => ({ type: 'image' as const, url })),
   ]
 
   if (allMedia.length === 0) {
@@ -30,8 +30,8 @@ export default function ProductGallery({ images, videos = [], name, placeholderI
 
   useEffect(() => {
     const currentMedia: MediaItem[] = [
-      ...(images || []).map((url) => ({ type: 'image' as const, url })),
       ...(videos || []).map((url) => ({ type: 'video' as const, url })),
+      ...(images || []).map((url) => ({ type: 'image' as const, url })),
     ]
     if (currentMedia.length > 0) {
       setSelectedMedia(currentMedia[0])
