@@ -71,7 +71,7 @@ export default function RootLayout({
                 "streetAddress": "Seepat Rd, beside Indian Oil Petrol Pump, Mopka",
                 "addressLocality": "Bilaspur",
                 "addressRegion": "Chhattisgarh",
-                "postalCode": "495001",
+                "postalCode": "495006",
                 "addressCountry": "IN"
               },
               "sameAs": [
