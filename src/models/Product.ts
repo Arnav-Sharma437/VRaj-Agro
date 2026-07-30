@@ -10,6 +10,7 @@ const ProductSchema = new Schema<IProductDocument>(
     name: { type: String, required: true },
     slug: { type: String, default: '' },
     images: { type: [String], default: [] },
+    videos: { type: [String], default: [] },
     short_description: { type: String, default: '' },
     full_description: { type: String, default: '' },
     specifications: { type: Map, of: String, default: {} },

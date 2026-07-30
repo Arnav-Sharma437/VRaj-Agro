@@ -56,6 +56,7 @@ export async function POST(req: Request) {
   try {
     await dbConnect();
     const body = await req.json();
+    body.videos = body.videos || [];
     const product = await Product.create(body);
     return NextResponse.json(product, { status: 201 });
   } catch (error) {

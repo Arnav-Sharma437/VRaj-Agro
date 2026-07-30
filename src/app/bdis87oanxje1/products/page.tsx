@@ -21,6 +21,7 @@ interface ProductFormState {
   full_description: string;
   category: string;
   images: string[];
+  videos: string[];
   features: string[];
   applications: string[];
   is_featured: boolean;
@@ -37,6 +38,7 @@ const defaultForm: ProductFormState = {
   full_description: '',
   category: '',
   images: [''],
+  videos: [''],
   features: [''],
   applications: [''],
   is_featured: false,
@@ -120,6 +122,7 @@ export default function AdminProductsPage() {
       full_description: item.full_description || '',
       category: catId,
       images: item.images && item.images.length > 0 ? [...item.images] : [''],
+      videos: item.videos && item.videos.length > 0 ? [...item.videos] : [''],
       features: item.features && item.features.length > 0 ? [...item.features] : [''],
       applications: item.applications && item.applications.length > 0 ? [...item.applications] : [''],
       is_featured: item.is_featured ?? false,
@@ -155,15 +158,15 @@ export default function AdminProductsPage() {
     }));
   };
 
-  // Dynamic Array Helpers (Images, Features, Applications)
-  const addArrayField = (field: 'images' | 'features' | 'applications') => {
+  // Dynamic Array Helpers (Images, Videos, Features, Applications)
+  const addArrayField = (field: 'images' | 'videos' | 'features' | 'applications') => {
     setFormData((prev) => ({
       ...prev,
       [field]: [...prev[field], ''],
     }));
   };
 
-  const removeArrayField = (field: 'images' | 'features' | 'applications', index: number) => {
+  const removeArrayField = (field: 'images' | 'videos' | 'features' | 'applications', index: number) => {
     setFormData((prev) => {
       const arr = [...prev[field]];
       arr.splice(index, 1);
@@ -174,7 +177,7 @@ export default function AdminProductsPage() {
     });
   };
 
-  const updateArrayField = (field: 'images' | 'features' | 'applications', index: number, value: string) => {
+  const updateArrayField = (field: 'images' | 'videos' | 'features' | 'applications', index: number, value: string) => {
     setFormData((prev) => {
       const arr = [...prev[field]];
       arr[index] = value;
@@ -217,12 +220,14 @@ export default function AdminProductsPage() {
 
     // Clean arrays (remove empty entries)
     const cleanedImages = formData.images.filter((img) => img.trim() !== '');
+    const cleanedVideos = formData.videos ? formData.videos.filter((v) => v.trim() !== '') : [];
     const cleanedFeatures = formData.features.filter((f) => f.trim() !== '');
     const cleanedApplications = formData.applications.filter((a) => a.trim() !== '');
 
     const payload = {
       ...formData,
       images: cleanedImages,
+      videos: cleanedVideos,
       features: cleanedFeatures,
       applications: cleanedApplications,
       specifications: specsObject,
@@ -428,6 +433,40 @@ export default function AdminProductsPage() {
                   <button
                     type="button"
                     onClick={() => removeArrayField('images', idx)}
+                    className="absolute top-2 right-2 text-red-500 hover:text-red-700 focus:outline-none p-1"
+                    title="Remove item"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 4.5: Videos List (Dynamic) */}
+          <div className="border border-gray-150 p-4 rounded-xl space-y-3 bg-gray-50/50">
+            <div className="flex items-center justify-between">
+              <h4 className="text-sm font-bold text-gray-800">Product Videos (Optional)</h4>
+              <button
+                type="button"
+                onClick={() => addArrayField('videos')}
+                className="text-xs text-[#cc0000] hover:underline font-semibold flex items-center gap-1 focus:outline-none"
+              >
+                <Plus size={14} /> Add Video
+              </button>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {formData.videos?.map((vidUrl, idx) => (
+                <div key={idx} className="border border-gray-200 p-2.5 rounded bg-white relative">
+                  <ImageUpload
+                    value={vidUrl}
+                    onChange={(url) => updateArrayField('videos', idx, url)}
+                    label={`Video #${idx + 1}`}
+                    accept="video/*"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeArrayField('videos', idx)}
                     className="absolute top-2 right-2 text-red-500 hover:text-red-700 focus:outline-none p-1"
                     title="Remove item"
                   >
