@@ -131,36 +131,14 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
         {/* Two-Column Main Section */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          
-          {/* Left Column: Image Gallery */}
-          <div className="lg:col-span-6 w-full space-y-6">
+          {/* Left Column: Image & Video Gallery */}
+          <div className="lg:col-span-6 w-full">
             <ProductGallery
               images={product.images || []}
+              videos={product.videos || []}
               name={product.name}
               placeholderImage={getProductPlaceholder(product.name, categoryName)}
             />
-
-            {product.videos && product.videos.length > 0 && (
-              <div className="space-y-4">
-                <h3 className="text-xl font-bold text-[#1a1a1a]">Product Videos</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {product.videos.map((videoUrl, index) => (
-                    <video
-                      key={index}
-                      src={videoUrl}
-                      controls
-                      poster=""
-                      style={{
-                        width: '100%',
-                        borderRadius: '12px',
-                        boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
-                        maxHeight: '300px',
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
 
           {/* Right Column: Product Info & Actions */}
