@@ -6,8 +6,8 @@ import ShopPageClient from '@/components/main/ShopPageClient';
 import { ICategory, IProduct } from '@/types';
 
 export const metadata: Metadata = {
-  title: 'Products | V.Raj Agro',
-  description: 'Browse our wide range of agricultural and construction machinery',
+  title: 'Products | V.Raj Agro Bilaspur',
+  description: 'Browse our complete range of agricultural and construction machinery. Concrete mixers, chaff cutters, threshers, water tankers and more.',
 };
 
 export const dynamic = 'force-dynamic';

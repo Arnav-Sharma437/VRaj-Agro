@@ -11,6 +11,8 @@ const ProductSchema = new Schema<IProductDocument>(
     slug: { type: String, default: '' },
     images: { type: [String], default: [] },
     videos: { type: [String], default: [] },
+    meta_title: { type: String, default: '' },
+    meta_description: { type: String, default: '' },
     short_description: { type: String, default: '' },
     full_description: { type: String, default: '' },
     specifications: { type: Map, of: String, default: {} },

@@ -15,8 +15,8 @@ import {
 import AboutImage from '@/components/main/AboutImage';
 
 export const metadata = {
-  title: 'About Us | V.Raj Agro',
-  description: 'Learn about V.Raj Agro - trusted manufacturer of concrete mixer machines and agricultural machinery since 1998.'
+  title: 'About Us | V.Raj Agro Bilaspur',
+  description: 'V.Raj Agro is a trusted manufacturer of agricultural and construction machinery in Bilaspur, Chhattisgarh since 1998.',
 };
 
 export default function AboutPage() {

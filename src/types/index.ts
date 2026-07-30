@@ -29,6 +29,8 @@ export interface IProduct {
   slug: string;
   images: string[];
   videos?: string[];
+  meta_title?: string;
+  meta_description?: string;
   short_description: string;
   full_description?: string;
   specifications?: Record<string, string>;

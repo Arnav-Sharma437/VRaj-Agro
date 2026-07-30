@@ -54,6 +54,8 @@ export async function PUT(req: Request, { params }: RouteParams) {
     await dbConnect();
     const body = await req.json();
     body.videos = body.videos || [];
+    body.meta_title = body.meta_title || '';
+    body.meta_description = body.meta_description || '';
     const product = await Product.findByIdAndUpdate(params.id, body, { new: true });
     if (!product) {
       return NextResponse.json({ error: 'Product not found' }, { status: 404 });

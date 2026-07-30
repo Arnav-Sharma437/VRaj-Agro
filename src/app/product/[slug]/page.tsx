@@ -43,24 +43,36 @@ interface ProductPageProps {
 }
 
 // 1. Dynamic SEO Metadata Generation
-export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
-  await dbConnect();
-  const product = await Product.findOne({ slug: params.slug, is_active: true }).lean();
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  try {
+    const baseUrl = process.env.NEXTAUTH_URL || 'https://vrajagro.in'
+    const res = await fetch(`${baseUrl}/api/products/${params.slug}`, {
+      cache: 'no-store'
+    })
+    const product = await res.json()
 
-  if (!product) {
+    const title = product.meta_title || 
+      `${product.name} in Bilaspur | V.Raj Agro`
+    
+    const description = product.meta_description || 
+      `Buy ${product.name} in Bilaspur from V.Raj Agro. Quality machinery since 1998. Call now for best price!`
+
     return {
-      title: 'Product Not Found | V.Raj Agro',
-      description: 'The requested agricultural product could not be found.',
-    };
+      title,
+      description,
+      openGraph: {
+        title,
+        description,
+        images: product.images?.[0] ? [product.images[0]] : [],
+        type: 'website',
+      },
+    }
+  } catch {
+    return {
+      title: 'Product | V.Raj Agro',
+      description: 'Quality agricultural and construction machinery from V.Raj Agro, Bilaspur.',
+    }
   }
-
-  const prodName = product.name as string;
-  const prodDesc = (product.short_description || 'Product details from V.Raj Agro') as string;
-
-  return {
-    title: `${prodName} | V.Raj Agro`,
-    description: prodDesc,
-  };
 }
 
 export default async function ProductDetailPage({ params }: ProductPageProps) {

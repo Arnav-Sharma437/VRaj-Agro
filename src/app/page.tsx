@@ -10,8 +10,15 @@ import TestimonialsSection from '@/components/main/TestimonialsSection';
 import AnimateOnScroll from '@/components/ui/AnimateOnScroll';
 
 export const metadata = {
-  title: 'V.Raj Agro | Concrete Mixers & Agricultural Machinery Manufacturer',
-  description: 'V.Raj Agro is a premier manufacturer of high-quality Concrete Mixer Machines and agricultural equipment since 1998. Trusted by builders and farmers across India.',
+  title: 'V.Raj Agro | Agricultural & Construction Machinery in Bilaspur',
+  description: 'V.Raj Agro manufactures quality concrete mixer machines, chaff cutters, threshers & agricultural equipment in Bilaspur, Chhattisgarh since 1998.',
+  keywords: 'concrete mixer machine bilaspur, agricultural machinery chhattisgarh, chaff cutter, thresher machine',
+  openGraph: {
+    title: 'V.Raj Agro | Agricultural & Construction Machinery',
+    description: 'Quality machinery since 1998. Bilaspur, Chhattisgarh.',
+    type: 'website',
+    url: 'https://vrajagro.in',
+  },
 };
 
 // Redesigned AEC-Style AboutSection (Why Choose Us & Who Are We)

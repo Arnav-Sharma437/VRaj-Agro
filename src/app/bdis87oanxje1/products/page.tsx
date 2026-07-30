@@ -29,6 +29,8 @@ interface ProductFormState {
   price: number;
   discount_percent: number;
   show_price: boolean;
+  meta_title: string;
+  meta_description: string;
 }
 
 const defaultForm: ProductFormState = {
@@ -46,6 +48,8 @@ const defaultForm: ProductFormState = {
   price: 0,
   discount_percent: 0,
   show_price: false,
+  meta_title: '',
+  meta_description: '',
 };
 
 const slugify = (text: string) => {
@@ -130,6 +134,8 @@ export default function AdminProductsPage() {
       price: item.price ?? 0,
       discount_percent: item.discount_percent ?? 0,
       show_price: item.show_price ?? false,
+      meta_title: item.meta_title || '',
+      meta_description: item.meta_description || '',
     });
 
     // Parse specifications map to SpecPair array
@@ -666,6 +672,47 @@ export default function AdminProductsPage() {
               <label htmlFor="is_active" className="ml-2 block text-sm font-medium text-gray-700">
                 Is Active (Visible to users)
               </label>
+            </div>
+          </div>
+
+          {/* SEO Section (Optional) */}
+          <div className="border-t border-gray-200 pt-6 space-y-4">
+            <h4 className="text-sm font-bold text-gray-800 uppercase tracking-wide">SEO Settings (Optional)</h4>
+            
+            <div className="grid grid-cols-1 gap-4">
+              <div>
+                <div className="flex justify-between items-center mb-1">
+                  <label className="block text-sm font-medium text-gray-700">Meta Title</label>
+                  <span className={`text-xs font-semibold ${formData.meta_title.length > 60 ? 'text-red-500' : 'text-gray-400'}`}>
+                    {formData.meta_title.length} / 60
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  value={formData.meta_title}
+                  onChange={(e) => setFormData({ ...formData, meta_title: e.target.value })}
+                  placeholder="e.g. Concrete Mixer Machine in Bilaspur | V.Raj Agro"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm"
+                />
+                <p className="text-[11px] text-gray-500 mt-1">Recommended: 50-60 characters</p>
+              </div>
+
+              <div>
+                <div className="flex justify-between items-center mb-1">
+                  <label className="block text-sm font-medium text-gray-700">Meta Description</label>
+                  <span className={`text-xs font-semibold ${formData.meta_description.length > 160 ? 'text-red-500' : 'text-gray-400'}`}>
+                    {formData.meta_description.length} / 160
+                  </span>
+                </div>
+                <textarea
+                  rows={3}
+                  value={formData.meta_description}
+                  onChange={(e) => setFormData({ ...formData, meta_description: e.target.value })}
+                  placeholder="e.g. Looking for a reliable Concrete Mixer Machine..."
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 bg-white placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm"
+                />
+                <p className="text-[11px] text-gray-500 mt-1">Recommended: 120-160 characters</p>
+              </div>
             </div>
           </div>
 

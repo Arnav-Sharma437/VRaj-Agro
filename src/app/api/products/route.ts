@@ -57,6 +57,8 @@ export async function POST(req: Request) {
     await dbConnect();
     const body = await req.json();
     body.videos = body.videos || [];
+    body.meta_title = body.meta_title || '';
+    body.meta_description = body.meta_description || '';
     const product = await Product.create(body);
     return NextResponse.json(product, { status: 201 });
   } catch (error) {
