@@ -9,8 +9,8 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata = {
   metadataBase: new URL('https://vrajagro.in'),
   title: {
-    default: 'V.Raj Agro | Agricultural & Construction Machinery in Bilaspur',
-    template: '%s | V.Raj Agro',
+    default: 'V.Raj Agro | Agricultural & Construction Machinery Bilaspur',
+    template: '%s',  // Remove "| V.Raj Agro" from template to avoid duplication
   },
   description: 'V.Raj Agro manufactures quality concrete mixer machines, chaff cutters, threshers & agricultural equipment in Bilaspur, Chhattisgarh since 1998.',
   icons: {

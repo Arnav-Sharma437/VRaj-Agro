@@ -43,19 +43,30 @@ interface ProductPageProps {
 }
 
 // 1. Dynamic SEO Metadata Generation
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: { slug: string } 
+}): Promise<Metadata> {
   try {
-    const baseUrl = process.env.NEXTAUTH_URL || 'https://vrajagro.in'
-    const res = await fetch(`${baseUrl}/api/products/${params.slug}`, {
-      cache: 'no-store'
-    })
+    const res = await fetch(
+      `https://vrajagro.in/api/products/slug/${params.slug}`,
+      { cache: 'no-store' }
+    )
+    
+    if (!res.ok) throw new Error('Failed to fetch')
+    
     const product = await res.json()
 
-    const title = product.meta_title || 
-      `${product.name} in Bilaspur | V.Raj Agro`
-    
-    const description = product.meta_description || 
-      `Buy ${product.name} in Bilaspur from V.Raj Agro. Quality machinery since 1998. Call now for best price!`
+    // Use saved meta_title if exists, otherwise generate from product name
+    const title = product.meta_title && product.meta_title.trim() !== ''
+      ? product.meta_title
+      : `${product.name} in Bilaspur | V.Raj Agro`
+
+    // Use saved meta_description if exists, otherwise generate
+    const description = product.meta_description && product.meta_description.trim() !== ''
+      ? product.meta_description
+      : `Buy ${product.name} in Bilaspur from V.Raj Agro. Quality machinery since 1998. Call +91-8871822944 for best price!`
 
     return {
       title,
@@ -63,11 +74,39 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       openGraph: {
         title,
         description,
-        images: product.images?.[0] ? [product.images[0]] : [],
+        images: product.images?.[0] ? [{ url: product.images[0] }] : [],
         type: 'website',
+        url: `https://vrajagro.in/product/${params.slug}`,
       },
     }
   } catch {
+    // Fallback: query MongoDB directly in case fetch fails (e.g. during build time or deployment)
+    try {
+      await dbConnect();
+      const product = await Product.findOne({ slug: params.slug, is_active: true });
+      if (product) {
+        const title = product.meta_title && product.meta_title.trim() !== ''
+          ? product.meta_title
+          : `${product.name} in Bilaspur | V.Raj Agro`;
+        const description = product.meta_description && product.meta_description.trim() !== ''
+          ? product.meta_description
+          : `Buy ${product.name} in Bilaspur from V.Raj Agro. Quality machinery since 1998. Call +91-8871822944 for best price!`;
+        return {
+          title,
+          description,
+          openGraph: {
+            title,
+            description,
+            images: product.images?.[0] ? [{ url: product.images[0] }] : [],
+            type: 'website',
+            url: `https://vrajagro.in/product/${params.slug}`,
+          },
+        };
+      }
+    } catch (dbError) {
+      console.error('Metadata DB fallback error:', dbError);
+    }
+
     return {
       title: 'Product | V.Raj Agro',
       description: 'Quality agricultural and construction machinery from V.Raj Agro, Bilaspur.',
