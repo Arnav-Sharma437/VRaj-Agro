@@ -34,8 +34,16 @@ export default function ImageUpload({ value, onChange, label, accept = "image/*"
       });
 
       if (!res.ok) {
-        const errData = await res.json();
-        throw new Error(errData.error || `Failed to upload ${isVideo ? 'video' : 'image'}`);
+        let errorMsg = `Failed to upload ${isVideo ? 'video' : 'image'}`;
+        try {
+          const errData = await res.json();
+          errorMsg = errData.error || errorMsg;
+        } catch {
+          // Response is plain text (e.g. "Request Entity Too Large")
+          const errText = await res.text().catch(() => '');
+          if (errText) errorMsg = errText;
+        }
+        throw new Error(errorMsg);
       }
 
       const data = await res.json();

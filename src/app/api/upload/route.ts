@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { v2 as cloudinary } from 'cloudinary'
 
+// Allow up to 50 MB uploads on Vercel (default is 4.5 MB)
+export const maxDuration = 60 // seconds
+
 export async function POST(request: NextRequest) {
   try {
     // Configure fresh on every request
