@@ -24,30 +24,32 @@ export default function ImageUpload({ value, onChange, label, accept = "image/*"
     setUploading(true);
     setError(null);
 
-    const formData = new FormData();
-    formData.append('file', file);
-
     try {
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
+      // Step 1: Get a signed upload token from our server (keeps API secret safe)
+      const signRes = await fetch('/api/upload/sign');
+      if (!signRes.ok) throw new Error('Could not get upload credentials');
+      const { signature, timestamp, apiKey, cloudName, folder } = await signRes.json();
 
-      if (!res.ok) {
-        let errorMsg = `Failed to upload ${isVideo ? 'video' : 'image'}`;
-        try {
-          const errData = await res.json();
-          errorMsg = errData.error || errorMsg;
-        } catch {
-          // Response is plain text (e.g. "Request Entity Too Large")
-          const errText = await res.text().catch(() => '');
-          if (errText) errorMsg = errText;
-        }
-        throw new Error(errorMsg);
+      // Step 2: Upload directly to Cloudinary from the browser — bypasses Vercel size limits entirely
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('signature', signature);
+      formData.append('timestamp', String(timestamp));
+      formData.append('api_key', apiKey);
+      formData.append('folder', folder);
+
+      const uploadRes = await fetch(
+        `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`,
+        { method: 'POST', body: formData }
+      );
+
+      if (!uploadRes.ok) {
+        const errData = await uploadRes.json().catch(() => ({}));
+        throw new Error(errData?.error?.message || `Upload failed (${uploadRes.status})`);
       }
 
-      const data = await res.json();
-      onChange(data.url);
+      const data = await uploadRes.json();
+      onChange(data.secure_url);
     } catch (err) {
       const msg = err instanceof Error ? err.message : 'Upload failed';
       setError(msg);
@@ -56,6 +58,7 @@ export default function ImageUpload({ value, onChange, label, accept = "image/*"
       setUploading(false);
     }
   };
+
 
   const handleRemove = () => {
     onChange('');
